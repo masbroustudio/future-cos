@@ -12,7 +12,6 @@ Built on **Next.js App Router + Google Gemini 2.5 Flash** for frontend & API, an
 |---------|-----|
 | **Frontend** | https://cos-frontend-934594569799.asia-southeast1.run.app |
 | **Backend** | https://cos-backend-934594569799.asia-southeast1.run.app |
-| **GCP Project** | `gen-ai-academy-492602` |
 
 ---
 
@@ -156,8 +155,6 @@ Create a `.env.local` file inside the `mvp/` folder:
 
 ```env
 # Gemini API — separate multiple keys with commas for automatic rotation
-GEMINI_API_KEY="API_KEY_PRIMARY"
-GEMINI_API_KEYS="API_KEY_PRIMARY,API_KEY_BACKUP_1,API_KEY_BACKUP_2"
 
 # Backend URL (Next.js → FastAPI)
 NEXT_PUBLIC_BACKEND_URL="http://localhost:8000"
@@ -165,7 +162,7 @@ NEXT_PUBLIC_BACKEND_URL="http://localhost:8000"
 # Firebase / Firestore (optional, connects to production Firestore)
 NEXT_PUBLIC_FIREBASE_API_KEY="..."
 NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN="..."
-NEXT_PUBLIC_FIREBASE_PROJECT_ID="gen-ai-academy-492602"
+NEXT_PUBLIC_FIREBASE_PROJECT_ID="..."
 NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET="..."
 NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID="..."
 NEXT_PUBLIC_FIREBASE_APP_ID="..."
@@ -195,7 +192,7 @@ uvicorn server:app --port 8000
 
 ---
 
-## 📁 Struktur Direktori Utama
+## 📁 Structure Directory
 
 ```
 mvp/
@@ -219,7 +216,7 @@ mvp/
 │       │       ├── ProjectNotes.tsx
 │       │       ├── ProjectList.tsx
 │       │       └── ReasoningTrailPanel.tsx
-│       ├── dashboard/page.tsx       ← Dashboard dengan Gantt Chart 14 Hari
+│       ├── dashboard/page.tsx       ← Dashboard dengan Gantt Chart 14 Days
 │       ├── page.tsx                 ← Landing Page
 │       └── chat/page.tsx            ← Halaman Chat Utama
 ├── fixtures/                        ← Mock data (finance, crm, calendar, search)
@@ -278,7 +275,7 @@ Return JSON: { text: string, genUI: GenUIPayload | null }
 Chat.tsx → Render komponen GenUI yang sesuai berdasarkan componentName
 ```
 
-**Catatan kunci**: Semua tool data (`calculate_hiring_impact`, `calculate_revenue_scenario`, `generate_board_report_draft`, `fetch_market_intelligence`) **langsung men-set `innerGenUIPayload`** tanpa bergantung pada Gemini untuk memanggil render tool secara berantai — memastikan komponen selalu muncul.
+**Note**: All tool data (`calculate_hiring_impact`, `calculate_revenue_scenario`, `generate_board_report_draft`, `fetch_market_intelligence`) **Direct-set `innerGenUIPayload`** tanpa bergantung pada Gemini untuk memanggil render tool secara berantai — memastikan komponen selalu muncul.
 
 ---
 
@@ -318,30 +315,6 @@ Chat.tsx → Render komponen GenUI yang sesuai berdasarkan componentName
 | `render_market_digest_card` | `MarketDigestCard` |
 | `renderProjectSummary` | `ProjectSummary` |
 
----
-
-## 🚢 Deploy ke Google Cloud Run
-
-```bash
-# Build & push image backend
-cd backend/
-gcloud builds submit --tag asia-southeast1-docker.pkg.dev/gen-ai-academy-492602/cos-repo/cos-backend:latest
-
-# Build & push image frontend
-cd mvp/
-gcloud builds submit --tag asia-southeast1-docker.pkg.dev/gen-ai-academy-492602/cos-repo/cos-frontend:latest
-
-# Deploy backend
-gcloud run deploy cos-backend \
-  --image asia-southeast1-docker.pkg.dev/gen-ai-academy-492602/cos-repo/cos-backend:latest \
-  --region asia-southeast1 --allow-unauthenticated
-
-# Deploy frontend
-gcloud run deploy cos-frontend \
-  --image asia-southeast1-docker.pkg.dev/gen-ai-academy-492602/cos-repo/cos-frontend:latest \
-  --region asia-southeast1 --allow-unauthenticated \
-  --set-env-vars NEXT_PUBLIC_BACKEND_URL=https://cos-backend-934594569799.asia-southeast1.run.app
-```
 
 ---
 

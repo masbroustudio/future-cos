@@ -1,0 +1,177 @@
+/* Design System: Apple-like Light Mode + TypeUI Sleekness */
+:root {
+  /* Colors */
+  --bg-main: #fcfcfd;
+  --bg-surface: rgba(255, 255, 255, 0.85);
+  --bg-card: #ffffff;
+  
+  --text-primary: #111113;
+  --text-secondary: #68686d;
+  
+  --accent-color: #000000;
+  --accent-hover: #333333;
+  
+  --user-bubble: #f1f1f3;
+  --ai-bubble: #ffffff;
+  
+  --border-color: rgba(0, 0, 0, 0.08);
+  
+  /* Shadows */
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.04);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.05);
+  --shadow-lg: 0 12px 32px rgba(0, 0, 0, 0.08);
+  
+  /* Layout */
+  --max-width: 800px;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  background-color: var(--bg-main);
+  color: var(--text-primary);
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+}
+
+/* Animations */
+@keyframes slideUpFade {
+  0% { opacity: 0; transform: translateY(16px) scale(0.97); }
+  100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@keyframes pulseOpacity {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 1; }
+}
+
+.animate-enter {
+  animation: slideUpFade 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  opacity: 0;
+}
+
+.animate-pulse {
+  animation: pulseOpacity 1.5s ease-in-out infinite;
+}
+
+/* Chat Layout */
+.chat-container {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 40px 20px 120px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.chat-bubble {
+  padding: 16px 20px;
+  border-radius: 22px;
+  max-width: 85%;
+  line-height: 1.5;
+  font-size: 15px;
+  letter-spacing: -0.01em;
+}
+
+.chat-bubble.user {
+  background: var(--user-bubble);
+  align-self: flex-end;
+  border-bottom-right-radius: 4px;
+  color: var(--text-primary);
+}
+
+.chat-bubble.ai {
+  background: var(--ai-bubble);
+  align-self: flex-start;
+  border: 1px solid var(--border-color);
+  box-shadow: var(--shadow-sm);
+  border-bottom-left-radius: 4px;
+  color: var(--text-primary);
+}
+
+/* Input Area */
+.input-wrapper {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 24px;
+  background: linear-gradient(to top, var(--bg-main) 70%, transparent);
+  display: flex;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.input-box {
+  width: 100%;
+  max-width: var(--max-width);
+  position: relative;
+  pointer-events: auto;
+}
+
+.chat-input {
+  width: 100%;
+  padding: 18px 56px 18px 24px;
+  border-radius: 32px;
+  border: 1px solid var(--border-color);
+  background: var(--bg-surface);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  box-shadow: var(--shadow-md);
+  font-size: 15px;
+  outline: none;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.chat-input:focus {
+  border-color: rgba(0,0,0,0.2);
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-2px);
+}
+
+.send-btn {
+  position: absolute;
+  right: 8px;
+  top: 8px;
+  bottom: 8px;
+  width: 42px;
+  border-radius: 50%;
+  border: none;
+  background: var(--accent-color);
+  color: white;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.send-btn:hover {
+  transform: scale(1.05);
+  background: var(--accent-hover);
+}
+
+.send-btn:active {
+  transform: scale(0.95);
+}
+
+.send-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* GenUI Specifics */
+.genui-card {
+  background: white;
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+  padding: 20px;
+  box-shadow: var(--shadow-sm);
+  margin-top: 12px;
+  width: 100%;
+  transition: box-shadow 0.3s ease;
+}
+.genui-card:hover {
+  box-shadow: var(--shadow-md);
+}

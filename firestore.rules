@@ -1,0 +1,39 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Users collection rules: users can only read/write their own profiles/settings
+    match /users/{userId}/{document=**} {
+      allow read, write: if request.auth != null && request.auth.uid == userId;
+    }
+    
+    // Decisions: scoped by userId attribute in the document
+    match /decisions/{docId} {
+      allow read, write: if request.auth != null && resource.data.userId == request.auth.uid;
+      allow create: if request.auth != null && request.resource.data.userId == request.auth.uid;
+    }
+    
+    // Briefings: scoped by userId
+    match /briefings/{docId} {
+      allow read, write: if request.auth != null && resource.data.userId == request.auth.uid;
+      allow create: if request.auth != null && request.resource.data.userId == request.auth.uid;
+    }
+    
+    // Scenarios: scoped by userId
+    match /scenarios/{docId} {
+      allow read, write: if request.auth != null && resource.data.userId == request.auth.uid;
+      allow create: if request.auth != null && request.resource.data.userId == request.auth.uid;
+    }
+    
+    // RAG Documents: scoped by userId
+    match /cos_documents/{docId} {
+      allow read, write: if request.auth != null && resource.data.userId == request.auth.uid;
+      allow create: if request.auth != null && request.resource.data.userId == request.auth.uid;
+    }
+    
+    // Audit logs: read-only for users, written only by service accounts
+    match /audit_log/{docId} {
+      allow read: if request.auth != null && resource.data.userId == request.auth.uid;
+      allow write: if false; 
+    }
+  }
+}

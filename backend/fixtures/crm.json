@@ -1,0 +1,29 @@
+{
+  "open_deals": 23,
+  "pipeline_value": 2100000000.0,
+  "conversion_rate": 0.32,
+  "avg_deal_size": 91304347.0,
+  "deals_stalled": [
+    {
+      "id": "deal-001",
+      "name": "PT Maju Bersama",
+      "value": 250000000.0,
+      "days_stalled": 18,
+      "owner": "Budi Santoso"
+    }
+  ],
+  "deals_closing_this_week": [
+    {
+      "id": "deal-005",
+      "name": "CV Teknologi Nusantara",
+      "value": 150000000.0,
+      "probability": 0.85,
+      "close_date": "2026-07-07"
+    }
+  ],
+  "total_customers": 142,
+  "mrr": 178500000.0,
+  "arr": 2142000000.0,
+  "churn_rate_monthly": 0.018,
+  "nps_score": 52
+}

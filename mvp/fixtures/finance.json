@@ -1,0 +1,22 @@
+{
+  "current_month": {
+    "revenue": 180000000.0,
+    "revenue_target": 200000000.0,
+    "revenue_vs_target": -0.10,
+    "revenue_trend_vs_last_month": 0.03,
+    "expenses": 145000000.0,
+    "gross_margin": 0.62,
+    "cash_balance": 750000000.0,
+    "cash_runway_months": 8.2,
+    "monthly_burn": 91500000.0
+  },
+  "history_monthly": [
+    {"month": "2026-01", "revenue": 160000000.0, "target": 170000000.0},
+    {"month": "2026-02", "revenue": 168000000.0, "target": 175000000.0},
+    {"month": "2026-03", "revenue": 155000000.0, "target": 180000000.0},
+    {"month": "2026-04", "revenue": 172000000.0, "target": 190000000.0},
+    {"month": "2026-05", "revenue": 175000000.0, "target": 195000000.0},
+    {"month": "2026-06", "revenue": 180000000.0, "target": 200000000.0}
+  ],
+  "data_freshness_hours": 2
+}

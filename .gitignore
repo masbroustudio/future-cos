@@ -1,0 +1,61 @@
+# Dependencies
+node_modules/
+.pnp
+.pnp.*
+.yarn/
+.venv/
+venv/
+env/
+
+# Next.js build and cache
+.next/
+out/
+build/
+dist/
+*.tsbuildinfo
+
+# Python cache & build files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.pytest_cache/
+.coverage
+htmlcov/
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Local Database & Cache
+db.json
+**/db.json
+db_*.json
+**/db_*.json
+.vercel
+.system_generated/
+
+# Environment and Secrets (CRITICAL)
+.env
+.env.*
+*.env
+*.env.*
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+*.pem
+*.key
+
+# Excluded folders requested by user
+example_code_genui/
+DESIGN_SYSTEM/
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# OS Files
+.DS_Store
+Thumbs.db

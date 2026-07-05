@@ -1,0 +1,25 @@
+{
+  "events_today": [
+    {
+      "title": "Board Call — Q2 Review",
+      "start_time": "10:00",
+      "duration_minutes": 60,
+      "attendees": ["Founder", "CFO", "Board Member A"],
+      "is_important": true,
+      "preparation_needed": true,
+      "preparation_note": "Siapkan deck Q2 revenue & pipeline"
+    },
+    {
+      "title": "1:1 Head of Sales",
+      "start_time": "14:00",
+      "duration_minutes": 30,
+      "attendees": ["Founder", "Ahmad Rizky"],
+      "is_important": true,
+      "preparation_needed": false
+    }
+  ],
+  "total_meeting_hours": 1.5,
+  "focus_blocks": [
+    {"start": "08:00", "end": "10:00", "label": "Deep Work Block"}
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "pricing_competitors": [
+    {
+      "competitor": "SaaS Co A",
+      "pricing_plans": "Starter: $49/mo, Growth: $99/mo, Enterprise: Custom",
+      "recent_updates": "Added automated reporting feature last month",
+      "url": "https://example.com/saas-co-a/pricing"
+    },
+    {
+      "competitor": "SaaS Co B",
+      "pricing_plans": "Free Tier, Pro: $29/user/mo, Business: $79/user/mo",
+      "recent_updates": "Announced $10M Series A funding",
+      "url": "https://example.com/saas-co-b/pricing"
+    }
+  ]
+}

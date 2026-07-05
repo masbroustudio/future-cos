@@ -64,4 +64,4 @@ def test_generate_board_report_draft_investor(mock_firestore):
     assert "investor" in result["title"].lower()
     assert "Saldo Kas & Setara Kas" in result["content_markdown"]
     # Should fall back to "no strategic decisions" text
-    assert "Tidak ada keputusan strategis baru" in result["content_markdown"]
+    assert "No new strategic decisions recorded" in result["content_markdown"]

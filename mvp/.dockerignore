@@ -3,7 +3,11 @@ node_modules
 out
 build
 db.json
-.env.local
+.env
+.env.*
+*.env
+env.yaml
+*.yaml
 .git
 README.md
 Dockerfile

@@ -3,7 +3,8 @@ import { CopilotRuntime, copilotRuntimeNextJSAppRouterEndpoint } from "@copilotk
 import { LangGraphHttpAgent } from "@copilotkit/runtime/langgraph";
 
 const handleCopilotKitRequest = async (req: NextRequest) => {
-  const langGraphAgent = new LangGraphHttpAgent({ url: "http://localhost:8000/copilotkit" });
+  const backendBaseUrl = process.env.NEXT_PUBLIC_BACKEND_URL || "http://localhost:8000";
+  const langGraphAgent = new LangGraphHttpAgent({ url: `${backendBaseUrl}/copilotkit` });
 
   const runtime = new CopilotRuntime({
     agents: { default: langGraphAgent },

@@ -92,7 +92,7 @@ export function ReasoningTrailPanel({ trail }: { trail: ReasoningTrailProps }) {
         >
           <polyline points="9 18 15 12 9 6" />
         </svg>
-        {isOpen ? "Sembunyikan Jalur Reasoning" : "Lihat Jalur Reasoning (Audit Trail)"}
+        {isOpen ? "Hide Reasoning Trail" : "View Reasoning Trail (Audit Trail)"}
       </button>
 
       {isOpen && (
@@ -110,7 +110,7 @@ export function ReasoningTrailPanel({ trail }: { trail: ReasoningTrailProps }) {
         }}>
           {/* Confidence Score Widget */}
           <div>
-            <div style={{ fontWeight: 600, color: "#86868b", marginBottom: "6px" }}>Tingkat Keyakinan AI</div>
+            <div style={{ fontWeight: 600, color: "#86868b", marginBottom: "6px" }}>AI Confidence Level</div>
             <ConfidenceWidget score={trail.confidenceScore} label={trail.confidenceLabel} />
           </div>
 
@@ -124,7 +124,7 @@ export function ReasoningTrailPanel({ trail }: { trail: ReasoningTrailProps }) {
               color: "#b27a00",
             }}>
               <div style={{ fontWeight: 700, display: "flex", alignItems: "center", gap: "6px", marginBottom: "4px" }}>
-                <span>⚠️ Catatan Akurasi Data</span>
+                <span>⚠️ Data Accuracy Note</span>
               </div>
               <ul style={{ paddingLeft: "18px", margin: 0, fontSize: "12px", lineHeight: "1.5" }}>
                 {trail.warnings.map((warning, i) => (
@@ -136,7 +136,7 @@ export function ReasoningTrailPanel({ trail }: { trail: ReasoningTrailProps }) {
 
           {/* Data Sources */}
           <div>
-            <div style={{ fontWeight: 600, color: "#86868b", marginBottom: "4px" }}>Sumber Data Referensi</div>
+            <div style={{ fontWeight: 600, color: "#86868b", marginBottom: "4px" }}>Reference Data Sources</div>
             <ul style={{ paddingLeft: "18px", margin: 0, lineHeight: "1.5", color: "#48484a" }}>
               {trail.dataSources.map((source, i) => (
                 <li key={i}>{source}</li>
@@ -147,7 +147,7 @@ export function ReasoningTrailPanel({ trail }: { trail: ReasoningTrailProps }) {
           {/* Assumptions */}
           {trail.assumptions && trail.assumptions.length > 0 && (
             <div>
-              <div style={{ fontWeight: 600, color: "#86868b", marginBottom: "4px" }}>Asumsi Perhitungan</div>
+              <div style={{ fontWeight: 600, color: "#86868b", marginBottom: "4px" }}>Calculation Assumptions</div>
               <ul style={{ paddingLeft: "18px", margin: 0, lineHeight: "1.5", color: "#48484a" }}>
                 {trail.assumptions.map((assumption, i) => (
                   <li key={i}>{assumption}</li>
@@ -159,7 +159,7 @@ export function ReasoningTrailPanel({ trail }: { trail: ReasoningTrailProps }) {
           {/* Alternative Options */}
           {trail.alternativeOptions && trail.alternativeOptions.length > 0 && (
             <div>
-              <div style={{ fontWeight: 600, color: "#86868b", marginBottom: "4px" }}>Opsi Alternatif yang Dipertimbangkan</div>
+              <div style={{ fontWeight: 600, color: "#86868b", marginBottom: "4px" }}>Alternative Options Considered</div>
               <ul style={{ paddingLeft: "18px", margin: 0, lineHeight: "1.5", color: "#48484a" }}>
                 {trail.alternativeOptions.map((option, i) => (
                   <li key={i}>{option}</li>

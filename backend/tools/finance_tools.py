@@ -7,26 +7,26 @@ finance_conn = MockFinanceConnector()
 @tool
 async def fetch_finance_summary(period: str = "current_month") -> dict:
     """
-    Ambil ringkasan data keuangan (P&L, cash flow, cash runway, expenses) dari accounting system (Xero/Accurate).
+    Fetch a summary of financial data (P&L, cash flow, cash runway, expenses) from the accounting system (Xero/Accurate).
     
     Args:
-        period: Periode data, default 'current_month'. Pilihan: 'current_month', 'history'.
+        period: Data period, default 'current_month'. Options: 'current_month', 'history'.
         
     Returns:
-        Dictionary data keuangan lengkap yang berisi revenue, expenses, gross margin, cash balance, dan cash runway.
+        Complete financial data dictionary containing revenue, expenses, gross margin, cash balance, and cash runway.
     """
     return await finance_conn.fetch_data({"period": period})
 
 @tool
 async def fetch_revenue_history(months: int = 12) -> dict:
     """
-    Ambil data historis revenue bulanan untuk kebutuhan analisa tren atau forecasting.
+    Fetch monthly historical revenue data for trend analysis or forecasting.
     
     Args:
-        months: Jumlah bulan ke belakang yang ingin diambil.
+        months: Number of past months to retrieve.
         
     Returns:
-        List data historis bulanan berisi revenue aktual dan target.
+        List of monthly historical data containing actual and target revenue.
     """
     return await finance_conn.fetch_data({"period": "history"})
 
@@ -38,13 +38,13 @@ def render_briefing_card(
     reasoning_trail: dict
 ) -> str:
     """
-    Tampilkan kartu Briefing Eksekutif Harian di layar pengguna (Generative UI).
-    Panggil tool ini setelah Anda selesai mengumpulkan semua data dan menganalisisnya.
+    Display the Executive Daily Briefing card on the user's chat screen (Generative UI).
+    Call this tool after you finish gathering and analyzing all business data.
     
     Args:
-        highlights: List berisi ringkasan kejadian kritis hari ini. Setiap item memiliki 'title', 'description', dan 'severity' ('critical' | 'warning' | 'info').
-        metrics: Dictionary berisi metrik finansial utama (revenue, cash_balance, cash_runway_months).
-        agenda: List agenda rapat penting hari ini. Setiap item memiliki 'time', 'title', 'attendees', 'is_important', dan 'preparation_note'.
-        reasoning_trail: Dictionary berisi dataSources, assumptions, confidenceScore, confidenceLabel, alternativeOptions, dan warnings.
+        highlights: List containing summaries of today's critical events. Each item has 'title', 'description', and 'severity' ('critical' | 'warning' | 'info').
+        metrics: Dictionary containing key financial metrics (revenue, cash_balance, cash_runway_months).
+        agenda: List of today's important meeting agendas. Each item has 'time', 'title', 'attendees', 'is_important', and 'preparation_note'.
+        reasoning_trail: Dictionary containing dataSources, assumptions, confidenceScore, confidenceLabel, alternativeOptions, and warnings.
     """
-    return "Menampilkan Briefing Eksekutif..."
+    return "Displaying Executive Briefing..."

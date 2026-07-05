@@ -29,7 +29,7 @@ export default function MarketDigestCard({
   const formatTimestamp = (isoStr: string) => {
     try {
       const d = new Date(isoStr);
-      return d.toLocaleTimeString("id-ID", { hour: "2-digit", minute: "2-digit" }) + " WIB, " + d.toLocaleDateString("id-ID", { day: "numeric", month: "short" });
+      return d.toLocaleTimeString("en-US", { hour: "2-digit", minute: "2-digit" }) + " , " + d.toLocaleDateString("en-US", { day: "numeric", month: "short" });
     } catch {
       return isoStr;
     }
@@ -37,12 +37,12 @@ export default function MarketDigestCard({
 
   const handleForceRefresh = async () => {
     setRefreshing(true);
-    setStatusText("Menghubungi API & Memperbarui Cache...");
+    setStatusText("Connecting to API & Updating Cache...");
     
     // Simulate cache invalidation and reload request via a friendly helper alert or reload prompt
     setTimeout(() => {
       setRefreshing(false);
-      setStatusText("Cache Firestore diperbarui. Silakan ketik 'Segarkan intelijen pasar' untuk melihat metrik terbaru.");
+      setStatusText("Firestore cache updated. Please type 'refresh market intelligence' to see the latest metrics.");
     }, 2000);
   };
 
@@ -74,7 +74,7 @@ export default function MarketDigestCard({
             🔍 Market Intelligence
           </span>
           <h4 style={{ margin: "6px 0 0 0", fontWeight: 800, fontSize: "16px", color: "#1d1d1f" }}>
-            Analisis Kompetitor: "{query}"
+            Competitor Analysis: "{query}"
           </h4>
         </div>
         
@@ -102,13 +102,13 @@ export default function MarketDigestCard({
         marginBottom: "20px",
         borderLeft: "4px solid #0071E3"
       }}>
-        <strong>Sintesis AI:</strong> {insights}
+        <strong>AI Synthesis:</strong> {insights}
       </div>
 
       {/* Competitors List / Grid */}
       <div style={{ marginBottom: "20px" }}>
         <div style={{ fontSize: "11px", fontWeight: 700, color: "#86868b", textTransform: "uppercase", marginBottom: "8px" }}>
-          Temuan Sumber & Kompetitor Utama:
+          Key Sources & Competitors Found:
         </div>
         
         <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
@@ -121,11 +121,11 @@ export default function MarketDigestCard({
             }}>
               <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "6px" }}>
                 <span style={{ fontWeight: 800, fontSize: "13px", color: "#1d1d1f" }}>
-                  🏢 {item.source || "Kompetitor"}
+                  🏢 {item.source || "Competitor"}
                 </span>
                 {item.published_date && (
                   <span style={{ fontSize: "10px", color: "#86868b" }}>
-                    Diperbarui: {item.published_date}
+                    Updated: {item.published_date}
                   </span>
                 )}
               </div>
@@ -148,7 +148,7 @@ export default function MarketDigestCard({
                   gap: "4px"
                 }}
               >
-                Kunjungi Sumber Web ↗
+                Visit Web Source ↗
               </a>
             </div>
           ))}
@@ -166,7 +166,7 @@ export default function MarketDigestCard({
         gap: "10px"
       }}>
         <span style={{ fontSize: "11px", color: "#86868b" }}>
-          🕒 Sinkronisasi Cache: {formatTimestamp(cached_at)}
+          🕒 Cache Sync: {formatTimestamp(cached_at)}
         </span>
         
         <button 
@@ -185,7 +185,7 @@ export default function MarketDigestCard({
             transition: "all 0.2s"
           }}
         >
-          {refreshing ? "Menyegarkan..." : "🔄 Force Refresh"}
+          {refreshing ? "Refreshing..." : "🔄 Force Refresh"}
         </button>
       </div>
 
@@ -193,7 +193,7 @@ export default function MarketDigestCard({
         <div style={{ 
           marginTop: "12px", 
           fontSize: "11px", 
-          color: statusText.includes("diperbarui") ? "#15A34A" : "#0071E3",
+          color: statusText.includes("updated") ? "#15A34A" : "#0071E3",
           textAlign: "right"
         }}>
           {statusText}

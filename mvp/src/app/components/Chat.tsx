@@ -63,11 +63,11 @@ const getDueDateStatus = (dueDateStr?: string, isCompleted?: boolean) => {
   const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
   
   if (diffDays < 0) {
-    return { label: `⚠️ Telat ${Math.abs(diffDays)} hari`, color: '#ff3b30', background: '#ffebeb', isOverdue: true, isToday: false };
+    return { label: `⚠️ Overdue by ${Math.abs(diffDays)} days`, color: '#ff3b30', background: '#ffebeb', isOverdue: true, isToday: false };
   } else if (diffDays === 0) {
-    return { label: '📅 Hari Ini', color: '#ff9500', background: '#fff9e6', isOverdue: false, isToday: true };
+    return { label: '📅 Today', color: '#ff9500', background: '#fff9e6', isOverdue: false, isToday: true };
   } else {
-    const dateFormatted = new Intl.DateTimeFormat('id-ID', { day: 'numeric', month: 'short' }).format(dueDate);
+    const dateFormatted = new Intl.DateTimeFormat('en-US', { day: 'numeric', month: 'short' }).format(dueDate);
     return { label: `📅 ${dateFormatted}`, color: '#0071e3', background: '#e8f2fc', isOverdue: false, isToday: false };
   }
 };
@@ -150,7 +150,7 @@ function TaskListCard({
         </span>
         <input 
           type="text" 
-          placeholder="Cari tugas, kategori, atau prioritas..." 
+          placeholder="Search tasks, categories, or priorities..." 
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
           style={{
@@ -235,7 +235,7 @@ function TaskListCard({
       {/* List Items */}
       {filteredItems.length === 0 ? (
         <p style={{ color: 'var(--text-secondary)', fontStyle: 'italic', fontSize: '13.5px', textAlign: 'center', padding: '20px 0' }}>
-          {items.length === 0 ? "Tidak ada tugas di proyek ini." : "Tidak ada tugas yang cocok dengan filter."}
+          {items.length === 0 ? "No tasks in this project." : "No tasks match the filters."}
         </p>
       ) : (
         <div style={{ display: 'flex', flexDirection: 'column' }}>
@@ -474,8 +474,8 @@ function ProjectSummaryCard({
           </div>
         </div>
         <div>
-          <p style={{ fontWeight: 700, fontSize: '14px', color: '#1d1d1f', marginBottom: '2px' }}>Progress Proyek</p>
-          <p style={{ color: 'var(--text-secondary)', fontSize: '12px' }}>{completedTasks} dari {totalTasks} tugas selesai</p>
+          <p style={{ fontWeight: 700, fontSize: '14px', color: '#1d1d1f', marginBottom: '2px' }}>Project Progress</p>
+          <p style={{ color: 'var(--text-secondary)', fontSize: '12px' }}>{completedTasks} of {totalTasks} tasks completed</p>
         </div>
       </div>
 
@@ -560,10 +560,10 @@ function ProjectSwitchCard({
         </h4>
       </div>
       <p style={{ fontSize: '14.5px', color: '#1d1d1f', fontWeight: 600 }}>
-        {action === 'create' ? `Proyek "${projectName}" telah berhasil dibuat.` : `Sekrawat Anda berada di proyek "${projectName}".`}
+        {action === 'create' ? `Project "${projectName}" created successfully.` : `You are now in project "${projectName}".`}
       </p>
       <p style={{ fontSize: '12px', color: 'var(--text-secondary)', marginTop: '4px', lineHeight: 1.4 }}>
-        Semua perintah tugas Anda berikutnya akan dikelola di papan proyek ini.
+        All of your next task commands will be managed on this project board.
       </p>
     </div>
   );
@@ -581,7 +581,7 @@ function ProjectListCard({
 }) {
   return (
     <div className="genui-card animate-enter" style={{ animationDelay: '0.2s', marginTop: '16px' }}>
-      <h4 style={{ fontWeight: 700, fontSize: '15px', color: '#1d1d1f', marginBottom: '12px' }}>📁 Daftar Proyek Anda</h4>
+      <h4 style={{ fontWeight: 700, fontSize: '15px', color: '#1d1d1f', marginBottom: '12px' }}>📁 Your Projects List</h4>
       <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
         {projects.map(p => {
           const completionRate = p.taskCount > 0 ? Math.round((p.completedCount / p.taskCount) * 100) : 0;
@@ -600,10 +600,10 @@ function ProjectListCard({
             >
               <div>
                 <p style={{ fontWeight: 700, fontSize: '14px', color: p.id === activeId ? '#0071e3' : '#1d1d1f' }}>{p.name}</p>
-                <p style={{ fontSize: '11px', color: 'var(--text-secondary)' }}>{p.completedCount} dari {p.taskCount} tugas ({completionRate}%)</p>
+                <p style={{ fontSize: '11px', color: 'var(--text-secondary)' }}>{p.completedCount} of {p.taskCount} tasks ({completionRate}%)</p>
               </div>
               {p.id === activeId ? (
-                <span style={{ fontSize: '11px', fontWeight: 700, color: '#0071e3', background: 'rgba(0,71,227,0.08)', padding: '3px 8px', borderRadius: '8px' }}>Aktif</span>
+                <span style={{ fontSize: '11px', fontWeight: 700, color: '#0071e3', background: 'rgba(0,71,227,0.08)', padding: '3px 8px', borderRadius: '8px' }}>Active</span>
               ) : (
                 <button 
                   onClick={() => onSwitch(p.id)}
@@ -622,7 +622,7 @@ function ProjectListCard({
                   onMouseEnter={(e) => e.currentTarget.style.background = '#f5f5f7'}
                   onMouseLeave={(e) => e.currentTarget.style.background = 'white'}
                 >
-                  Beralih
+                  Switch
                 </button>
               )}
             </div>
@@ -780,7 +780,7 @@ export default function Chat() {
       { 
         id: '1', 
         role: 'ai', 
-        content: `Halo, ${username}! Saya CoS, asisten eksekutif pribadi Anda. Coba perintahkan saya untuk membuat briefing harian, mensimulasikan skenario, atau menganalisis bisnis Anda!` 
+        content: `Hello, ${username}! I am CoS, your personal executive assistant. Try instructing me to generate a daily briefing, simulate a scenario, or analyze your business!` 
       }
     ]);
   }, [username]);
@@ -864,11 +864,11 @@ export default function Chat() {
         setMessages(prev => [...prev, {
           id: Date.now().toString(),
           role: 'ai',
-          content: `Proyek baru "${data.activeProjectName}" berhasil dibuat dan sekarang aktif.`
+          content: `New project "${data.activeProjectName}" created successfully and is now active.`
         }]);
       }
     } catch (error) {
-      console.error("Gagal membuat proyek baru:", error);
+      console.error("Failed to create new project:", error);
     }
   };
 
@@ -968,7 +968,7 @@ export default function Chat() {
         genUI: data.genUI
       }]);
     } catch (error) {
-      setMessages(prev => [...prev, { id: Date.now().toString(), role: 'ai', content: 'Maaf, terjadi kesalahan pada server.' }]);
+      setMessages(prev => [...prev, { id: Date.now().toString(), role: 'ai', content: 'Sorry, a server error occurred.' }]);
     } finally {
       setIsLoading(false);
     }
@@ -1183,15 +1183,15 @@ export default function Chat() {
             Future Chief of Staff (CoS)
           </h2>
           <p style={{ fontSize: '13px', color: 'var(--text-secondary)', textAlign: 'center', marginBottom: '28px', lineHeight: 1.4 }}>
-            AI Executive Copilot untuk Founder & C-Suite.<br />Masuk dengan nama pengguna Anda.
+            AI Executive Copilot for Founder & C-Suite.<br />Sign in with your username.
           </p>
 
           <form onSubmit={handleLoginSubmit} style={{ width: '100%', display: 'flex', flexDirection: 'column', gap: '16px' }}>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
-              <label style={{ fontSize: '12px', fontWeight: 700, color: '#1d1d1f' }}>Nama Pengguna</label>
+              <label style={{ fontSize: '12px', fontWeight: 700, color: '#1d1d1f' }}>Username</label>
               <input
                 type="text"
-                placeholder="Contoh: frits, guest, marketing"
+                placeholder="Example: frits, guest, marketing"
                 value={loginUsername}
                 onChange={(e) => setLoginUsername(e.target.value)}
                 style={{
@@ -1212,12 +1212,12 @@ export default function Chat() {
 
             <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
               <label style={{ fontSize: '12px', fontWeight: 700, color: '#1d1d1f', display: 'flex', justifyContent: 'space-between' }}>
-                <span>PIN Keamanan</span>
-                <span style={{ color: 'var(--text-secondary)', fontWeight: 500, fontSize: '11px' }}>Opsional</span>
+                <span>Security PIN</span>
+                <span style={{ color: 'var(--text-secondary)', fontWeight: 500, fontSize: '11px' }}>Optional</span>
               </label>
               <input
                 type="password"
-                placeholder="4-digit angka (contoh: 1234)"
+                placeholder="4-digit number (e.g.: 1234)"
                 maxLength={4}
                 pattern="[0-9]*"
                 inputMode="numeric"
@@ -1263,13 +1263,13 @@ export default function Chat() {
               onMouseEnter={(e) => e.currentTarget.style.opacity = '0.9'}
               onMouseLeave={(e) => e.currentTarget.style.opacity = '1'}
             >
-              Masuk & Kelola Tugas
+              Sign In & Manage Tasks
             </button>
           </form>
 
           <div style={{ marginTop: '24px', paddingTop: '16px', borderTop: '1px solid rgba(0,0,0,0.06)', width: '100%', textAlign: 'center' }}>
             <p style={{ fontSize: '11px', color: 'var(--text-secondary)', lineHeight: 1.4 }}>
-              🔒 Database tersimpan lokal berdasarkan nama pengguna Anda. PIN opsional dapat digunakan untuk keamanan dasar peramban Anda.
+              🔒 Database is stored locally based on your username. An optional PIN can be used for basic browser security.
             </p>
           </div>
         </div>
@@ -1671,7 +1671,7 @@ export default function Chat() {
           <input
             type="text"
             className="chat-input"
-            placeholder="Contoh: 'Tolong catat tugasku hari ini: Beli kopi, Cek email...'"
+            placeholder="Example: 'Please record my tasks today: Buy coffee, check email...'"
             value={input}
             onChange={(e) => setInput(e.target.value)}
             disabled={isLoading}
@@ -1724,10 +1724,10 @@ export default function Chat() {
             }}>
               <div>
                 <h3 style={{ fontSize: '18px', fontWeight: 700, color: '#1313BA', letterSpacing: '-0.02em', margin: 0 }}>
-                  📝 Catatan Proyek
+                  📝 Project Notes
                 </h3>
                 <span style={{ fontSize: '12px', color: '#9090CE', marginTop: '2px', display: 'block' }}>
-                  Wiki & memo untuk proyek: <strong>{activeProjectName}</strong>
+                  Wiki & memo for project: <strong>{activeProjectName}</strong>
                 </span>
               </div>
               
@@ -1755,7 +1755,7 @@ export default function Chat() {
               <textarea
                 value={notes}
                 onChange={(e) => handleUpdateNotes(e.target.value)}
-                placeholder="Tulis ringkasan rapat, spec teknis, detail api, atau catatan penting lainnya di sini... AI asisten juga akan menulis di sini saat Anda memintanya."
+                placeholder="Write meeting summaries, tech specs, API details, or other important notes here... The AI assistant will also write here when requested."
                 style={{
                   width: '100%',
                   height: '350px',

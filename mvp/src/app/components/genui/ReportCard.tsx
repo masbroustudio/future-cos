@@ -64,12 +64,12 @@ export default function ReportCard({
             textTransform: "uppercase",
             letterSpacing: "0.05em"
           }}>
-            📄 Draf Laporan {String(report_type).toLowerCase().includes("board") ? "Dewan Direksi" : "Investor"}
+            📄 {String(report_type).toLowerCase().includes("board") ? "Board" : "Investor"} Report Draft
           </span>
           <h4 style={{ margin: "6px 0 0 0", fontWeight: 800, fontSize: "16px", color: "#1d1d1f" }}>
             {title}
           </h4>
-          <span style={{ fontSize: "12px", color: "#86868b" }}>Periode: {period}</span>
+          <span style={{ fontSize: "12px", color: "#86868b" }}>Period: {period}</span>
         </div>
         
         <span style={{ 
@@ -134,7 +134,7 @@ export default function ReportCard({
             gap: "6px"
           }}
         >
-          {copied ? "✓ Tersalin" : "📋 Salin Laporan"}
+          {copied ? "✓ Copied" : "📋 Copy Report"}
         </button>
         <button 
           onClick={handleDownload}
@@ -153,7 +153,7 @@ export default function ReportCard({
             gap: "6px"
           }}
         >
-          📥 Unduh File (.md)
+          📥 Download File (.md)
         </button>
       </div>
 

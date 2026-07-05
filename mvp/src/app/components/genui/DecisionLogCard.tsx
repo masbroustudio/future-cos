@@ -65,7 +65,7 @@ export default function DecisionLogCard({
     } catch (err: any) {
       console.error("Failed to save decision in frontend:", err);
       setStatus("error");
-      setErrorMessage(err.message || "Gagal menghubungi database");
+      setErrorMessage(err.message || "Failed to connect to the database");
     }
   };
 
@@ -95,7 +95,7 @@ export default function DecisionLogCard({
             textTransform: "uppercase",
             letterSpacing: "0.05em"
           }}>
-            ✍️ Draf Keputusan
+            ✍️ Decision Draft
           </span>
           <h4 style={{ margin: "6px 0 0 0", fontWeight: 800, fontSize: "16px", color: "#1d1d1f" }}>
             {title}
@@ -118,7 +118,7 @@ export default function DecisionLogCard({
         marginBottom: "16px"
       }}>
         <div style={{ fontSize: "11px", fontWeight: 700, color: "#86868b", textTransform: "uppercase", marginBottom: "4px" }}>
-          Keputusan yang Diambil:
+          Decision Made:
         </div>
         <div style={{ fontSize: "14px", fontWeight: 800, color: "#1d1d1f", lineHeight: "1.4" }}>
           {decision_made}
@@ -128,7 +128,7 @@ export default function DecisionLogCard({
       {/* Rationale */}
       <div style={{ marginBottom: "16px" }}>
         <div style={{ fontSize: "11px", fontWeight: 700, color: "#86868b", textTransform: "uppercase", marginBottom: "4px" }}>
-          Alasan & Justifikasi:
+          Rationale & Justification:
         </div>
         <div style={{ fontSize: "13px", color: "#1d1d1f", lineHeight: "1.4" }}>
           {rationale}
@@ -145,7 +145,7 @@ export default function DecisionLogCard({
         {/* Assumptions */}
         <div>
           <div style={{ fontSize: "11px", fontWeight: 700, color: "#86868b", textTransform: "uppercase", marginBottom: "6px" }}>
-            Asumsi Kunci:
+            Key Assumptions:
           </div>
           <ul style={{ paddingLeft: "16px", margin: 0, fontSize: "12px", color: "#515154", lineHeight: "1.5" }}>
             {assumptions.map((item, idx) => (
@@ -157,7 +157,7 @@ export default function DecisionLogCard({
         {/* Alternatives */}
         <div>
           <div style={{ fontSize: "11px", fontWeight: 700, color: "#86868b", textTransform: "uppercase", marginBottom: "6px" }}>
-            Alternatif yang Ditolak:
+            Rejected Alternatives:
           </div>
           <ul style={{ paddingLeft: "16px", margin: 0, fontSize: "12px", color: "#515154", lineHeight: "1.5" }}>
             {alternatives_considered.map((item, idx) => (
@@ -205,7 +205,7 @@ export default function DecisionLogCard({
                 padding: "8px 12px"
               }}
             >
-              Abaikan
+              Ignore
             </button>
             <button 
               onClick={handleSave}
@@ -221,7 +221,7 @@ export default function DecisionLogCard({
                 outline: "none"
               }}
             >
-              Simpan ke Decision Log
+              Save to Decision Log
             </button>
           </>
         )}
@@ -229,7 +229,7 @@ export default function DecisionLogCard({
         {status === "saving" && (
           <span style={{ fontSize: "13px", color: "#86868b", display: "flex", alignItems: "center", gap: "6px" }}>
             <span className="animate-pulse" style={{ display: "inline-block", width: "8px", height: "8px", backgroundColor: "#0071E3", borderRadius: "50%" }}></span>
-            Menyimpan...
+            Saving...
           </span>
         )}
 
@@ -246,14 +246,14 @@ export default function DecisionLogCard({
             fontSize: "13px",
             fontWeight: 700
           }}>
-            <span>✓ Tersimpan di Log Keputusan</span>
+            <span>✓ Saved in Decision Log</span>
             <span style={{ fontSize: "10px", color: "#166534", fontWeight: 500 }}>({decisionId})</span>
           </div>
         )}
 
         {status === "error" && (
           <span style={{ fontSize: "13px", color: "#FF3B30" }}>
-            ⚠️ {errorMessage || "Aksi dibatalkan"}
+            ⚠️ {errorMessage || "Action cancelled"}
           </span>
         )}
       </div>

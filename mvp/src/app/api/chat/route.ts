@@ -45,31 +45,31 @@ const tools = [
     functionDeclarations: [
       {
         name: "updateAndRenderTasks",
-        description: "Wajib digunakan ketika pengguna ingin MENAMBAH, MENGUBAH STATUS, MENGHAPUS, atau MELIHAT daftar tugas. Kamu harus mengirimkan kembali SELURUH array tugas yang sudah diperbarui beserta kategori dan prioritasnya.",
+        description: "Mandatory when the user wants to ADD, CHANGE STATUS, DELETE, or VIEW the task list. You must return the ENTIRE updated tasks array along with their category and priority.",
         parameters: {
           type: SchemaType.OBJECT,
           properties: {
             items: {
               type: SchemaType.ARRAY,
-              description: "Array lengkap dari tugas-tugas setelah dilakukan penambahan/perubahan/penghapusan.",
+              description: "Complete array of tasks after additions/modifications/deletions.",
               items: {
                 type: SchemaType.OBJECT,
                 properties: {
-                  id: { type: SchemaType.STRING, description: "Gunakan UUID atau ID unik (misal: 'task-1')" },
-                  title: { type: SchemaType.STRING, description: "Judul tugas" },
-                  status: { type: SchemaType.STRING, description: "Hanya isi dengan 'completed' atau 'pending'" },
-                  priority: { type: SchemaType.STRING, description: "Tingkat prioritas tugas: 'High', 'Medium', atau 'Low'." },
-                  category: { type: SchemaType.STRING, description: "Kategori tugas: 'Tech', 'Design', 'Marketing', 'Personal', atau 'Admin'." },
-                  dueDate: { type: SchemaType.STRING, description: "Tenggat waktu (due date) dengan format YYYY-MM-DD (misal: '2026-07-15') jika ditentukan oleh pengguna." },
+                  id: { type: SchemaType.STRING, description: "Use UUID or unique ID (e.g.: 'task-1')" },
+                  title: { type: SchemaType.STRING, description: "Task title" },
+                  status: { type: SchemaType.STRING, description: "Only fill with 'completed' or 'pending'" },
+                  priority: { type: SchemaType.STRING, description: "Task priority level: 'High', 'Medium', or 'Low'." },
+                  category: { type: SchemaType.STRING, description: "Task category: 'Tech', 'Design', 'Marketing', 'Personal', or 'Admin'." },
+                  dueDate: { type: SchemaType.STRING, description: "Due date with YYYY-MM-DD format (e.g.: '2026-07-15') if specified by the user." },
                   subtasks: {
                     type: SchemaType.ARRAY,
-                    description: "Daftar subtugas bertingkat opsional untuk memecah tugas utama menjadi checklist terperinci.",
+                    description: "Optional hierarchical list of subtasks to break down the main task into a detailed checklist.",
                     items: {
                       type: SchemaType.OBJECT,
                       properties: {
-                        id: { type: SchemaType.STRING, description: "ID unik subtugas (misal: 'subtask-1')" },
-                        title: { type: SchemaType.STRING, description: "Judul subtugas" },
-                        status: { type: SchemaType.STRING, description: "Hanya isi dengan 'completed' atau 'pending'" }
+                        id: { type: SchemaType.STRING, description: "Unique ID of the subtask (e.g.: 'subtask-1')" },
+                        title: { type: SchemaType.STRING, description: "Subtask title" },
+                        status: { type: SchemaType.STRING, description: "Only fill with 'completed' or 'pending'" }
                       },
                       required: ["id", "title", "status"]
                     }
@@ -90,36 +90,36 @@ const tools = [
           properties: {
             projectName: { type: SchemaType.STRING },
             summary: { type: SchemaType.STRING },
-            status: { type: SchemaType.STRING, description: "Status proyek: 'On Track', 'At Risk', atau 'Off Track'." }
+            status: { type: SchemaType.STRING, description: "Project status: 'On Track', 'At Risk', or 'Off Track'." }
           },
           required: ["projectName", "summary", "status"]
         }
       },
       {
         name: "createProject",
-        description: "Membuat proyek atau papan tugas baru dengan nama tertentu.",
+        description: "Create a new project or task board with a specific name.",
         parameters: {
           type: SchemaType.OBJECT,
           properties: {
-            projectName: { type: SchemaType.STRING, description: "Nama proyek baru yang ingin dibuat." }
+            projectName: { type: SchemaType.STRING, description: "Name of the new project to be created." }
           },
           required: ["projectName"]
         }
       },
       {
         name: "switchProject",
-        description: "Pindah atau beralih ke proyek/papan tugas lain berdasarkan nama proyek atau ID proyek.",
+        description: "Switch to another project/task board based on project name or ID.",
         parameters: {
           type: SchemaType.OBJECT,
           properties: {
-            projectNameOrId: { type: SchemaType.STRING, description: "Nama proyek atau ID proyek tujuan beralih." }
+            projectNameOrId: { type: SchemaType.STRING, description: "Target project name or ID to switch to." }
           },
           required: ["projectNameOrId"]
         }
       },
       {
         name: "listProjects",
-        description: "Melihat daftar semua proyek yang dimiliki pengguna saat ini.",
+        description: "View the list of all current projects of the user.",
         parameters: {
           type: SchemaType.OBJECT,
           properties: {}
@@ -127,28 +127,28 @@ const tools = [
       },
       {
         name: "updateProjectNotes",
-        description: "Digunakan untuk menulis, memperbarui, atau menghapus catatan/wiki proyek yang sedang aktif. Gunakan ini saat pengguna meminta untuk menyimpan catatan, menulis ringkasan teknis, ringkasan rapat, memo, atau menyimpan informasi penting proyek.",
+        description: "Used to write, update, or delete active project notes/wiki. Use this when the user asks to save notes, write technical specs, meeting summaries, memos, or save key project information.",
         parameters: {
           type: SchemaType.OBJECT,
           properties: {
-            notes: { type: SchemaType.STRING, description: "Seluruh konten teks catatan proyek yang baru atau diperbarui." }
+            notes: { type: SchemaType.STRING, description: "Entire text content of the new or updated project notes." }
           },
           required: ["notes"]
         }
       },
       {
         name: "fetchFinanceSummary",
-        description: "Ambil ringkasan data keuangan (P&L, cash flow, cash runway, expenses) dari accounting system (Xero/Accurate).",
+        description: "Fetch financial data summary (P&L, cash flow, cash runway, expenses) from accounting system (Xero/Accurate).",
         parameters: {
           type: SchemaType.OBJECT,
           properties: {
-            period: { type: SchemaType.STRING, description: "Periode data: 'current_month' atau 'history'" }
+            period: { type: SchemaType.STRING, description: "Data period: 'current_month' or 'history'" }
           }
         }
       },
       {
         name: "fetchSalesHighlights",
-        description: "Ambil ringkasan pipeline penjualan (CRM HubSpot) yang berisi target sales, deal aktif, konversi, dan deals yang terhambat.",
+        description: "Fetch sales pipeline summary (HubSpot CRM) containing sales targets, active deals, conversion, and stalled deals.",
         parameters: {
           type: SchemaType.OBJECT,
           properties: {}
@@ -156,7 +156,7 @@ const tools = [
       },
       {
         name: "fetchCalendarToday",
-        description: "Ambil agenda rapat dan focus blocks hari ini dari Google Calendar.",
+        description: "Fetch today's meeting agenda and focus blocks from Google Calendar.",
         parameters: {
           type: SchemaType.OBJECT,
           properties: {}
@@ -164,24 +164,24 @@ const tools = [
       },
       {
         name: "searchWeb",
-        description: "Cari berita, tren pasar, atau informasi kompetitor secara online lewat search engine.",
+        description: "Search for news, market trends, or competitor info online via search engine.",
         parameters: {
           type: SchemaType.OBJECT,
           properties: {
-            query: { type: SchemaType.STRING, description: "Kata kunci pencarian." }
+            query: { type: SchemaType.STRING, description: "Search query keywords." }
           },
           required: ["query"]
         }
       },
       {
         name: "renderBriefingCard",
-        description: "Tampilkan kartu Briefing Eksekutif Harian di layar pengguna (Generative UI). Panggil tool ini setelah Anda selesai mengumpulkan semua data dan menganalisisnya.",
+        description: "Display the Daily Executive Briefing card on user screen (Generative UI). Call this tool after you finish gathering and analyzing all data.",
         parameters: {
           type: SchemaType.OBJECT,
           properties: {
             highlights: {
               type: SchemaType.ARRAY,
-              description: "List ringkasan kejadian kritis hari ini. Setiap item memiliki 'title', 'description', dan 'severity' ('critical' | 'warning' | 'info').",
+              description: "List of today's critical event summaries. Each item has 'title', 'description', and 'severity' ('critical' | 'warning' | 'info').",
               items: {
                 type: SchemaType.OBJECT,
                 properties: {
@@ -194,7 +194,7 @@ const tools = [
             },
             metrics: {
               type: SchemaType.OBJECT,
-              description: "Metrik finansial utama (revenue, cashBalance, cashRunwayMonths, monthlyBurn).",
+              description: "Key financial metrics (revenue, cashBalance, cashRunwayMonths, monthlyBurn).",
               properties: {
                 revenue: { type: SchemaType.NUMBER },
                 revenueTrend: { type: SchemaType.NUMBER },
@@ -206,7 +206,7 @@ const tools = [
             },
             agenda: {
               type: SchemaType.ARRAY,
-              description: "Agenda rapat penting hari ini. Setiap item memiliki 'time', 'title', 'attendees', 'is_important', dan 'preparationNote'.",
+              description: "Today's important meeting agenda. Each item has 'time', 'title', 'attendees', 'isImportant', and 'preparationNote'.",
               items: {
                 type: SchemaType.OBJECT,
                 properties: {
@@ -224,7 +224,7 @@ const tools = [
             },
             reasoning_trail: {
               type: SchemaType.OBJECT,
-              description: "Jalur reasoning AI (dataSources, assumptions, confidenceScore, confidenceLabel, alternativeOptions, warnings).",
+              description: "AI reasoning trail (dataSources, assumptions, confidenceScore, confidenceLabel, alternativeOptions, warnings).",
               properties: {
                 dataSources: {
                   type: SchemaType.ARRAY,
@@ -253,14 +253,14 @@ const tools = [
       },
       {
         name: "save_decision_to_log",
-        description: "Simpan keputusan strategis bisnis yang diambil ke dalam database Firestore Decision Log.",
+        description: "Save strategic business decisions taken into the Firestore Decision Log database.",
         parameters: {
           type: SchemaType.OBJECT,
           properties: {
-            title: { type: SchemaType.STRING, description: "Judul keputusan (max 100 char)." },
-            description: { type: SchemaType.STRING, description: "Deskripsi latar belakang keputusan." },
-            decision_made: { type: SchemaType.STRING, description: "Hasil keputusan akhir." },
-            rationale: { type: SchemaType.STRING, description: "Alasan utama keputusan." },
+            title: { type: SchemaType.STRING, description: "Decision title (max 100 char)." },
+            description: { type: SchemaType.STRING, description: "Description of decision background." },
+            decision_made: { type: SchemaType.STRING, description: "Final decision outcome." },
+            rationale: { type: SchemaType.STRING, description: "Main rationale for the decision." },
             assumptions: {
               type: SchemaType.ARRAY,
               items: { type: SchemaType.STRING }
@@ -284,18 +284,18 @@ const tools = [
       },
       {
         name: "search_similar_decisions",
-        description: "Cari keputusan-keputusan serupa yang pernah diambil sebelumnya di masa lalu.",
+        description: "Search for similar decisions previously taken in the past.",
         parameters: {
           type: SchemaType.OBJECT,
           properties: {
-            query: { type: SchemaType.STRING, description: "Kata kunci pencarian keputusan." }
+            query: { type: SchemaType.STRING, description: "Decision search keywords." }
           },
           required: ["query"]
         }
       },
       {
         name: "render_decision_log_card",
-        description: "Tampilkan draf pencatatan keputusan strategis di layar obrolan pengguna (Generative UI). Panggil tool ini ketika AI mendeteksi diskusi tentang keputusan strategis.",
+        description: "Display draft strategic decision record on user screen (Generative UI). Call this tool when AI detects a strategic decision discussion.",
         parameters: {
           type: SchemaType.OBJECT,
           properties: {
@@ -330,7 +330,7 @@ const tools = [
         parameters: {
           type: SchemaType.OBJECT,
           properties: {
-            base_monthly_revenue: { type: SchemaType.NUMBER, description: "Pendapatan bulanan saat ini." },
+            base_monthly_revenue: { type: SchemaType.NUMBER, description: "Current monthly revenue." },
             growth_rate_change: { type: SchemaType.NUMBER, description: "Perubahan persentase pertumbuhan bulanan (e.g. +0.02 = +2% growth)." },
             months: { type: SchemaType.INTEGER, description: "Jumlah bulan proyeksi (default 12)." },
             churn_rate: { type: SchemaType.NUMBER, description: "Persentase churn bulanan (default 0.02)." }
@@ -340,50 +340,50 @@ const tools = [
       },
       {
         name: "calculate_hiring_impact",
-        description: "Kalkulasi dampak penambahan staf (hiring) terhadap burn rate bulanan dan cash runway.",
+        description: "Calculate impact of staff additions (hiring) on monthly burn rate and cash runway.",
         parameters: {
           type: SchemaType.OBJECT,
           properties: {
-            headcount_delta: { type: SchemaType.INTEGER, description: "Jumlah staf baru." },
-            avg_annual_salary: { type: SchemaType.NUMBER, description: "Rata-rata gaji tahunan per staf." },
-            ramp_months: { type: SchemaType.INTEGER, description: "Waktu transisi staf (bulan)." },
-            revenue_per_head_monthly: { type: SchemaType.NUMBER, description: "Kontribusi revenue bulanan per kepala." },
-            current_cash: { type: SchemaType.NUMBER, description: "Saldo kas saat ini." },
-            current_monthly_burn: { type: SchemaType.NUMBER, description: "Burn rate bulanan saat ini." }
+            headcount_delta: { type: SchemaType.INTEGER, description: "Number of new staff." },
+            avg_annual_salary: { type: SchemaType.NUMBER, description: "Average annual salary per staff." },
+            ramp_months: { type: SchemaType.INTEGER, description: "Staff ramp-up time (months)." },
+            revenue_per_head_monthly: { type: SchemaType.NUMBER, description: "Monthly revenue contribution per head." },
+            current_cash: { type: SchemaType.NUMBER, description: "Current cash balance." },
+            current_monthly_burn: { type: SchemaType.NUMBER, description: "Current monthly burn rate." }
           },
           required: ["headcount_delta", "avg_annual_salary"]
         }
       },
       {
         name: "calculate_pricing_impact",
-        description: "Kalkulasi dampak perubahan harga produk terhadap volume penjualan dan gross margin berdasarkan elastisitas harga.",
+        description: "Calculate price change impact on sales volume and gross margin based on price elasticity.",
         parameters: {
           type: SchemaType.OBJECT,
           properties: {
-            current_price: { type: SchemaType.NUMBER, description: "Harga jual saat ini." },
-            new_price: { type: SchemaType.NUMBER, description: "Harga jual baru." },
-            price_elasticity: { type: SchemaType.NUMBER, description: "Koefisien elastisitas harga (angka negatif, e.g. -0.5)." },
-            current_volume: { type: SchemaType.INTEGER, description: "Volume penjualan bulanan saat ini." },
-            cost_per_unit: { type: SchemaType.NUMBER, description: "HPP per unit." }
+            current_price: { type: SchemaType.NUMBER, description: "Current selling price." },
+            new_price: { type: SchemaType.NUMBER, description: "New selling price." },
+            price_elasticity: { type: SchemaType.NUMBER, description: "Price elasticity coefficient (negative number, e.g. -0.5)." },
+            current_volume: { type: SchemaType.INTEGER, description: "Current monthly sales volume." },
+            cost_per_unit: { type: SchemaType.NUMBER, description: "COGS per unit." }
           },
           required: ["current_price", "new_price", "price_elasticity", "current_volume"]
         }
       },
       {
         name: "render_scenario_chart",
-        description: "Tampilkan bagan tren grafik visual skenario What-If di layar obrolan pengguna (Generative UI). Panggil tool ini setelah Anda selesai melakukan kalkulasi kalkulator scenario_tools.",
+        description: "Display visual trend chart of What-If scenario on user chat screen (Generative UI). Call this tool after you finish calculations with scenario_tools.",
         parameters: {
           type: SchemaType.OBJECT,
           properties: {
-            scenario_type: { type: SchemaType.STRING, description: "Kategori simulasi: 'revenue_growth', 'hiring', atau 'pricing'." },
-            title: { type: SchemaType.STRING, description: "Judul skenario simulasi." },
+            scenario_type: { type: SchemaType.STRING, description: "Simulation category: 'revenue_growth', 'hiring', or 'pricing'." },
+            title: { type: SchemaType.STRING, description: "Simulation scenario title." },
             summary_metrics: {
               type: SchemaType.OBJECT,
-              description: "Kumpulan metrik hasil utama."
+              description: "Collection of key outcome metrics."
             },
             projections: {
               type: SchemaType.ARRAY,
-              description: "List titik data bulanan untuk digambar pada grafik.",
+              description: "List of monthly data points to draw on the chart.",
               items: {
                 type: SchemaType.OBJECT
               }
@@ -398,57 +398,57 @@ const tools = [
       },
       {
         name: "generate_board_report_draft",
-        description: "Ambil data keuangan, CRM, dan keputusan strategis dari sistem untuk menghasilkan draf laporan lengkap bagi Dewan Direksi (board) atau Investor. Panggil tool ini saat pengguna meminta laporan board atau investor.",
+        description: "Fetch financial, CRM, and strategic decision data to generate a complete report draft for Board or Investor. Call this tool when report is requested.",
         parameters: {
           type: SchemaType.OBJECT,
           properties: {
-            report_type: { type: SchemaType.STRING, description: "Jenis laporan: 'board' (Dewan Direksi) atau 'investor'." },
-            period: { type: SchemaType.STRING, description: "Periode laporan, misalnya 'Juli 2026' atau 'Q2 2026'." }
+            report_type: { type: SchemaType.STRING, description: "Report type: 'board' or 'investor'." },
+            period: { type: SchemaType.STRING, description: "Report period, e.g. 'July 2026' or 'Q2 2026'." }
           },
           required: ["report_type", "period"]
         }
       },
       {
         name: "render_report_card",
-        description: "Tampilkan kartu preview draf laporan Board/Investor di layar obrolan (Generative UI) dengan tombol salin dan unduh. Panggil setelah generate_board_report_draft menghasilkan data laporan.",
+        description: "Display Board/Investor report draft preview card on chat screen (Generative UI) with copy and download buttons. Call after generate_board_report_draft.",
         parameters: {
           type: SchemaType.OBJECT,
           properties: {
-            title: { type: SchemaType.STRING, description: "Judul laporan." },
-            report_type: { type: SchemaType.STRING, description: "Jenis laporan: 'board' atau 'investor'." },
-            period: { type: SchemaType.STRING, description: "Periode laporan." },
-            content_markdown: { type: SchemaType.STRING, description: "Isi laporan dalam format Markdown." }
+            title: { type: SchemaType.STRING, description: "Report title." },
+            report_type: { type: SchemaType.STRING, description: "Report type: 'board' or 'investor'." },
+            period: { type: SchemaType.STRING, description: "Report period." },
+            content_markdown: { type: SchemaType.STRING, description: "Report content in Markdown format." }
           },
           required: ["title", "report_type", "period", "content_markdown"]
         }
       },
       {
         name: "fetch_market_intelligence",
-        description: "Cari dan ambil data riset pasar, tren industri, dan informasi kompetitor. Mendukung Firestore caching agar hasil sebelumnya bisa digunakan ulang. Panggil saat pengguna meminta riset pasar atau analisis kompetitor.",
+        description: "Search and retrieve market research, industry trends, and competitor info. Supports Firestore caching for reuse. Call when market research or competitor analysis is requested.",
         parameters: {
           type: SchemaType.OBJECT,
           properties: {
-            query_text: { type: SchemaType.STRING, description: "Kata kunci pencarian (misal: 'project management SaaS competitor pricing')." },
-            force_refresh: { type: SchemaType.BOOLEAN, description: "Set true untuk memaksa refresh data terbaru dari sumber, mengabaikan cache." }
+            query_text: { type: SchemaType.STRING, description: "Search query keywords (e.g., 'project management SaaS competitor pricing')." },
+            force_refresh: { type: SchemaType.BOOLEAN, description: "Set true to force refresh the latest data, ignoring cache." }
           },
           required: ["query_text"]
         }
       },
       {
         name: "render_market_digest_card",
-        description: "Tampilkan kartu ringkasan intelijen pasar dan kompetitor (Generative UI). Panggil setelah fetch_market_intelligence mengembalikan data.",
+        description: "Display market and competitor intelligence summary card (Generative UI). Call after fetch_market_intelligence returns data.",
         parameters: {
           type: SchemaType.OBJECT,
           properties: {
-            query: { type: SchemaType.STRING, description: "Kata kunci pencarian yang digunakan." },
+            query: { type: SchemaType.STRING, description: "Search query keywords used." },
             results: {
               type: SchemaType.ARRAY,
-              description: "List hasil kompetitor/berita pasar.",
+              description: "List of competitor results/market news.",
               items: { type: SchemaType.OBJECT }
             },
-            insights: { type: SchemaType.STRING, description: "Ringkasan analisis AI atas data pasar." },
-            cached_at: { type: SchemaType.STRING, description: "Waktu data di-cache (ISO string)." },
-            cache_hit: { type: SchemaType.BOOLEAN, description: "Apakah data berasal dari cache." }
+            insights: { type: SchemaType.STRING, description: "Summary of AI analysis on market data." },
+            cached_at: { type: SchemaType.STRING, description: "Time data was cached (ISO string)." },
+            cache_hit: { type: SchemaType.BOOLEAN, description: "Whether the data is from cache." }
           },
           required: ["query", "results", "insights"]
         }
@@ -467,7 +467,7 @@ export async function POST(req: Request) {
 
     const keys = getApiKeys();
     if (keys.length === 0) {
-      return NextResponse.json({ text: "API Key belum dikonfigurasi." }, { status: 500 });
+      return NextResponse.json({ text: "API Key is not configured." }, { status: 500 });
     }
 
     const formattedHistory = history
@@ -477,7 +477,7 @@ export async function POST(req: Request) {
         parts: [{ text: msg.content }]
       }));
 
-    // Filter history agar bergantian antara 'user' dan 'model' secara ketat, dimulai dengan 'user'
+    // Filter history to strictly alternate between 'user' and 'model', starting with 'user'
     const cleanHistory: any[] = [];
     let expectedRole = 'user';
     for (const msg of formattedHistory) {
@@ -489,38 +489,38 @@ export async function POST(req: Request) {
 
     const currentNotes = readNotes(username);
 
-    const systemPrompt = `Kamu adalah asisten AI Future Chief of Staff (CoS).
-Nama proyek yang aktif saat ini: "${activeProjectName}"
-Daftar proyek Anda saat ini: ${JSON.stringify(projectsList.map(p => p.name))}
-Daftar Tugas (Task List) di proyek "${activeProjectName}" saat ini (dalam JSON): 
+    const systemPrompt = `You are the Future Chief of Staff (CoS) AI Assistant.
+Currently active project name: "${activeProjectName}"
+Your list of current projects: ${JSON.stringify(projectsList.map(p => p.name))}
+Current Task List in project "${activeProjectName}" (in JSON): 
 ${JSON.stringify(currentTasks)}
-Catatan Proyek (Notes/Wiki) saat ini:
+Current Project Notes (Notes/Wiki):
 "${currentNotes}"
 
-ATURAN:
-1. Jika pengguna meminta untuk menambah tugas, memecah tugas menjadi subtugas, mengubah status, atau menghapus tugas, kamu HARUS memodifikasi array JSON di atas, lalu memanggil fungsi 'updateAndRenderTasks' dengan array yang sudah final.
-2. Ketika MENAMBAH tugas baru atau jika pengguna memintanya, lakukan klasifikasi prioritas dan kategori secara otomatis. Jika tugas bersifat kompleks atau besar, pecahlah menjadi beberapa subtugas ('subtasks') secara otomatis dengan status default 'pending'. Jika pengguna menyebutkan deadline, tenggat waktu, atau waktu pengerjaan (misal: "sebelum besok", "deadline tanggal 20 juli", dll.), konversikan menjadi format tanggal ISO 'YYYY-MM-DD' (dengan basis tahun berjalan saat ini yaitu 2026) dan simpan pada field 'dueDate'.
-3. Jika pengguna meminta ringkasan proyek atau status keseluruhan proyek saat ini, kamu HARUS memanggil fungsi 'renderProjectSummary' dengan menyusun deskripsi summary berdasarkan statistik penyelesaian daftar tugas saat ini. Tentukan status proyek: 'On Track' (jika sebagian besar selesai/lancar), 'At Risk' (jika banyak tugas High priority belum selesai), atau 'Off Track'.
-4. Jika pengguna meminta untuk membuat proyek baru, panggil fungsi 'createProject' dengan nama proyek yang baru.
-5. Jika pengguna meminta untuk pindah/beralih proyek, panggil fungsi 'switchProject' dengan nama proyek tujuan.
-6. Jika pengguna meminta melihat daftar proyek, panggil fungsi 'listProjects'.
-7. Jika pengguna meminta untuk mencatat informasi penting, menulis memo, membuat spec teknis, ringkasan rapat, atau menyimpan informasi tentang proyek saat ini, kamu HARUS memanggil fungsi 'updateProjectNotes' dengan teks catatan yang lengkap.
-8. Jika pengguna meminta Briefing Eksekutif Harian/Mingguan (Daily/Weekly Briefing) atau ringkasan pagi, kamu HARUS:
-   a. Panggil 'fetchFinanceSummary', 'fetchSalesHighlights', dan 'fetchCalendarToday' secara paralel/berurutan untuk mengumpulkan data bisnis.
-   b. Lakukan analisis Agentic Loop secara implisit: PLAN (sorot anomali kritis), SELECT & EXECUTE, SYNTHESIZE, dan SELF-REFLECT (cek kelengkapan data & confidence).
-   c. Panggil fungsi 'renderBriefingCard' dengan data-data yang sudah di-generate tersebut agar dirender sebagai Generative UI.
-9. Jika pengguna mendiskusikan atau menetapkan keputusan bisnis strategis (misal: merekrut karyawan baru, pendanaan, pengeluaran besar, perubahan produk), kamu HARUS memanggil fungsi 'render_decision_log_card' untuk menampilkan draf pencatatan keputusan strategis. Jika pengguna secara eksplisit menyetujui, menyuruh simpan, atau mengkonfirmasi keputusan tersebut, panggil fungsi 'save_decision_to_log'. Untuk menanyakan keputusan masa lalu yang serupa, panggil 'search_similar_decisions'.
-10. Jika pengguna menanyakan proyeksi skenario bisnis, analisis dampak ("What-If"), atau simulasi finansial/hiring/pricing (misal: "bagaimana proyeksi jika kita naikkan harga 10%?", "simulasikan jika kita merekrut 2 developer", "analisis runway jika revenue naik"), kamu HARUS LANGSUNG BERTINDAK tanpa meminta data tambahan:
-    a. JANGAN TANYA pengguna tentang data keuangan. Gunakan nilai default yang masuk akal: current_cash=750000000 (Rp 750 juta), current_monthly_burn=91500000 (Rp 91,5 juta), base_monthly_revenue=180000000 (Rp 180 juta), price_elasticity=-0.5.
-    b. Panggil fungsi simulasi yang sesuai SECARA LANGSUNG ('calculate_revenue_scenario', 'calculate_hiring_impact', atau 'calculate_pricing_impact') dengan data yang bisa disimpulkan dari konteks percakapan + nilai default.
-    c. Setelah dapat hasil kalkulasi, LANGSUNG panggil fungsi 'render_scenario_chart' dengan menyuplai hasil kalkulasi tersebut agar dirender sebagai grafik visual.
-11. Jika pengguna meminta laporan untuk dewan direksi (board) atau investor (misal: "buatkan draf laporan board", "laporan kinerja untuk investor"), kamu HARUS:
-    a. Panggil fungsi 'generate_board_report_draft' untuk mengumpulkan metrik dari sistem keuangan, CRM, dan log keputusan Firestore.
-    b. Panggil fungsi 'render_report_card' agar draf laporan ditampilkan lengkap dengan tombol salin & unduh.
-12. Jika pengguna meminta riset pasar, analisis kompetitor, tren bisnis, atau intelijen pasar (misal: "cari berita kompetitor kita", "bagaimana perbandingan harga kompetitor?"), kamu HARUS:
-    a. Panggil fungsi 'fetch_market_intelligence' untuk mencari informasi (dengan Firestore caching).
-    b. Panggil fungsi 'render_market_digest_card' untuk menampilkan ringkasan intelijen pasar dan kompetitor secara terstruktur.
-13. Untuk pertanyaan umum di luar sistem manajemen proyek dan analisis bisnis, jawab dengan teks natural.`;
+RULES:
+1. If the user asks to add a task, split a task into subtasks, change status, or delete a task, you MUST modify the JSON array above, and then call 'updateAndRenderTasks' function with the final array.
+2. When ADDING a new task or if requested by the user, automatically classify priority and category. If the task is complex or large, automatically split it into multiple 'subtasks' with a default status of 'pending'. If the user mentions a deadline, due date, or timeline (e.g. "by tomorrow", "deadline July 20", etc.), convert it to ISO date format 'YYYY-MM-DD' (using the current active year 2026) and store it in the 'dueDate' field.
+3. If the user asks for a project summary or overall current project status, you MUST call 'renderProjectSummary' function, compiling the summary description based on completion stats of the current task list. Determine project status: 'On Track' (if mostly complete/smooth), 'At Risk' (if many High priority tasks are incomplete), or 'Off Track'.
+4. If the user asks to create a new project, call 'createProject' function with the new project name.
+5. If the user asks to switch/change projects, call 'switchProject' function with the target project name.
+6. If the user asks to view the list of projects, call 'listProjects' function.
+7. If the user asks to record important information, write a memo, technical spec, meeting summary, or save info about the current project, you MUST call 'updateProjectNotes' function with the full note text.
+8. If the user requests a Daily/Weekly Executive Briefing or morning summary, you MUST:
+   a. Call 'fetchFinanceSummary', 'fetchSalesHighlights', and 'fetchCalendarToday' in parallel or sequence to gather business data.
+   b. Perform implicit Agentic Loop analysis: PLAN (highlight critical anomalies), SELECT & EXECUTE, SYNTHESIZE, and SELF-REFLECT (check data completeness & confidence).
+   c. Call 'renderBriefingCard' function with the generated data to render it as Generative UI.
+9. If the user discusses or sets a strategic business decision (e.g., hiring new employees, funding, large expenses, product changes), you MUST call 'render_decision_log_card' function to display a draft of the strategic decision record. If the user explicitly approves, instructs to save, or confirms the decision, call 'save_decision_to_log'. To search for similar past decisions, call 'search_similar_decisions'.
+10. If the user asks for a business scenario projection, impact analysis ("What-If"), or financial/hiring/pricing simulation (e.g. "what is the projection if we increase price by 10%?", "simulate if we hire 2 developers", "analyze runway if revenue increases"), you MUST ACT IMMEDIATELY without asking for additional data:
+    a. DO NOT ask the user for financial data. Use reasonable default values: current_cash=750000000 (IDR 750 million), current_monthly_burn=91500000 (IDR 91.5 million), base_monthly_revenue=180000000 (IDR 180 million), price_elasticity=-0.5.
+    b. Call the appropriate simulation function DIRECTLY ('calculate_revenue_scenario', 'calculate_hiring_impact', or 'calculate_pricing_impact') using data inferred from the conversation context + default values.
+    c. Once the calculation results are obtained, DIRECTLY call 'render_scenario_chart' function supplying the calculation results to render it as a visual chart.
+11. If the user requests a report for the Board of Directors or Investors (e.g. "make a draft of board report", "growth report for investors"), you MUST:
+    a. Call 'generate_board_report_draft' function to compile metrics from the financial system, CRM, and Firestore decision log.
+    b. Call 'render_report_card' function to display the full report draft along with copy & download buttons.
+12. If the user asks for market research, competitor analysis, business trends, or market intelligence (e.g. "search competitor news", "how do competitor prices compare?"), you MUST:
+    a. Call 'fetch_market_intelligence' function to search for info (with Firestore caching).
+    b. Call 'render_market_digest_card' function to display the structured market and competitor intelligence summary.
+13. For general questions outside the project management system and business analysis, reply with natural text. Always reply in professional, clear, and structured English.`;
 
     let response = null;
     let successfulKeyIndex = 0;
@@ -656,7 +656,7 @@ ATURAN:
                     decision_id: data.id,
                     title: data.title,
                     decision_made: data.decisionMade,
-                    outcome: data.outcome || "Belum terekam",
+                    outcome: data.outcome || "Not recorded",
                     similarity_score: Math.round(score * 100) / 100,
                     made_at: data.madeAt
                   });
@@ -710,13 +710,13 @@ ATURAN:
                 componentName: 'ScenarioChart',
                 props: {
                   scenario_type: 'revenue_growth',
-                  title: `Simulasi Proyeksi Revenue (Growth +${Math.round(growth_change * 100)}%)`,
+                  title: `Revenue Projection Simulation (Growth +${Math.round(growth_change * 100)}%)`,
                   summary_metrics: toolResult,
                   projections,
-                  reasoning_trail: { dataSources: ['Fixture Finance Data'], assumptions: [`Base revenue: Rp ${base_revenue.toLocaleString('id-ID')}/bln`, `Growth rate: +${Math.round(growth_change * 100)}%/bln`, `Churn: ${Math.round(churn * 100)}%`], confidenceScore: 0.85, confidenceLabel: 'High' }
+                  reasoning_trail: { dataSources: ['Fixture Finance Data'], assumptions: [`Base revenue: IDR ${base_revenue.toLocaleString('en-US')}/mo`, `Growth rate: +${Math.round(growth_change * 100)}%/mo`, `Churn: ${Math.round(churn * 100)}%`], confidenceScore: 0.85, confidenceLabel: 'High' }
                 }
               };
-              innerReplyText = 'Simulasi proyeksi revenue berhasil dihitung:';
+              innerReplyText = 'Revenue projection simulation calculated successfully:';
             }
             else if (call.name === 'calculate_hiring_impact') {
               const args = call.args as any;
@@ -769,13 +769,13 @@ ATURAN:
                 componentName: 'ScenarioChart',
                 props: {
                   scenario_type: 'hiring',
-                  title: `Simulasi Dampak Rekrutmen ${headcount} Staf Baru`,
+                  title: `Hiring Impact Simulation for ${headcount} New Staff`,
                   summary_metrics: toolResult,
                   projections,
-                  reasoning_trail: { dataSources: ['Fixture Finance Data'], assumptions: [`Gaji/tahun: Rp ${salary.toLocaleString('id-ID')}`, `Ramp-up: ${ramp} bulan`], confidenceScore: 0.85, confidenceLabel: 'High' }
+                  reasoning_trail: { dataSources: ['Fixture Finance Data'], assumptions: [`Salary/year: IDR ${salary.toLocaleString('en-US')}`, `Ramp-up: ${ramp} months`], confidenceScore: 0.85, confidenceLabel: 'High' }
                 }
               };
-              innerReplyText = `Simulasi dampak hiring ${headcount} staf baru berhasil dihitung:`;
+              innerReplyText = `Hiring impact simulation for ${headcount} new staff calculated successfully:`;
             }
             else if (call.name === 'calculate_pricing_impact') {
               const args = call.args as any;
@@ -826,18 +826,18 @@ ATURAN:
                 componentName: 'ScenarioChart',
                 props: {
                   scenario_type: 'pricing',
-                  title: `Simulasi Dampak Perubahan Harga (${current_p} → ${new_p})`,
+                  title: `Price Change Impact Simulation (${current_p} → ${new_p})`,
                   summary_metrics: toolResult,
                   projections,
-                  reasoning_trail: { dataSources: ['Pricing Calculator'], assumptions: [`Harga lama: ${current_p}`, `Harga baru: ${new_p}`, `Elastisitas: ${elasticity}`], confidenceScore: 0.82, confidenceLabel: 'High' }
+                  reasoning_trail: { dataSources: ['Pricing Calculator'], assumptions: [`Old price: ${current_p}`, `New price: ${new_p}`, `Elasticity: ${elasticity}`], confidenceScore: 0.82, confidenceLabel: 'High' }
                 }
               };
-              innerReplyText = 'Simulasi dampak perubahan harga berhasil dihitung:';
+              innerReplyText = 'Price change impact simulation calculated successfully:';
             }
             else if (call.name === 'generate_board_report_draft') {
               const args = call.args as any;
               const reportType = args.report_type || "board";
-              const period = args.period || "Periode Saat Ini";
+              const period = args.period || "Current Period";
 
               const financeData = getFixture('finance.json') || {};
               const currMonth = financeData.current_month || {};
@@ -857,24 +857,24 @@ ATURAN:
                 const querySnapshot = await getDocs(q);
                 querySnapshot.forEach((doc) => {
                   const data = doc.data();
-                  decisionsList.push(`- **${data.title}**: ${data.decisionMade} (Alasan: ${data.rationale})`);
+                  decisionsList.push(`- **${data.title}**: ${data.decisionMade} (Rationale: ${data.rationale})`);
                 });
               } catch (err) {
                 console.error("Failed to query decisions for report:", err);
               }
 
               if (decisionsList.length === 0) {
-                decisionsList.push("- *Tidak ada keputusan strategis baru yang tercatat pada periode ini.*");
+                decisionsList.push("- *No new strategic decisions recorded*");
               }
               const decisionsText = decisionsList.join("\n");
-              const title = `Laporan Kinerja ${reportType.charAt(0).toUpperCase() + reportType.slice(1)} - ${period}`;
-              const formattedDate = new Date().toLocaleDateString("id-ID", { day: "numeric", month: "long", year: "numeric" });
+              const title = `${reportType.charAt(0).toUpperCase() + reportType.slice(1)} Performance Report - {period}`;
+              const formattedDate = new Date().toLocaleDateString("en-US", { day: "numeric", month: "long", year: "numeric" });
 
               let contentMarkdown = "";
               if (reportType === "investor") {
-                contentMarkdown = `# ${title}\n**Kepada**: Pemegang Saham & Investor Future Chief of Staff (CoS)\n**Tanggal**: ${formattedDate}\n**Periode**: ${period}\n\n---\n\n## 1. Ringkasan Eksekutif\nBisnis beroperasi dengan kinerja solid pada periode ${period}. Fokus utama kami adalah ekspansi pasar dan optimalisasi retensi pelanggan. Cash runway saat ini berada di level aman mendukung pertumbuhan berkelanjutan.\n\n## 2. Metrik Keuangan Kunci (Financial Health)\n*   **Pendapatan Bulanan (MRR)**: Rp ${new Intl.NumberFormat("id-ID").format(monthlyRevenue)}\n*   **Saldo Kas & Setara Kas**: Rp ${new Intl.NumberFormat("id-ID").format(cashBalance)}\n*   **Cash Runway**: ${runway} Bulan\n\n## 3. Metrik Pertumbuhan & Sales (CRM)\n*   **Pipeline Sales Aktif**: ${openDeals} Kesepakatan (Total Nilai: Rp ${new Intl.NumberFormat("id-ID").format(dealsValue)})\n*   **Net Promoter Score (NPS)**: ${nps}\n*   **Tingkat Churn Bulanan**: ${churn}%\n\n## 4. Keputusan Strategis & Penggunaan Dana\n${decisionsText}\n\n---\n*Dibuat secara otomatis oleh Future Chief of Staff (CoS) Assistant.*`;
+                contentMarkdown = `# ${title}\n**To**: Shareholders & Investors of Future Chief of Staff (CoS)\n**Date**: ${formattedDate}\n**Period**: ${period}\n\n---\n\n## 1. Executive Summary\nThe business operated with solid performance during the period ${period}. Our primary focus remains on market expansion and customer retention optimization. The current cash runway is at a safe level, supporting sustainable growth.\n\n## 2. Key Financial Metrics (Financial Health)\n*   **Monthly Revenue (MRR)**: IDR ${new Intl.NumberFormat("en-US").format(monthlyRevenue)}\n*   **Cash & Cash Equivalents Balance**: IDR ${new Intl.NumberFormat("en-US").format(cashBalance)}\n*   **Cash Runway**: ${runway} Months\n\n## 3. Growth & Sales Metrics (CRM)\n*   **Active Sales Pipeline**: ${openDeals} Deals (Total Value: IDR ${new Intl.NumberFormat("en-US").format(dealsValue)})\n*   **Net Promoter Score (NPS)**: ${nps}\n*   **Monthly Churn Rate**: ${churn}%\n\n## 4. Strategic Decisions & Use of Funds\n${decisionsText}\n\n---\n*Automatically generated by Future Chief of Staff (CoS) Assistant.*`;
               } else {
-                contentMarkdown = `# ${title}\n**Kepada**: Dewan Direksi & Komisaris\n**Tanggal**: ${formattedDate}\n**Periode**: ${period}\n**Klasifikasi**: Rahasia / Internal Only\n\n---\n\n## I. Tinjauan Finansial & Tata Kelola\nLaporan tata kelola kinerja keuangan dan rencana alokasi modal perusahaan.\n*   **Total Kas Tersedia**: Rp ${new Intl.NumberFormat("id-ID").format(cashBalance)}\n*   **Kesehatan Kas**: Runway kas ${runway} bulan memberikan fleksibilitas operasional yang memadai.\n*   **Pendapatan Operasional Bulanan**: Rp ${new Intl.NumberFormat("id-ID").format(monthlyRevenue)}\n\n## II. Operasional & Manajemen Hubungan Pelanggan (CRM)\n*   **Aktivitas Pipeline**: Penjualan menunjukkan prospek kuat dengan ${openDeals} open deals senilai Rp ${new Intl.NumberFormat("id-ID").format(dealsValue)}.\n*   **Kepuasan Pelanggan**: NPS bertahan tinggi di angka ${nps}, dengan target mempertahankan churn di bawah 2% (saat ini ${churn}%).\n\n## III. Log Keputusan Tata Kelola Board\nBerikut adalah keputusan-keputusan strategis utama yang diambil dan memerlukan pengawasan Board:\n${decisionsText}\n\n## IV. Rencana Tindak Lanjut (Next Steps)\n1. Menjaga stabilitas runway dengan pengendalian burn rate bulanan.\n2. Mempercepat siklus closing sales pipeline.\n3. Optimalisasi onboarding staf kunci baru.\n\n---\n*Laporan ini disajikan untuk keperluan evaluasi Dewan Direksi.*`;
+                contentMarkdown = `# ${title}\n**To**: Board of Directors & Commissioners\n**Date**: ${formattedDate}\n**Period**: ${period}\n**Classification**: Confidential / Internal Only\n\n---\n\n## I. Financial & Governance Overview\nGovernance report on the company's financial performance and capital allocation plans.\n*   **Total Cash Available**: IDR ${new Intl.NumberFormat("en-US").format(cashBalance)}\n*   **Cash Health**: Cash runway of ${runway} months provides adequate operational flexibility.\n*   **Monthly Operating Revenue**: IDR ${new Intl.NumberFormat("en-US").format(monthlyRevenue)}\n\n## II. Operations & Customer Relationship Management (CRM)\n*   **Pipeline Activity**: Sales show a strong outlook with ${openDeals} open deals valued at IDR ${new Intl.NumberFormat("en-US").format(dealsValue)}.\n*   **Customer Satisfaction**: NPS remains high at ${nps}, with a target of keeping monthly churn below 2% (currently ${churn}%).\n\n## III. Board Governance Decision Log\nThe following are the key strategic decisions taken that require Board oversight:\n${decisionsText}\n\n## IV. Action Plan (Next Steps)\n1. Maintain runway stability by controlling the monthly burn rate.\n2. Accelerate the sales pipeline closing cycle.\n3. Optimize onboarding of new key staff.\n\n---\n*This report is presented for the evaluation of the Board of Directors.*`;
               }
 
               toolResult = {
@@ -889,7 +889,7 @@ ATURAN:
                 componentName: 'ReportCard',
                 props: { title, report_type: reportType, period, content_markdown: contentMarkdown }
               };
-              innerReplyText = "Berikut adalah draf laporan Board/Investor Anda:";
+              innerReplyText = "Here is your draft Board/Investor report:";
             }
             else if (call.name === 'fetch_market_intelligence') {
               const args = call.args as any;
@@ -945,7 +945,7 @@ ATURAN:
                   source: comp.competitor
                 }));
 
-                insights = `Hasil analisis intelijen pasar menunjukkan update kompetitor terkini mengenai ${queryText}. Ditemukan ${results.length} artikel referensi penting. Tren utama menunjukkan peningkatan fitur otomatisasi operasional dan simplifikasi skema harga berlangganan.`;
+                insights = `Market intelligence analysis shows the latest competitor updates regarding ${queryText}. Found ${results.length} key reference articles. Key trends point to enhanced operational automation features and simplified subscription pricing models.`;
                 cachedAtStr = new Date().toISOString();
 
                 try {
@@ -972,7 +972,7 @@ ATURAN:
                 componentName: 'MarketDigestCard',
                 props: { query: queryText, results, insights, cached_at: cachedAtStr, cache_hit: cacheHit }
               };
-              innerReplyText = "Berikut adalah ringkasan intelijen pasar dan kompetitor:";
+              innerReplyText = "Here is the summary of market intelligence and competitors:";
             }
 
             // ── RENDER TOOLS: set genUIPayload inside the loop, feed dummy result, then break ──
@@ -987,7 +987,7 @@ ATURAN:
                   content_markdown: args.content_markdown
                 }
               };
-              innerReplyText = "Berikut adalah draf laporan Board/Investor Anda:";
+              innerReplyText = "Here is your draft Board/Investor report:";
               toolResult = { rendered: true };
             }
             else if (call.name === 'render_scenario_chart') {
@@ -1002,7 +1002,7 @@ ATURAN:
                   reasoning_trail: args.reasoning_trail || {}
                 }
               };
-              innerReplyText = "Berikut adalah bagan proyeksi skenario What-If Anda:";
+              innerReplyText = "Here is your What-If scenario projection chart:";
               toolResult = { rendered: true };
             }
             else if (call.name === 'render_decision_log_card') {
@@ -1021,7 +1021,7 @@ ATURAN:
                   tags: args.tags || []
                 }
               };
-              innerReplyText = "Berikut adalah draf pencatatan keputusan strategis Anda:";
+              innerReplyText = "Here is your strategic decision record draft:";
               toolResult = { rendered: true };
             }
             else if (call.name === 'render_market_digest_card') {
@@ -1036,7 +1036,7 @@ ATURAN:
                   cache_hit: args.cache_hit
                 }
               };
-              innerReplyText = "Berikut adalah ringkasan intelijen pasar kompetitor:";
+              innerReplyText = "Here is your competitor market intelligence summary:";
               toolResult = { rendered: true };
             }
             else if (call.name === 'renderBriefingCard') {
@@ -1050,7 +1050,7 @@ ATURAN:
                   reasoning_trail: args.reasoning_trail || {}
                 }
               };
-              innerReplyText = "Berikut adalah Briefing Eksekutif Harian Anda hari ini:";
+              innerReplyText = "Here is your Daily Executive Briefing for today:";
               toolResult = { rendered: true };
             }
 
@@ -1089,7 +1089,7 @@ ATURAN:
           }
 
           console.warn(`Attempt failed for model ${modelName} with key index ${i}. Trying next option...`);
-          continue; // Selalu coba opsi berikutnya jika ada kegagalan apa pun
+          continue; // Always try the next option if any failure occurs
         }
       }
     }
@@ -1097,7 +1097,7 @@ ATURAN:
     if (!response) {
       if (rateLimitHit) {
         return NextResponse.json({ 
-          text: "Maaf, kuota Gemini API Key Anda sedang habis atau terkena batas limit (Rate Limit / Too Many Requests). Silakan tunggu sekitar 1-2 menit sebelum mencoba kembali." 
+          text: "Sorry, your Gemini API Key quota is exhausted or rate limited (Rate Limit / Too Many Requests). Please wait 1-2 minutes before trying again." 
         });
       }
       throw new Error("Failed to get response from Gemini API");
@@ -1122,14 +1122,14 @@ ATURAN:
           componentName: 'TaskList',
           props: { items }
         };
-        if (!replyText) replyText = "Daftar tugas telah diperbarui sesuai permintaan Anda:";
+        if (!replyText) replyText = "The task list has been updated as requested:";
       } 
       else if (call.name === 'renderProjectSummary') {
         genUIPayload = {
           componentName: 'ProjectSummary',
           props: call.args
         };
-        if (!replyText) replyText = "Ini dia ringkasan proyek yang Anda tanyakan:";
+        if (!replyText) replyText = "Here is the project summary you asked for:";
       }
       else if (call.name === 'createProject') {
         const args = call.args as any;
@@ -1144,7 +1144,7 @@ ATURAN:
             projects: listUserProjects(username)
           }
         };
-        if (!replyText) replyText = `Proyek baru "${projName}" berhasil dibuat dan sekarang aktif.`;
+        if (!replyText) replyText = `New project "${projName}" created successfully and is now active.`;
       }
       else if (call.name === 'switchProject') {
         const args = call.args as any;
@@ -1164,9 +1164,9 @@ ATURAN:
               projects: listUserProjects(username)
             }
           };
-          if (!replyText) replyText = `Pindah ke proyek "${found.name}" berhasil.`;
+          if (!replyText) replyText = `Successfully switched to project "${found.name}".`;
         } else {
-          if (!replyText) replyText = `Proyek "${target}" tidak ditemukan. Silakan buat proyek baru jika perlu.`;
+          if (!replyText) replyText = `Project "${target}" not found. Please create a new project if needed.`;
         }
       }
       else if (call.name === 'listProjects') {
@@ -1177,7 +1177,7 @@ ATURAN:
             projects
           }
         };
-        if (!replyText) replyText = "Berikut adalah daftar semua proyek Anda:";
+        if (!replyText) replyText = "Here is the list of all your projects:";
       }
       else if (call.name === 'updateProjectNotes') {
         const args = call.args as any;
@@ -1187,7 +1187,7 @@ ATURAN:
           componentName: 'ProjectNotes',
           props: { notes }
         };
-        if (!replyText) replyText = "Catatan proyek telah berhasil diperbarui dan disimpan.";
+        if (!replyText) replyText = "Project notes have been successfully updated and saved.";
       }
       else if (call.name === 'renderBriefingCard') {
         const args = call.args as any;
@@ -1200,7 +1200,7 @@ ATURAN:
             reasoning_trail: args.reasoning_trail || {}
           }
         };
-        if (!replyText) replyText = "Berikut adalah Briefing Eksekutif Harian Anda hari ini:";
+        if (!replyText) replyText = "Here is your Daily Executive Briefing for today:";
       }
       else if (call.name === 'render_decision_log_card') {
         const args = call.args as any;
@@ -1218,7 +1218,7 @@ ATURAN:
             tags: args.tags || []
           }
         };
-        if (!replyText) replyText = "Berikut adalah draf pencatatan keputusan strategis Anda:";
+        if (!replyText) replyText = "Here is your strategic decision record draft:";
       }
       else if (call.name === 'render_scenario_chart') {
         const args = call.args as any;
@@ -1232,7 +1232,7 @@ ATURAN:
             reasoning_trail: args.reasoning_trail || {}
           }
         };
-        if (!replyText) replyText = "Berikut adalah bagan proyeksi skenario What-If Anda:";
+        if (!replyText) replyText = "Here is your What-If scenario projection chart:";
       }
       else if (call.name === 'render_report_card') {
         const args = call.args as any;
@@ -1245,7 +1245,7 @@ ATURAN:
             content_markdown: args.content_markdown
           }
         };
-        if (!replyText) replyText = "Berikut adalah draf laporan Board/Investor Anda:";
+        if (!replyText) replyText = "Here is your draft Board/Investor report:";
       }
       else if (call.name === 'render_market_digest_card') {
         const args = call.args as any;
@@ -1259,7 +1259,7 @@ ATURAN:
             cache_hit: args.cache_hit
           }
         };
-        if (!replyText) replyText = "Berikut adalah ringkasan intelijen pasar kompetitor:";
+        if (!replyText) replyText = "Here is your competitor market intelligence summary:";
       }
     }
 
@@ -1272,9 +1272,9 @@ ATURAN:
     console.error("Gemini API Error:", error);
     if (error?.status === 429 || error?.message?.includes("429") || error?.message?.includes("RESOURCE_EXHAUSTED")) {
       return NextResponse.json({ 
-        text: "Maaf, kuota Gemini API Key Anda sedang habis atau terkena batas limit (Rate Limit / Too Many Requests). Silakan tunggu sekitar 1-2 menit sebelum mencoba kembali." 
+        text: "Sorry, your Gemini API Key quota is exhausted or rate limited. Please wait 1-2 minutes before trying again." 
       });
     }
-    return NextResponse.json({ text: "Terjadi kesalahan saat menghubungi server AI." }, { status: 500 });
+    return NextResponse.json({ text: "An error occurred while contacting the AI server." }, { status: 500 });
   }
 }

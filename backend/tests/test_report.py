@@ -41,7 +41,7 @@ def test_generate_board_report_draft_board(mock_firestore):
     # Check that it contains mocked decision title
     assert "Hiring Sales lead" in result["content_markdown"]
     # Check that it contains board specific headers
-    assert "Tinjauan Finansial & Tata Kelola" in result["content_markdown"]
+    assert "Financial & Governance Overview" in result["content_markdown"]
 
 def test_generate_board_report_draft_investor(mock_firestore):
     mock_limit = MagicMock()
@@ -62,6 +62,6 @@ def test_generate_board_report_draft_investor(mock_firestore):
     
     assert result["report_type"] == "investor"
     assert "investor" in result["title"].lower()
-    assert "Saldo Kas & Setara Kas" in result["content_markdown"]
+    assert "Cash & Cash Equivalents Balance" in result["content_markdown"]
     # Should fall back to "no strategic decisions" text
     assert "No new strategic decisions recorded" in result["content_markdown"]

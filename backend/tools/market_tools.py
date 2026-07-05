@@ -9,15 +9,15 @@ from tools.search_tools import search_web
 @tool
 def fetch_market_intelligence(query_text: str, force_refresh: bool = False) -> dict:
     """
-    Dapatkan ringkasan intelijen pasar/kompetitor secara real-time. Tool ini
-    menggunakan Firestore untuk melakukan caching hasil pencarian web demi efisiensi biaya API.
+    Get real-time market/competitor intelligence summary. This tool
+    uses Firestore to cache web search results for API cost efficiency.
     
     Args:
-        query_text: Kata kunci pencarian intelijen pasar (misal: 'competitor pricing' atau 'AI Chief of Staff market').
-        force_refresh: Jika True, lewati cache dan paksa ambil data segar dari search engine.
+        query_text: Market intelligence search query (e.g. 'competitor pricing' or 'AI Chief of Staff market').
+        force_refresh: If True, skip cache and force fetch fresh data from the search engine.
         
     Returns:
-        Dictionary berisi ringkasan hasil intelijen pasar, kompetitor, dan status cache.
+        Dictionary containing market intelligence summary, competitors, and cache status.
     """
     db = get_firestore_client()
     cache_id = query_text.lower().replace(" ", "_")[:32]
@@ -37,7 +37,7 @@ def fetch_market_intelligence(query_text: str, force_refresh: bool = False) -> d
                         return {
                             "query": query_text,
                             "results": data.get("results", []),
-                            "insights": data.get("insights", "Insight dari cache"),
+                            "insights": data.get("insights", "Cached insights"),
                             "cached_at": cached_at_str,
                             "cache_hit": True
                         }
@@ -59,12 +59,12 @@ def fetch_market_intelligence(query_text: str, force_refresh: bool = False) -> d
     results = search_res.get("results", [])
     
     # Construct competitor analysis insights
-    insights = f"Hasil analisis intelijen pasar menunjukkan update kompetitor terkini mengenai {query_text}. "
+    insights = f"Market intelligence analysis shows the latest competitor updates regarding {query_text}. "
     if results:
-        insights += f"Ditemukan {len(results)} artikel referensi penting. "
-        insights += "Tren utama menunjukkan peningkatan fitur otomatisasi operasional dan simplifikasi skema harga berlangganan."
+        insights += f"Found {len(results)} key reference articles. "
+        insights += "Key trends point to enhanced operational automation features and simplified subscription pricing models."
     else:
-        insights += "Tidak ditemukan data sekunder spesifik, disarankan memantau secara manual berkala."
+        insights += "No specific secondary data found, manual monitoring is recommended periodically."
         
     # Compile cache payload
     cached_time_str = datetime.utcnow().isoformat() + "Z"
@@ -98,14 +98,14 @@ def render_market_digest_card(
     cache_hit: bool
 ) -> str:
     """
-    Merender kartu ringkasan intelijen pasar (Generative UI) di layar obrolan pengguna.
-    Panggil tool ini setelah Anda mendapatkan data dari 'fetch_market_intelligence'.
+    Renders the market intelligence summary card (Generative UI) on the user's chat screen.
+    Call this tool after you obtain data from 'fetch_market_intelligence'.
     
     Args:
-        query: Kategori kueri riset pasar.
-        results: List artikel/informasi kompetitor.
-        insights: Kesimpulan ringkas analis AI.
-        cached_at: Waktu pembaruan kas intelijen pasar.
-        cache_hit: Status apakah data dimuat dari cache Firestore.
+        query: Market research query category.
+        results: List of competitor articles/information.
+        insights: Concise conclusions from AI analyst.
+        cached_at: Timestamp of when the market intelligence cache was updated.
+        cache_hit: Status of whether the data was loaded from Firestore cache.
     """
-    return "Menampilkan Digest Intelijen Pasar..."
+    return "Displaying Market Intelligence Digest..."

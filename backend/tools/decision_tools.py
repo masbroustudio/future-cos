@@ -19,23 +19,23 @@ def save_decision_to_log(
     user_id: str = "default_user"
 ) -> dict:
     """
-    Simpan keputusan strategis bisnis yang diambil ke dalam database Firestore Decision Log.
-    Panggil tool ini ketika pengguna menyetujui (klik Approve/Simpan) atau secara eksplisit meminta untuk menyimpan keputusan ke database log.
+    Save the strategic business decision taken into the Firestore Decision Log database.
+    Call this tool when the user approves (clicks Approve/Save) or explicitly requests to save the decision to the log database.
     
     Args:
-        title: Judul singkat keputusan strategis (max 100 karakter).
-        description: Latar belakang dan konteks lengkap mengapa keputusan ini dibahas.
-        decision_made: Hasil keputusan akhir yang diambil/dipilih.
-        rationale: Alasan utama mengapa opsi ini dipilih dibanding alternatif lain.
-        assumptions: Daftar asumsi utama yang dijadikan landasan keputusan.
-        alternatives_considered: Opsi alternatif lain yang dipertimbangkan tapi ditolak beserta alasannya.
-        confidence_score: Confidence score AI (0.0 - 1.0) terhadap keputusan ini.
-        data_sources: Dokumen, data, atau dashboard yang dirujuk.
-        tags: Label kategori (contoh: ['hiring', 'pricing', 'fundraising']).
-        user_id: ID pengguna, default 'default_user'.
+        title: Short title of the strategic decision (max 100 characters).
+        description: Full background and context of why this decision is being discussed.
+        decision_made: The final decision made/selected.
+        rationale: Main reason why this option was chosen over alternatives.
+        assumptions: List of key assumptions behind the decision.
+        alternatives_considered: Other alternative options considered but rejected and the reasons why.
+        confidence_score: AI confidence score (0.0 - 1.0) for this decision.
+        data_sources: Documents, data, or dashboards referenced.
+        tags: Category labels (e.g. ['hiring', 'pricing', 'fundraising']).
+        user_id: User ID, default 'default_user'.
         
     Returns:
-        Dictionary status berisi success: True, decision_id, dan timestamp penyimpanan.
+        Dictionary status containing success: True, decision_id, and save timestamp.
     """
     try:
         db = get_firestore_client()
@@ -88,14 +88,14 @@ def save_decision_to_log(
 @tool
 def search_similar_decisions(query: str, user_id: str = "default_user") -> dict:
     """
-    Cari keputusan-keputusan serupa yang pernah diambil sebelumnya di masa lalu untuk referensi dan pembanding.
+    Search for similar decisions previously taken in the past for reference and comparison.
     
     Args:
-        query: Kata kunci pencarian keputusan terkait.
-        user_id: ID pengguna.
+        query: Search keywords for related decisions.
+        user_id: User ID.
         
     Returns:
-        Dictionary berisi array 'similar_decisions' dengan judul, keputusan, dan hasil (outcome) jika ada.
+        Dictionary containing 'similar_decisions' array with title, decision, and outcome if any.
     """
     try:
         db = get_firestore_client()
@@ -122,7 +122,7 @@ def search_similar_decisions(query: str, user_id: str = "default_user") -> dict:
                 "decision_id": data.get("id"),
                 "title": data.get("title"),
                 "decision_made": data.get("decisionMade"),
-                "outcome": data.get("outcome", "Belum terekam"),
+                "outcome": data.get("outcome", "Not recorded"),
                 "similarity_score": round(score, 2),
                 "made_at": made_at_str
             })
@@ -152,18 +152,18 @@ def render_decision_log_card(
     tags: List[str]
 ) -> str:
     """
-    Tampilkan draf pencatatan keputusan strategis di layar obrolan pengguna (Generative UI).
-    Panggil tool ini ketika AI mendeteksi diskusi tentang keputusan strategis atau ketika pengguna ingin membuat catatan keputusan strategis baru.
+    Display the draft strategic decision log on the user's chat screen (Generative UI).
+    Call this tool when AI detects a discussion about a strategic decision or when the user wants to create a new strategic decision record.
     
     Args:
-        title: Judul singkat keputusan strategis (max 100 karakter).
-        description: Deskripsi latar belakang / konteks keputusan.
-        decision_made: Keputusan final yang diambil.
-        rationale: Alasan utama keputusan tersebut.
-        assumptions: Daftar asumsi utama yang mendasari keputusan.
-        alternatives_considered: Opsi alternatif lain yang ditolak dan alasannya.
-        confidence_score: Confidence score AI (0.0 - 1.0) terhadap keputusan ini.
-        data_sources: Dokumen, data, atau dashboard yang dirujuk.
-        tags: Label kategori (contoh: ['hiring', 'pricing', 'fundraising']).
+        title: Short title of the strategic decision (max 100 characters).
+        description: Background / context description of the decision.
+        decision_made: The final decision made.
+        rationale: Main reason for the decision.
+        assumptions: List of key assumptions underlying the decision.
+        alternatives_considered: Other alternative options rejected and their reasons.
+        confidence_score: AI confidence score (0.0 - 1.0) for this decision.
+        data_sources: Documents, data, or dashboards referenced.
+        tags: Category labels (e.g. ['hiring', 'pricing', 'fundraising']).
     """
-    return "Menampilkan Draf Pencatatan Keputusan..."
+    return "Displaying Decision Record Draft..."

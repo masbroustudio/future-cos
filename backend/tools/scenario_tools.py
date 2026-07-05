@@ -9,17 +9,17 @@ def calculate_revenue_scenario(
     churn_rate: float = 0.02
 ) -> dict:
     """
-    Kalkulasi proyeksi revenue (deterministik murni) untuk beberapa bulan ke depan 
-    membandingkan baseline (pertumbuhan 0%) vs skenario pertumbuhan baru.
+    Calculate pure deterministic revenue projection for the next few months
+    comparing the baseline (0% growth change) vs the new growth scenario.
     
     Args:
-        base_monthly_revenue: Pendapatan bulanan saat ini (baseline).
-        growth_rate_change: Perubahan persentase pertumbuhan bulanan (misal: 0.03 untuk +3% per bulan).
-        months: Jumlah bulan proyeksi (default 12).
-        churn_rate: Persentase churn pelanggan bulanan (default 2% atau 0.02).
+        base_monthly_revenue: Current monthly revenue (baseline).
+        growth_rate_change: Percentage change in monthly growth rate (e.g. 0.03 for +3% per month).
+        months: Projection months (default 12).
+        churn_rate: Monthly customer churn rate (default 2% or 0.02).
         
     Returns:
-        Dictionary berisi array 'projections' bulanan, total revenue delta, dan % perubahan.
+        Dictionary containing monthly 'projections' array, total revenue delta, and % change.
     """
     projections = []
     baseline_rev = base_monthly_revenue
@@ -65,18 +65,18 @@ def calculate_hiring_impact(
     current_monthly_burn: float = 91500000.0
 ) -> dict:
     """
-    Kalkulasi dampak penambahan staf (hiring) terhadap burn rate bulanan dan cash runway.
+    Calculate the impact of hiring new staff on monthly burn rate and cash runway.
     
     Args:
-        headcount_delta: Jumlah staf baru yang akan di-hire.
-        avg_annual_salary: Rata-rata gaji tahunan per staf.
-        ramp_months: Waktu transisi (bulan) sebelum staf baru produktif menghasilkan revenue.
-        revenue_per_head_monthly: Ekspektasi kontribusi revenue bulanan per kepala setelah produktif.
-        current_cash: Saldo kas saat ini (rupiah).
-        current_monthly_burn: Total pengeluaran bulanan saat ini (rupiah).
+        headcount_delta: Number of new staff to hire.
+        avg_annual_salary: Average annual salary per staff.
+        ramp_months: Transition time (months) before new staff becomes productive and generates revenue.
+        revenue_per_head_monthly: Expected monthly revenue contribution per head after ramp-up.
+        current_cash: Current cash balance (currency).
+        current_monthly_burn: Current monthly burn rate (currency).
         
     Returns:
-        Dictionary dampak berisi burn rate baru, runway baru, tambahan pengeluaran bulanan, dan bulan break-even.
+        Dictionary containing new burn rate, new runway, additional monthly expenditure, and break-even month.
     """
     # Monthly cost per new head = Annual salary / 12
     monthly_cost_per_head = avg_annual_salary / 12
@@ -129,17 +129,17 @@ def calculate_pricing_impact(
     cost_per_unit: float = 0.0
 ) -> dict:
     """
-    Kalkulasi dampak perubahan harga produk terhadap volume penjualan dan gross margin berdasarkan elastisitas harga.
+    Calculate the impact of a product price change on sales volume and gross margin based on price elasticity.
     
     Args:
-        current_price: Harga jual saat ini (rupiah).
-        new_price: Harga jual baru yang diajukan (rupiah).
-        price_elasticity: Koefisien elastisitas harga (angka negatif, contoh -1.5).
-        current_volume: Volume penjualan bulanan saat ini (unit/user).
-        cost_per_unit: Harga pokok penjualan per unit (HPP), default 0.
+        current_price: Current selling price.
+        new_price: Proposed new selling price.
+        price_elasticity: Price elasticity coefficient (negative number, e.g. -1.5).
+        current_volume: Current monthly sales volume (units/users).
+        cost_per_unit: Cost of goods sold per unit (COGS), default 0.
         
     Returns:
-        Dictionary berisi volume baru, revenue baru, gross profit baru, dan delta perubahan.
+        Dictionary containing new volume, new revenue, new gross profit, and change delta.
     """
     # Price change percentage
     price_change_pct = (new_price - current_price) / current_price
@@ -195,14 +195,14 @@ def render_scenario_chart(
     reasoning_trail: dict
 ) -> str:
     """
-    Tampilkan bagan tren grafik visual skenario What-If di layar obrolan pengguna (Generative UI).
-    Panggil tool ini setelah Anda selesai melakukan kalkulasi kalkulator scenario_tools.
+    Display the What-If scenario visual trend chart on the user's chat screen (Generative UI).
+    Call this tool after you finish calculating with the scenario_tools calculator.
     
     Args:
-        scenario_type: Kategori simulasi ('revenue_growth', 'hiring', atau 'pricing').
-        title: Judul skenario simulasi (contoh: 'Simulasi Kenaikan Harga +10%').
-        summary_metrics: Kumpulan metrik hasil utama (delta, burn rate baru, runway baru, dll).
-        projections: List titik data bulanan untuk digambar pada grafik.
-        reasoning_trail: Jalur reasoning AI.
+        scenario_type: Simulation category ('revenue_growth', 'hiring', or 'pricing').
+        title: Simulation scenario title (e.g. 'Price Increase Simulation +10%').
+        summary_metrics: Collection of key output metrics (delta, new burn rate, new runway, etc).
+        projections: List of monthly data points to draw on the chart.
+        reasoning_trail: AI reasoning trail.
     """
-    return "Menampilkan Bagan Simulasi Skenario..."
+    return "Displaying Scenario Simulation Chart..."

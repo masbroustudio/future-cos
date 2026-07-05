@@ -6,12 +6,12 @@ search_conn = MockSearchConnector()
 @tool
 async def search_web(query: str) -> dict:
     """
-    Cari berita, tren pasar, atau informasi kompetitor secara online lewat search engine (Tavily/SerpAPI).
+    Search for news, market trends, or competitor information online via a search engine (Tavily/SerpAPI).
     
     Args:
-        query: Kata kunci pencarian.
+        query: Search query keywords.
         
     Returns:
-        List berita dan snippet terkait berserta link URL sumber referensinya.
+        List of related news and snippets along with source URL references.
     """
     return await search_conn.fetch_data({"query": query})

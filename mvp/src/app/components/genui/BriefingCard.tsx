@@ -38,7 +38,7 @@ export default function BriefingCard({
 }: BriefingCardProps) {
   
   const formatCurrency = (amount: number) => {
-    return new Intl.NumberFormat("id-ID", {
+    return new Intl.NumberFormat("en-US", {
       style: "currency",
       currency: "IDR",
       maximumFractionDigits: 0
@@ -48,9 +48,9 @@ export default function BriefingCard({
   const getSeverityStyle = (severity: HighlightItem["severity"]) => {
     switch (severity) {
       case "critical":
-        return { text: "#FF3B30", bg: "#FFEBEB", label: "🔴 Kritis" };
+        return { text: "#FF3B30", bg: "#FFEBEB", label: "🔴 Critical" };
       case "warning":
-        return { text: "#FF9500", bg: "#FFF9E6", label: "🟡 Peringatan" };
+        return { text: "#FF9500", bg: "#FFF9E6", label: "🟡 Warning" };
       case "info":
       default:
         return { text: "#0071E3", bg: "#E8F2FC", label: "🔵 Info" };
@@ -72,17 +72,17 @@ export default function BriefingCard({
       {/* Header */}
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "18px" }}>
         <h4 style={{ margin: 0, fontWeight: 800, fontSize: "16px", color: "#111113", display: "flex", alignItems: "center", gap: "6px" }}>
-          📊 Briefing Eksekutif Harian
+          📊 Daily Executive Briefing
         </h4>
         <span style={{ fontSize: "11px", color: "#86868b", fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.05em" }}>
-          Hari Ini
+          Today
         </span>
       </div>
 
       {/* Highlights Section */}
       <div style={{ marginBottom: "20px" }}>
         <div style={{ fontSize: "11px", color: "#86868b", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.05em", marginBottom: "8px" }}>
-          Sorotan Utama
+          Key Highlights
         </div>
         <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
           {highlights.map((item, index) => {
@@ -117,7 +117,7 @@ export default function BriefingCard({
       {/* Financial Metrics Grid */}
       <div style={{ marginBottom: "20px" }}>
         <div style={{ fontSize: "11px", color: "#86868b", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.05em", marginBottom: "8px" }}>
-          Kesehatan Finansial
+          Financial Health
         </div>
         <div style={{
           display: "grid",
@@ -126,13 +126,13 @@ export default function BriefingCard({
         }}>
           {/* Revenue */}
           <div style={{ border: "1px solid rgba(0, 0, 0, 0.05)", borderRadius: "10px", padding: "12px", backgroundColor: "#fcfcfd" }}>
-            <span style={{ fontSize: "11px", color: "#86868b", display: "block", marginBottom: "4px" }}>Revenue (Bulan Ini)</span>
+            <span style={{ fontSize: "11px", color: "#86868b", display: "block", marginBottom: "4px" }}>Revenue (This Month)</span>
             <span style={{ fontSize: "15px", fontWeight: 800, color: "#1d1d1f", display: "block" }}>
               {formatCurrency(metrics.revenue)}
             </span>
             {metrics.revenueTrend !== undefined && (
               <span style={{ fontSize: "10px", fontWeight: 700, color: metrics.revenueTrend >= 0 ? "#15A34A" : "#FF3B30" }}>
-                {metrics.revenueTrend >= 0 ? "▲" : "▼"} {Math.abs(Math.round(metrics.revenueTrend * 100))}% vs bln lalu
+                {metrics.revenueTrend >= 0 ? "▲" : "▼"} {Math.abs(Math.round(metrics.revenueTrend * 100))}% vs last month
               </span>
             )}
           </div>
@@ -141,16 +141,16 @@ export default function BriefingCard({
           <div style={{ border: "1px solid rgba(0, 0, 0, 0.05)", borderRadius: "10px", padding: "12px", backgroundColor: "#fcfcfd" }}>
             <span style={{ fontSize: "11px", color: "#86868b", display: "block", marginBottom: "4px" }}>Cash Runway</span>
             <span style={{ fontSize: "15px", fontWeight: 800, color: metrics.cashRunwayMonths < 6 ? "#FF9500" : "#1d1d1f", display: "block" }}>
-              {metrics.cashRunwayMonths} Bulan
+              {metrics.cashRunwayMonths} Months
             </span>
             <span style={{ fontSize: "10px", color: "#86868b" }}>
-              Burn: {formatCurrency(metrics.monthlyBurn)}/bln
+              Burn: {formatCurrency(metrics.monthlyBurn)}/mo
             </span>
           </div>
 
           {/* Cash Balance */}
           <div style={{ border: "1px solid rgba(0, 0, 0, 0.05)", borderRadius: "10px", padding: "12px", backgroundColor: "#fcfcfd" }}>
-            <span style={{ fontSize: "11px", color: "#86868b", display: "block", marginBottom: "4px" }}>Saldo Kas</span>
+            <span style={{ fontSize: "11px", color: "#86868b", display: "block", marginBottom: "4px" }}>Cash Balance</span>
             <span style={{ fontSize: "15px", fontWeight: 800, color: "#1d1d1f", display: "block" }}>
               {formatCurrency(metrics.cashBalance)}
             </span>
@@ -164,7 +164,7 @@ export default function BriefingCard({
       {/* Agenda Section */}
       <div style={{ marginBottom: "20px" }}>
         <div style={{ fontSize: "11px", color: "#86868b", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.05em", marginBottom: "8px" }}>
-          Agenda Penting Hari Ini
+          Today's Important Agenda
         </div>
         <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
           {agenda.map((event, idx) => (
@@ -198,12 +198,12 @@ export default function BriefingCard({
                   </span>
                   {event.isImportant && (
                     <span style={{ fontSize: "9px", fontWeight: 800, color: "#FF9500", backgroundColor: "#FFF9E6", padding: "1px 6px", borderRadius: "4px" }}>
-                      PENTING
+                      IMPORTANT
                     </span>
                   )}
                 </div>
                 <span style={{ fontSize: "11px", color: "#86868b", display: "block", marginTop: "2px" }}>
-                  Peserta: {event.attendees.join(", ")}
+                  Attendees: {event.attendees.join(", ")}
                 </span>
                 {event.preparationNote && (
                   <div style={{

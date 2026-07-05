@@ -6,9 +6,9 @@ calendar_conn = MockCalendarConnector()
 @tool
 async def fetch_calendar_today() -> dict:
     """
-    Ambil agenda rapat dan focus blocks hari ini dari Google Calendar.
+    Fetch today's meeting agenda and focus blocks from Google Calendar.
     
     Returns:
-        Dictionary berisi array 'events_today' (list rapat dengan deskripsi persiapan) dan focus blocks.
+        Dictionary containing 'events_today' array (list of meetings with preparation descriptions) and focus blocks.
     """
     return await calendar_conn.fetch_data({})

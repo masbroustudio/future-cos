@@ -6,13 +6,13 @@ crm_conn = MockCRMConnector()
 @tool
 async def fetch_sales_highlights() -> dict:
     """
-    Ambil ringkasan pipeline penjualan (CRM HubSpot) yang berisi target sales, deal aktif, konversi, dan deals yang terhambat (stalled).
+    Fetch a sales pipeline summary (HubSpot CRM) containing sales targets, active deals, conversion rates, and stalled deals.
     """
     return await crm_conn.fetch_data({"target": "summary"})
 
 @tool
 async def fetch_customer_health() -> dict:
     """
-    Ambil metrik kesehatan pelanggan (NPS score, churn rate, total MRR aktif, jumlah customer).
+    Fetch customer health metrics (NPS score, churn rate, total active MRR, customer count).
     """
     return await crm_conn.fetch_data({"target": "health"})

@@ -17,19 +17,31 @@ const auth = getAuth(app);
 const db = getFirestore(app);
 
 // Connect to emulators in development environment
-if (typeof window !== "undefined" && process.env.NODE_ENV === "development") {
-  const hostname = window.location.hostname || "localhost";
-  
-  try {
-    // Connect Firestore Emulator
-    connectFirestoreEmulator(db, hostname, 8080);
-    console.log(`Firebase Client: Connected to Firestore Emulator at ${hostname}:8080`);
-    
-    // Connect Auth Emulator
-    connectAuthEmulator(auth, `http://${hostname}:9099`);
-    console.log(`Firebase Client: Connected to Auth Emulator at ${hostname}:9099`);
-  } catch (err) {
-    console.warn("Firebase Emulator connection warning:", err);
+if (process.env.NODE_ENV === "development") {
+  if (typeof window !== "undefined") {
+    const hostname = window.location.hostname || "localhost";
+    try {
+      // Connect Firestore Emulator
+      connectFirestoreEmulator(db, hostname, 8080);
+      console.log(`Firebase Client: Connected to Firestore Emulator at ${hostname}:8080`);
+      
+      // Connect Auth Emulator
+      connectAuthEmulator(auth, `http://${hostname}:9099`);
+      console.log(`Firebase Client: Connected to Auth Emulator at ${hostname}:9099`);
+    } catch (err) {
+      console.warn("Firebase Emulator connection warning:", err);
+    }
+  } else {
+    // Server-side node process emulator connection
+    const emulatorHost = process.env.FIRESTORE_EMULATOR_HOST || "127.0.0.1:8080";
+    const [host, portStr] = emulatorHost.split(":");
+    const port = parseInt(portStr) || 8080;
+    try {
+      connectFirestoreEmulator(db, host, port);
+      console.log(`Firebase Client (Server): Connected to Firestore Emulator at ${host}:${port}`);
+    } catch (err) {
+      console.warn("Firebase Server-side Emulator connection warning:", err);
+    }
   }
 }
 

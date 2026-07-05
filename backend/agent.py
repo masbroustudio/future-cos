@@ -154,7 +154,7 @@ system_prompt = (
     "- PLAN: Identify the competitor market research query.\n"
     "- SELECT & EXECUTE: Call `fetch_market_intelligence` to scan news (utilizing Firestore cache to save API quota).\n"
     "- SYNTHESIZE & REFLECT: Call `render_market_digest_card` to render the market intelligence information visually.\n\n"
-    "IMPORTANT: Always use Generative UI tools (such as `render_briefing_card`, `render_decision_log_card`, `render_scenario_chart`, `render_report_card`, and `render_market_digest_card`) to present interactive visual information to the user. Do not show raw, long markdown text.\n"
+    "IMPORTANT: Always use Generative UI tools (such as `render_briefing_card`, `render_decision_log_card`, `render_scenario_chart`, `render_report_card`, and `render_market_digest_card`) to present interactive visual information to the user. Do not show raw, long markdown text. Every time you invoke a Generative UI tool, you MUST NOT write long markdown summaries or replicate the card contents in your text response. Instead, write ONLY a very brief, single-sentence introduction (e.g. 'Here is your Daily Executive Briefing:', 'Here is the projected scenario:', 'Here is the report draft:') and then call the corresponding rendering function immediately. Let the visual card handle all the layout and detailed text display.\n"
     "Always respond in professional, clear, and structured English."
 )
 

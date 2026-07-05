@@ -31,7 +31,6 @@ export default function Dashboard() {
   useEffect(() => {
     const savedUser = localStorage.getItem('cos_username');
     if (!savedUser) {
-      // Redirect to login (chat page) if no username saved
       window.location.href = '/chat';
       return;
     }
@@ -79,7 +78,6 @@ export default function Dashboard() {
     window.location.href = '/';
   };
 
-  // Helper to check if task is overdue
   const isTaskOverdue = (task: Task) => {
     if (task.status === 'completed' || !task.dueDate) return false;
     const parts = task.dueDate.split('-');
@@ -91,7 +89,6 @@ export default function Dashboard() {
     return dueDate.getTime() < today.getTime();
   };
 
-  // Generate 14 days timeline dates starting from today
   const timelineDates = useMemo(() => {
     const dates = [];
     const today = new Date();
@@ -104,7 +101,6 @@ export default function Dashboard() {
     return dates;
   }, []);
 
-  // Helper to get index of dueDate in our 14-day window
   const getTaskTimelineData = (task: Task) => {
     if (!task.dueDate) return null;
     const parts = task.dueDate.split('-');
@@ -124,33 +120,32 @@ export default function Dashboard() {
       diffDays,
       isOverdue,
       color: task.status === 'completed'
-        ? '#15A34A' // Completed = Success Green
+        ? '#16A34A' 
         : isOverdue
-        ? '#BE123C' // Overdue = Danger Red
+        ? '#DC2626' 
         : task.priority === 'High'
-        ? '#F97316' // High priority pending = Warning Orange
+        ? '#D97706' 
         : task.priority === 'Medium'
-        ? '#1313BA' // Medium priority = Brand Indigo
-        : '#8989DD' // Low priority = Brand Medium
+        ? '#3B82F6' 
+        : '#9CA3AF' 
     };
   };
 
   if (loading) {
     return (
-      <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '100vh', backgroundColor: '#FFFFFF' }}>
-        <p style={{ color: '#6363C6', fontSize: '14px', fontWeight: 600 }}>Memuat dashboard...</p>
+      <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '100vh', backgroundColor: '#F9FAFB' }}>
+        <p style={{ color: '#4B5563', fontSize: '13px', fontWeight: 500 }}>Loading workspace dashboard...</p>
       </div>
     );
   }
 
-  // Calculate Global Metrics
   const totalProjects = projects.length;
   const totalTasks = projects.reduce((acc, p) => acc + p.taskCount, 0);
   const totalCompleted = projects.reduce((acc, p) => acc + p.completedCount, 0);
   const globalProgress = totalTasks > 0 ? Math.round((totalCompleted / totalTasks) * 100) : 0;
 
   return (
-    <div style={{ backgroundColor: '#FFFFFF', minHeight: '100vh', fontFamily: '"Inter", -apple-system, sans-serif' }}>
+    <div style={{ backgroundColor: '#F9FAFB', minHeight: '100vh', fontFamily: '"Inter", -apple-system, sans-serif', color: '#111827' }}>
       
       {/* --- HEADER NAVBAR --- */}
       <header style={{ 
@@ -158,12 +153,12 @@ export default function Dashboard() {
         top: 0, 
         zIndex: 100, 
         backgroundColor: 'rgba(255, 255, 255, 0.8)', 
-        backdropFilter: 'blur(20px)', 
-        WebkitBackdropFilter: 'blur(20px)',
-        borderBottom: '1px solid #E8E8F8'
+        backdropFilter: 'blur(12px)', 
+        WebkitBackdropFilter: 'blur(12px)',
+        borderBottom: '1px solid #E5E7EB'
       }}>
         <div style={{ 
-          maxWidth: '1280px', 
+          maxWidth: '1200px', 
           margin: '0 auto', 
           padding: '16px 24px', 
           display: 'flex', 
@@ -172,31 +167,31 @@ export default function Dashboard() {
         }}>
           {/* Logo */}
           <Link href="/" style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '8px' }}>
-            <span style={{ fontWeight: 800, fontSize: '18px', color: '#1313BA', letterSpacing: '-0.03em' }}>
-              Future Chief of Staff (CoS)
+            <span style={{ fontWeight: 600, fontSize: '16px', color: '#111827', letterSpacing: '-0.02em' }}>
+              Future Chief of Staff
             </span>
-            <span style={{ fontSize: '11px', color: '#9090CE', background: '#E8E8F8', padding: '2px 8px', fontWeight: 700 }}>
+            <span style={{ fontSize: '9px', color: '#3B82F6', background: 'rgba(59, 130, 246, 0.08)', padding: '2px 8px', fontWeight: 600, borderRadius: '4px' }}>
               DASHBOARD
             </span>
           </Link>
 
           {/* Navigation & Logout */}
           <div style={{ display: 'flex', alignItems: 'center', gap: '20px' }}>
-            <span style={{ fontSize: '13px', color: '#6363C6', fontWeight: 600 }}>
-              👤 <span style={{ textTransform: 'capitalize' }}>{username}</span>
+            <span style={{ fontSize: '12px', color: '#4B5563', fontWeight: 500 }}>
+              Active User: <span style={{ textTransform: 'capitalize', color: '#111827', fontWeight: 600 }}>{username}</span>
             </span>
             
             <Link href="/chat" style={{
               textDecoration: 'none',
-              fontSize: '13px',
+              fontSize: '12px',
               fontWeight: 500,
-              color: '#1313BA',
+              color: '#3B82F6',
               transition: 'opacity 0.15s ease'
             }}
-            onMouseEnter={(e) => e.currentTarget.style.opacity = '0.7'}
+            onMouseEnter={(e) => e.currentTarget.style.opacity = '0.8'}
             onMouseLeave={(e) => e.currentTarget.style.opacity = '1'}
             >
-              Ke Ruang Chat ➡️
+              Go to Workspace
             </Link>
 
             <button 
@@ -204,108 +199,107 @@ export default function Dashboard() {
               style={{
                 background: 'transparent',
                 border: 'none',
-                color: '#C81E1E',
-                fontSize: '13px',
-                fontWeight: 600,
+                color: '#DC2626',
+                fontSize: '12px',
+                fontWeight: 500,
                 cursor: 'pointer',
                 transition: 'opacity 0.15s ease'
               }}
-              onMouseEnter={(e) => e.currentTarget.style.opacity = '0.7'}
+              onMouseEnter={(e) => e.currentTarget.style.opacity = '0.8'}
               onMouseLeave={(e) => e.currentTarget.style.opacity = '1'}
             >
-              Keluar
+              Sign Out
             </button>
           </div>
         </div>
       </header>
 
-      {/* --- DASHBOARD SECTION CONTAINER --- */}
-      <main style={{ maxWidth: '1280px', margin: '0 auto', padding: '48px 24px' }}>
+      {/* --- DASHBOARD CONTAINER (8pt Spacing grid) --- */}
+      <main style={{ maxWidth: '1200px', margin: '0 auto', padding: '48px 24px' }}>
         
         {/* Title Block */}
-        <div style={{ maxWidth: '768px', marginBottom: '40px' }}>
-          <h1 style={{ fontSize: '32px', fontWeight: 800, color: '#1313BA', letterSpacing: '-0.03em', marginBottom: '8px' }}>
-            📊 Ringkasan Workspace Anda
+        <div style={{ maxWidth: '720px', marginBottom: '32px' }}>
+          <h1 style={{ fontSize: '24px', fontWeight: 600, color: '#111827', letterSpacing: '-0.02em', marginBottom: '8px' }}>
+            Workspace Summary
           </h1>
-          <p style={{ fontSize: '14px', color: '#6363C6', lineHeight: 1.5 }}>
-            Pantau status penyelesaian tugas dan performa semua proyek aktif Anda secara menyeluruh dalam satu layar terpusat.
+          <p style={{ fontSize: '13px', color: '#4B5563', lineHeight: 1.5 }}>
+            Monitor overall task progression, timelines, and execution metrics of all active project boards in a single unified dashboard.
           </p>
         </div>
 
-        {/* --- GLOBAL METRICS CARDS --- */}
+        {/* --- GLOBAL METRICS CARDS (60-30-10 Layout) --- */}
         <div style={{ 
           display: 'grid', 
-          gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', 
-          gap: '16px', // 16px widget grid gap per specification
+          gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', 
+          gap: '16px', 
           marginBottom: '32px'
         }}>
           {/* Card 1 */}
-          <div style={{ border: '1px solid #E8E8F8', padding: '24px', borderRadius: '0px', backgroundColor: '#FFFFFF' }}>
-            <span style={{ fontSize: '11px', fontWeight: 700, color: '#9090CE', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Total Proyek</span>
-            <div style={{ fontSize: '32px', fontWeight: 800, color: '#1313BA', marginTop: '8px' }}>{totalProjects}</div>
+          <div style={{ border: '1px solid #E5E7EB', padding: '20px', borderRadius: '8px', backgroundColor: '#FFFFFF' }}>
+            <span style={{ fontSize: '10px', fontWeight: 500, color: '#9CA3AF', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Total Projects</span>
+            <div style={{ fontSize: '28px', fontWeight: 600, color: '#111827', marginTop: '8px' }}>{totalProjects}</div>
           </div>
           
           {/* Card 2 */}
-          <div style={{ border: '1px solid #E8E8F8', padding: '24px', borderRadius: '0px', backgroundColor: '#FFFFFF' }}>
-            <span style={{ fontSize: '11px', fontWeight: 700, color: '#9090CE', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Total Tugas</span>
-            <div style={{ fontSize: '32px', fontWeight: 800, color: '#1313BA', marginTop: '8px' }}>{totalTasks}</div>
+          <div style={{ border: '1px solid #E5E7EB', padding: '20px', borderRadius: '8px', backgroundColor: '#FFFFFF' }}>
+            <span style={{ fontSize: '10px', fontWeight: 500, color: '#9CA3AF', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Total Tasks</span>
+            <div style={{ fontSize: '28px', fontWeight: 600, color: '#111827', marginTop: '8px' }}>{totalTasks}</div>
           </div>
 
           {/* Card 3 */}
-          <div style={{ border: '1px solid #E8E8F8', padding: '24px', borderRadius: '0px', backgroundColor: '#FFFFFF' }}>
-            <span style={{ fontSize: '11px', fontWeight: 700, color: '#9090CE', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Tugas Selesai</span>
-            <div style={{ fontSize: '32px', fontWeight: 800, color: '#1313BA', marginTop: '8px' }}>{totalCompleted} / {totalTasks}</div>
+          <div style={{ border: '1px solid #E5E7EB', padding: '20px', borderRadius: '8px', backgroundColor: '#FFFFFF' }}>
+            <span style={{ fontSize: '10px', fontWeight: 500, color: '#9CA3AF', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Completed Tasks</span>
+            <div style={{ fontSize: '28px', fontWeight: 600, color: '#111827', marginTop: '8px' }}>{totalCompleted} / {totalTasks}</div>
           </div>
 
           {/* Card 4 (Progress) */}
-          <div style={{ border: '1px solid #E8E8F8', padding: '24px', borderRadius: '0px', backgroundColor: '#FFFFFF' }}>
-            <span style={{ fontSize: '11px', fontWeight: 700, color: '#9090CE', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Kemajuan Global</span>
-            <div style={{ fontSize: '32px', fontWeight: 800, color: '#1313BA', marginTop: '8px', marginBottom: '12px' }}>{globalProgress}%</div>
+          <div style={{ border: '1px solid #E5E7EB', padding: '20px', borderRadius: '8px', backgroundColor: '#FFFFFF' }}>
+            <span style={{ fontSize: '10px', fontWeight: 500, color: '#9CA3AF', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Global Progress</span>
+            <div style={{ fontSize: '28px', fontWeight: 600, color: '#3B82F6', marginTop: '8px', marginBottom: '8px' }}>{globalProgress}%</div>
             
-            {/* Global Progress Bar (Square corner radius-xxl 0px) */}
-            <div style={{ width: '100%', height: '8px', backgroundColor: '#E8E8F8', borderRadius: '0px', overflow: 'hidden' }}>
-              <div style={{ width: `${globalProgress}%`, height: '100%', backgroundColor: '#1313BA', transition: 'width 0.3s ease' }}></div>
+            <div style={{ width: '100%', height: '6px', backgroundColor: '#F3F4F6', borderRadius: '3px', overflow: 'hidden' }}>
+              <div style={{ width: `${globalProgress}%`, height: '100%', backgroundColor: '#3B82F6', transition: 'width 0.3s ease' }}></div>
             </div>
           </div>
         </div>
 
         {/* --- PROJECTS GRID --- */}
-        <h2 style={{ fontSize: '20px', fontWeight: 800, color: '#1313BA', letterSpacing: '-0.02em', marginBottom: '24px' }}>
-          📂 Daftar Papan Kerja Proyek
+        <h2 style={{ fontSize: '16px', fontWeight: 600, color: '#111827', letterSpacing: '-0.02em', marginBottom: '16px' }}>
+          📂 Project Workspace Boards
         </h2>
 
         {projects.length === 0 ? (
-          <div style={{ border: '1px solid #E8E8F8', padding: '48px', textAlign: 'center', backgroundColor: '#FFFFFF' }}>
-            <p style={{ color: '#9090CE', fontSize: '14px' }}>Belum ada proyek yang dibuat.</p>
+          <div style={{ border: '1px solid #E5E7EB', padding: '48px', textAlign: 'center', backgroundColor: '#FFFFFF', borderRadius: '8px' }}>
+            <p style={{ color: '#9CA3AF', fontSize: '13px' }}>No active projects found.</p>
             <Link href="/chat" style={{
               textDecoration: 'none',
               marginTop: '16px',
               display: 'inline-flex',
               padding: '8px 16px',
-              fontSize: '13px',
-              fontWeight: 600,
+              fontSize: '12px',
+              fontWeight: 500,
               color: '#FFFFFF',
-              backgroundColor: '#1313BA',
-              borderRadius: '0px',
+              backgroundColor: '#3B82F6',
+              borderRadius: '6px',
               border: 'none',
-              cursor: 'pointer'
+              cursor: 'pointer',
+              transition: 'background-color 0.15s'
             }}
-            onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#0E0E8C'}
-            onMouseLeave={(e) => e.currentTarget.style.backgroundColor = '#1313BA'}
+            onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#2563EB'}
+            onMouseLeave={(e) => e.currentTarget.style.backgroundColor = '#3B82F6'}
             >
-              Mulai Buat Proyek di Ruang Chat
+              Create Project in Chat Workspace
             </Link>
           </div>
         ) : (
           <div style={{ 
             display: 'grid', 
-            gridTemplateColumns: 'repeat(auto-fit, minmax(350px, 1fr))', 
-            gap: '16px' // Grid gap 16px for widgets
+            gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', 
+            gap: '16px' 
           }}>
             {projects.map(proj => {
               const projectProgress = proj.taskCount > 0 ? Math.round((proj.completedCount / proj.taskCount) * 100) : 0;
               
-              // Count priority & overdue
               const highTasks = proj.tasks.filter(t => t.priority === 'High' && t.status !== 'completed').length;
               const medTasks = proj.tasks.filter(t => t.priority === 'Medium' && t.status !== 'completed').length;
               const lowTasks = proj.tasks.filter(t => t.priority === 'Low' && t.status !== 'completed').length;
@@ -315,9 +309,9 @@ export default function Dashboard() {
 
               return (
                 <div key={proj.id} style={{
-                  border: isActive ? '2px solid #1313BA' : '1px solid #E8E8F8',
-                  borderRadius: '0px', // Square corners
-                  padding: '28px',
+                  border: isActive ? '1px solid #3B82F6' : '1px solid #E5E7EB',
+                  borderRadius: '8px', 
+                  padding: '24px',
                   backgroundColor: '#FFFFFF',
                   display: 'flex',
                   flexDirection: 'column',
@@ -330,87 +324,88 @@ export default function Dashboard() {
                       position: 'absolute',
                       top: '12px',
                       right: '12px',
-                      fontSize: '10px',
-                      fontWeight: 800,
-                      color: '#1313BA',
-                      backgroundColor: '#E8E8F8',
+                      fontSize: '9px',
+                      fontWeight: 600,
+                      color: '#3B82F6',
+                      backgroundColor: 'rgba(59, 130, 246, 0.08)',
                       padding: '2px 8px',
+                      borderRadius: '4px',
                       textTransform: 'uppercase'
                     }}>
-                      Aktif saat ini
+                      Currently Active
                     </span>
                   )}
 
                   {/* Project Info */}
                   <div>
-                    <h3 style={{ fontSize: '20px', fontWeight: 700, color: '#1313BA', letterSpacing: '-0.02em', marginBottom: '8px', maxWidth: '80%' }}>
+                    <h3 style={{ fontSize: '16px', fontWeight: 600, color: '#111827', letterSpacing: '-0.01em', marginBottom: '6px', maxWidth: '75%' }}>
                       {proj.name}
                     </h3>
-                    <p style={{ fontSize: '13px', color: '#9090CE', marginBottom: '14px', fontWeight: 500 }}>
-                      📋 {proj.completedCount} dari {proj.taskCount} tugas selesai
+                    <p style={{ fontSize: '12px', color: '#4B5563', marginBottom: '12px' }}>
+                      📋 {proj.completedCount} of {proj.taskCount} tasks completed
                     </p>
 
-                    {/* Progress Bar (Square) */}
-                    <div style={{ width: '100%', height: '6px', backgroundColor: '#E8E8F8', borderRadius: '0px', overflow: 'hidden', marginBottom: '20px' }}>
-                      <div style={{ width: `${projectProgress}%`, height: '100%', backgroundColor: '#1313BA', transition: 'width 0.3s ease' }}></div>
+                    {/* Progress Bar */}
+                    <div style={{ width: '100%', height: '6px', backgroundColor: '#F3F4F6', borderRadius: '3px', overflow: 'hidden', marginBottom: '16px' }}>
+                      <div style={{ width: `${projectProgress}%`, height: '100%', backgroundColor: isActive ? '#3B82F6' : '#9CA3AF', transition: 'width 0.3s ease' }}></div>
                     </div>
 
-                    {/* Urgency indicators / breakdown */}
-                    <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap', marginBottom: '8px' }}>
+                    {/* Urgency indicators */}
+                    <div style={{ display: 'flex', gap: '6px', flexWrap: 'wrap' }}>
                       {highTasks > 0 && (
-                        <span style={{ fontSize: '11px', padding: '2px 8px', background: '#ffebeb', color: '#ff3b30', fontWeight: 700 }}>
+                        <span style={{ fontSize: '10px', padding: '2px 6px', borderRadius: '4px', background: 'rgba(220, 38, 26, 0.06)', color: '#DC2626', fontWeight: 600 }}>
                           High: {highTasks}
                         </span>
                       )}
                       {medTasks > 0 && (
-                        <span style={{ fontSize: '11px', padding: '2px 8px', background: '#fff9e6', color: '#ff9500', fontWeight: 700 }}>
+                        <span style={{ fontSize: '10px', padding: '2px 6px', borderRadius: '4px', background: 'rgba(217, 119, 6, 0.06)', color: '#D97706', fontWeight: 600 }}>
                           Medium: {medTasks}
                         </span>
                       )}
                       {lowTasks > 0 && (
-                        <span style={{ fontSize: '11px', padding: '2px 8px', background: '#f5f5f7', color: '#86868b', fontWeight: 700 }}>
+                        <span style={{ fontSize: '10px', padding: '2px 6px', borderRadius: '4px', background: '#F3F4F6', color: '#4B5563', fontWeight: 500 }}>
                           Low: {lowTasks}
                         </span>
                       )}
                       {overdueTasks > 0 && (
-                        <span style={{ fontSize: '11px', padding: '2px 8px', background: '#FFE4E6', color: '#BE123C', fontWeight: 700 }}>
-                          ⚠️ Telat: {overdueTasks}
+                        <span style={{ fontSize: '10px', padding: '2px 6px', borderRadius: '4px', background: 'rgba(220, 38, 26, 0.08)', color: '#DC2626', fontWeight: 600 }}>
+                          ⚠️ Overdue: {overdueTasks}
                         </span>
                       )}
                     </div>
                   </div>
 
-                  {/* Action Button: Small size per buttons.md specifications */}
+                  {/* Action Button */}
                   <button
                     onClick={() => handleSwitchProject(proj.id)}
                     style={{
                       width: '100%',
-                      padding: '8px 12px', // Small size padding per buttons.md
-                      fontSize: '13px', // Small size font
-                      fontWeight: 600,
-                      color: isActive ? '#1313BA' : '#FFFFFF',
-                      backgroundColor: isActive ? 'transparent' : '#1313BA',
-                      border: isActive ? '2px solid #1313BA' : 'none',
-                      borderRadius: '0px', // Square corners
+                      padding: '8px 12px', 
+                      fontSize: '12px', 
+                      fontWeight: 500,
+                      color: isActive ? '#3B82F6' : '#FFFFFF',
+                      backgroundColor: isActive ? 'transparent' : '#3B82F6',
+                      border: isActive ? '1px solid #3B82F6' : 'none',
+                      borderRadius: '6px', 
                       cursor: 'pointer',
-                      transition: 'background-color 0.15s ease, color 0.15s ease'
+                      transition: 'all 0.15s ease'
                     }}
                     onMouseEnter={(e) => {
                       if (isActive) {
-                        e.currentTarget.style.backgroundColor = '#E8E8F8';
+                        e.currentTarget.style.backgroundColor = 'rgba(59, 130, 246, 0.04)';
                       } else {
-                        e.currentTarget.style.backgroundColor = '#0E0E8C';
+                        e.currentTarget.style.backgroundColor = '#2563EB';
                       }
                     }}
                     onMouseLeave={(e) => {
                       if (isActive) {
                         e.currentTarget.style.backgroundColor = 'transparent';
                       } else {
-                        e.currentTarget.style.backgroundColor = '#1313BA';
+                        e.currentTarget.style.backgroundColor = '#3B82F6';
                       }
                     }}
                   >
-                    {isActive ? 'Masuk ke Ruang Chat' : 'Pilih & Buka Proyek'}
+                    {isActive ? 'Enter Chat Workspace' : 'Select & Open Project'}
                   </button>
                 </div>
               );
@@ -419,8 +414,8 @@ export default function Dashboard() {
         )}
 
         {/* --- GANTT TIMELINE SCHEDULE SECTION --- */}
-        <h2 style={{ fontSize: '20px', fontWeight: 800, color: '#1313BA', letterSpacing: '-0.02em', marginTop: '48px', marginBottom: '16px' }}>
-          📅 Linimasa Jadwal Tugas (Gantt Chart 14 Hari)
+        <h2 style={{ fontSize: '16px', fontWeight: 600, color: '#111827', letterSpacing: '-0.02em', marginTop: '40px', marginBottom: '16px' }}>
+          📅 Task Schedule Timeline (14-Day Gantt Chart)
         </h2>
 
         {/* Filter Controls Bar */}
@@ -428,18 +423,18 @@ export default function Dashboard() {
           display: 'flex',
           flexWrap: 'wrap',
           gap: '24px',
-          marginBottom: '20px',
+          marginBottom: '16px',
           alignItems: 'center',
-          fontSize: '13px'
+          fontSize: '12px'
         }}>
           {/* Priority filter */}
           <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-            <span style={{ color: '#9090CE', fontWeight: 600 }}>Filter Prioritas:</span>
+            <span style={{ color: '#4B5563', fontWeight: 500 }}>Priority Filter:</span>
             <div style={{ display: 'flex', gap: '6px' }}>
               {[
-                { value: 'all', label: 'Semua' },
-                { value: 'High', label: '🔥 Tinggi' },
-                { value: 'Medium', label: '⚡ Sedang' },
+                { value: 'all', label: 'All' },
+                { value: 'High', label: '🔥 High' },
+                { value: 'Medium', label: '⚡ Medium' },
                 { value: 'Low', label: 'Low' }
               ].map(opt => {
                 const isSelected = priorityFilter === opt.value;
@@ -448,12 +443,12 @@ export default function Dashboard() {
                     key={opt.value}
                     onClick={() => setPriorityFilter(opt.value as any)}
                     style={{
-                      border: '1px solid #E8E8F8',
-                      borderRadius: '0px',
+                      border: '1px solid #E5E7EB',
+                      borderRadius: '4px',
                       padding: '4px 10px',
-                      backgroundColor: isSelected ? '#1313BA' : '#FFFFFF',
-                      color: isSelected ? '#FFFFFF' : '#6363C6',
-                      fontWeight: 600,
+                      backgroundColor: isSelected ? '#3B82F6' : '#FFFFFF',
+                      color: isSelected ? '#FFFFFF' : '#4B5563',
+                      fontWeight: 500,
                       cursor: 'pointer',
                       fontSize: '11px',
                       transition: 'all 0.15s ease'
@@ -468,12 +463,12 @@ export default function Dashboard() {
 
           {/* Status filter */}
           <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-            <span style={{ color: '#9090CE', fontWeight: 600 }}>Filter Status:</span>
+            <span style={{ color: '#4B5563', fontWeight: 500 }}>Status Filter:</span>
             <div style={{ display: 'flex', gap: '6px' }}>
               {[
-                { value: 'all', label: 'Semua' },
-                { value: 'pending', label: '⏳ Belum' },
-                { value: 'completed', label: '✓ Selesai' }
+                { value: 'all', label: 'All' },
+                { value: 'pending', label: '⏳ Pending' },
+                { value: 'completed', label: '✓ Completed' }
               ].map(opt => {
                 const isSelected = statusFilter === opt.value;
                 return (
@@ -481,12 +476,12 @@ export default function Dashboard() {
                     key={opt.value}
                     onClick={() => setStatusFilter(opt.value as any)}
                     style={{
-                      border: '1px solid #E8E8F8',
-                      borderRadius: '0px',
+                      border: '1px solid #E5E7EB',
+                      borderRadius: '4px',
                       padding: '4px 10px',
-                      backgroundColor: isSelected ? '#1313BA' : '#FFFFFF',
-                      color: isSelected ? '#FFFFFF' : '#6363C6',
-                      fontWeight: 600,
+                      backgroundColor: isSelected ? '#3B82F6' : '#FFFFFF',
+                      color: isSelected ? '#FFFFFF' : '#4B5563',
+                      fontWeight: 500,
                       cursor: 'pointer',
                       fontSize: '11px',
                       transition: 'all 0.15s ease'
@@ -501,38 +496,39 @@ export default function Dashboard() {
         </div>
 
         <div style={{
-          border: '1px solid #E8E8F8',
-          borderRadius: '0px', // Square corners per specs
-          padding: '28px',
+          border: '1px solid #E5E7EB',
+          borderRadius: '8px', 
+          padding: '24px',
           backgroundColor: '#FFFFFF',
           overflowX: 'auto',
           boxSizing: 'border-box'
         }}>
           {/* Timeline Grid Header */}
-          <div style={{ display: 'flex', minWidth: '800px', marginBottom: '16px', borderBottom: '1px solid #E8E8F8', paddingBottom: '12px' }}>
-            <div style={{ width: '250px', flexShrink: 0, fontWeight: 700, fontSize: '13px', color: '#1313BA' }}>
-              Nama Tugas & Proyek
+          <div style={{ display: 'flex', minWidth: '800px', marginBottom: '16px', borderBottom: '1px solid #E5E7EB', paddingBottom: '12px' }}>
+            <div style={{ width: '240px', flexShrink: 0, fontWeight: 600, fontSize: '12px', color: '#111827' }}>
+              Task Name & Project
             </div>
             
             <div style={{ flex: 1, display: 'flex', justifyContent: 'space-between' }}>
               {timelineDates.map((date, idx) => {
                 const isToday = idx === 0;
-                const dayName = date.toLocaleDateString('id-ID', { weekday: 'short' });
+                const dayName = date.toLocaleDateString('en-US', { weekday: 'short' });
                 const dayNum = date.getDate();
                 
                 return (
                   <div key={idx} style={{ 
                     flex: 1, 
                     textAlign: 'center', 
-                    fontSize: '11px', 
-                    fontWeight: isToday ? 800 : 500,
-                    color: isToday ? '#1313BA' : '#9090CE',
-                    background: isToday ? '#E8E8F8' : 'transparent',
+                    fontSize: '10px', 
+                    fontWeight: isToday ? 600 : 500,
+                    color: isToday ? '#3B82F6' : '#9CA3AF',
+                    backgroundColor: isToday ? 'rgba(59, 130, 246, 0.06)' : 'transparent',
                     padding: '4px 0',
-                    borderRight: idx !== 13 ? '1px solid #F4F4FC' : 'none'
+                    borderRadius: isToday ? '4px' : '0px',
+                    borderRight: idx !== 13 ? '1px solid #F3F4F6' : 'none'
                   }}>
                     <div>{dayName}</div>
-                    <div style={{ fontSize: '13px', fontWeight: 700, marginTop: '2px' }}>{dayNum}</div>
+                    <div style={{ fontSize: '12px', fontWeight: 600, marginTop: '2px' }}>{dayNum}</div>
                   </div>
                 );
               })}
@@ -541,13 +537,12 @@ export default function Dashboard() {
 
           {/* Timeline Rows Grouped by Project */}
           {projects.length === 0 ? (
-            <p style={{ fontSize: '13px', color: '#9090CE', textAlign: 'center', padding: '24px 0' }}>
-              Belum ada data tugas untuk ditampilkan di linimasa.
+            <p style={{ fontSize: '12px', color: '#9CA3AF', textAlign: 'center', padding: '24px 0' }}>
+              No tasks available to show on the timeline.
             </p>
           ) : (
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '24px', minWidth: '800px' }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '20px', minWidth: '800px' }}>
               {projects.map(proj => {
-                // Filter tasks that have due dates and match selected filters
                 const tasksWithDue = proj.tasks ? proj.tasks.filter(t => {
                   const hasDue = !!t.dueDate;
                   const matchPriority = priorityFilter === 'all' || t.priority === priorityFilter;
@@ -561,12 +556,13 @@ export default function Dashboard() {
                   <div key={proj.id} style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
                     {/* Project Header Label */}
                     <div style={{ 
-                      fontSize: '12px', 
-                      fontWeight: 700, 
-                      color: '#1313BA', 
-                      backgroundColor: '#F4F4FC', 
+                      fontSize: '11px', 
+                      fontWeight: 600, 
+                      color: '#3B82F6', 
+                      backgroundColor: 'rgba(59, 130, 246, 0.04)', 
                       padding: '4px 12px', 
-                      borderLeft: '4px solid #1313BA'
+                      borderLeft: '3px solid #3B82F6',
+                      borderRadius: '0 4px 4px 0'
                     }}>
                       📁 {proj.name}
                     </div>
@@ -578,12 +574,11 @@ export default function Dashboard() {
                       
                       const { diffDays, isOverdue, color } = timelineData;
                       
-                      // Calculate bar width percentage
                       let barWidthPercent = 0;
                       let isBeyond = false;
                       
                       if (isOverdue) {
-                        barWidthPercent = 100 / 14; // Span 1 day at Today column
+                        barWidthPercent = 100 / 14; 
                       } else if (diffDays >= 0 && diffDays < 14) {
                         barWidthPercent = ((diffDays + 1) / 14) * 100;
                       } else if (diffDays >= 14) {
@@ -592,10 +587,10 @@ export default function Dashboard() {
                       }
 
                       return (
-                        <div key={task.id} style={{ display: 'flex', alignItems: 'center', minHeight: '36px' }}>
-                          {/* Left label: Task title & Priority */}
+                        <div key={task.id} style={{ display: 'flex', alignItems: 'center', minHeight: '32px' }}>
+                          {/* Left label */}
                           <div style={{ 
-                            width: '250px', 
+                            width: '240px', 
                             flexShrink: 0, 
                             paddingRight: '16px',
                             display: 'flex', 
@@ -603,9 +598,9 @@ export default function Dashboard() {
                             justifyContent: 'center'
                           }}>
                             <span style={{ 
-                              fontSize: '13px', 
-                              fontWeight: 600, 
-                              color: task.status === 'completed' ? '#9090CE' : '#6363C6',
+                              fontSize: '12px', 
+                              fontWeight: 500, 
+                              color: task.status === 'completed' ? '#9CA3AF' : '#111827',
                               textDecoration: task.status === 'completed' ? 'line-through' : 'none',
                               whiteSpace: 'nowrap',
                               overflow: 'hidden',
@@ -613,24 +608,24 @@ export default function Dashboard() {
                             }}>
                               {task.title}
                             </span>
-                            <span style={{ fontSize: '10px', color: '#9090CE', marginTop: '2px' }}>
-                              Due: {task.dueDate} {isOverdue && <strong style={{ color: '#BE123C' }}>(Telat)</strong>}
+                            <span style={{ fontSize: '9px', color: '#9CA3AF', marginTop: '2px' }}>
+                              Due: {task.dueDate} {isOverdue && <strong style={{ color: '#DC2626' }}>(Overdue)</strong>}
                             </span>
                           </div>
 
-                          {/* Right bar: Timeline Track (divided into 14 segments visually) */}
+                          {/* Right bar */}
                           <div style={{ 
                             flex: 1, 
-                            height: '24px', 
+                            height: '20px', 
                             position: 'relative', 
                             display: 'flex', 
                             alignItems: 'center',
-                            borderBottom: '1px solid #F4F4FC'
+                            borderBottom: '1px solid #F3F4F6'
                           }}>
                             {/* Grid vertical markers */}
                             <div style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, display: 'flex', justifyContent: 'space-between', pointerEvents: 'none' }}>
                               {Array.from({ length: 14 }).map((_, i) => (
-                                <div key={i} style={{ flex: 1, height: '100%', borderRight: i !== 13 ? '1px solid #F4F4FC' : 'none' }}></div>
+                                <div key={i} style={{ flex: 1, height: '100%', borderRight: i !== 13 ? '1px solid #F3F4F6' : 'none' }}></div>
                               ))}
                             </div>
 
@@ -639,9 +634,9 @@ export default function Dashboard() {
                               position: 'absolute',
                               left: 0,
                               width: `${barWidthPercent}%`,
-                              height: '12px',
+                              height: '10px',
                               backgroundColor: color,
-                              borderRadius: '0px', // Square corners per specs
+                              borderRadius: '4px', 
                               display: 'flex',
                               alignItems: 'center',
                               justifyContent: 'flex-end',
@@ -649,12 +644,11 @@ export default function Dashboard() {
                               boxSizing: 'border-box',
                               transition: 'width 0.3s ease'
                             }}>
-                              {/* If completed, render a small checkmark inside the bar */}
                               {task.status === 'completed' && (
-                                <span style={{ color: '#FFFFFF', fontSize: '9px', fontWeight: 800 }}>✓</span>
+                                <span style={{ color: '#FFFFFF', fontSize: '8px', fontWeight: 700 }}>✓</span>
                               )}
                               {isBeyond && (
-                                <span style={{ color: '#FFFFFF', fontSize: '9px', fontWeight: 800 }}>&gt;</span>
+                                <span style={{ color: '#FFFFFF', fontSize: '8px', fontWeight: 700 }}>&gt;</span>
                               )}
                             </div>
                           </div>

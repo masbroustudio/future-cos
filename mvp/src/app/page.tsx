@@ -11,15 +11,15 @@ export default function LandingPage() {
 
   // Mock Workspace Interactive Demo States
   const [demoTasks, setDemoTasks] = useState([
-    { id: 't1', title: 'Integrasi API Gemini 2.5', status: 'completed', priority: 'High', dueDate: '2026-07-15' },
-    { id: 't2', title: 'Audit keamanan sistem database', status: 'pending', priority: 'High', dueDate: '2026-07-20' },
-    { id: 't3', title: 'Mendesain layout dashboard baru', status: 'pending', priority: 'Medium', dueDate: '2026-07-18' }
+    { id: 't1', title: 'Integrate Gemini 2.5 Flash LLM', status: 'completed', priority: 'High', dueDate: '2026-07-15' },
+    { id: 't2', title: 'Audit database security & Firestore rules', status: 'pending', priority: 'High', dueDate: '2026-07-20' },
+    { id: 't3', title: 'Design premium Sleek design system', status: 'pending', priority: 'Medium', dueDate: '2026-07-18' }
   ]);
-  const [demoNotes, setDemoNotes] = useState('Spesifikasi Proyek:\n- Port server local berjalan di 3000\n- Menggunakan sistem desain TypeUI Atlas\n- Database auto-save diaktifkan');
+  const [demoNotes, setDemoNotes] = useState('Project Specification:\n- Development port active on :3000\n- Utilizes Sleek minimal design system\n- Live Firestore emulator configured');
   const [demoInput, setDemoInput] = useState('');
   const [demoChat, setDemoChat] = useState([
-    { role: 'user', content: 'Tolong buatkan ringkasan spec proyek kita' },
-    { role: 'ai', content: 'Tentu! Spesifikasi proyek menggunakan TypeUI Atlas, server port 3000, dan database auto-save telah saya tulis ke Catatan Proyek di sebelah kanan.' }
+    { role: 'user', content: 'Generate a project spec summary' },
+    { role: 'ai', content: 'Certainly! I have summarized the project spec (Sleek design system, port 3000, active emulator) and saved it to the Project Wiki on the right.' }
   ]);
   const [isTyping, setIsTyping] = useState(false);
 
@@ -47,8 +47,8 @@ export default function LandingPage() {
     setIsTyping(true);
 
     setTimeout(() => {
-      let aiContent = 'Saya telah menerima instruksi Anda. Mengubah daftar tugas...';
-      if (inputSaved.includes('tugas') || inputSaved.includes('task')) {
+      let aiContent = 'I have processed your request and updated the workspace state.';
+      if (inputSaved.includes('task') || inputSaved.includes('todo')) {
         const newTask = {
           id: `t${Date.now()}`,
           title: demoInput,
@@ -57,15 +57,15 @@ export default function LandingPage() {
           dueDate: '2026-07-22'
         };
         setDemoTasks(prev => [...prev, newTask]);
-        aiContent = `Tugas baru "${demoInput}" telah ditambahkan ke daftar tugas dengan prioritas High!`;
-      } else if (inputSaved.includes('catat') || inputSaved.includes('notes')) {
+        aiContent = `Task "${demoInput}" has been added to the board with High priority!`;
+      } else if (inputSaved.includes('note') || inputSaved.includes('wiki') || inputSaved.includes('record')) {
         setDemoNotes(prev => prev + `\n- ${demoInput}`);
-        aiContent = `Informasi "${demoInput}" telah ditambahkan ke Catatan Proyek.`;
+        aiContent = `Note "${demoInput}" has been added to the Project Wiki notes.`;
       }
       
       setDemoChat(prev => [...prev, { role: 'ai', content: aiContent }]);
       setIsTyping(false);
-    }, 1500);
+    }, 1200);
   };
 
   const toggleFaq = (index: number) => {
@@ -73,20 +73,20 @@ export default function LandingPage() {
   };
 
   return (
-    <div style={{ backgroundColor: '#FFFFFF', minHeight: '100vh', fontFamily: '"Inter", -apple-system, sans-serif' }}>
+    <div style={{ backgroundColor: '#FFFFFF', minHeight: '100vh', fontFamily: '"Inter", -apple-system, sans-serif', color: '#111827' }}>
       
-      {/* --- HEADER NAVBAR (Translucent with blur per specs) --- */}
+      {/* --- HEADER NAVBAR (Sleek Blur) --- */}
       <header style={{ 
         position: 'sticky', 
         top: 0, 
         zIndex: 100, 
-        backgroundColor: 'rgba(255, 255, 255, 0.85)', 
-        backdropFilter: 'blur(20px)', 
-        WebkitBackdropFilter: 'blur(20px)',
-        borderBottom: '1px solid #E8E8F8'
+        backgroundColor: 'rgba(255, 255, 255, 0.8)', 
+        backdropFilter: 'blur(12px)', 
+        WebkitBackdropFilter: 'blur(12px)',
+        borderBottom: '1px solid #E5E7EB'
       }}>
         <div style={{ 
-          maxWidth: '1280px', 
+          maxWidth: '1200px', 
           margin: '0 auto', 
           padding: '16px 24px', 
           display: 'flex', 
@@ -95,16 +95,16 @@ export default function LandingPage() {
         }}>
           {/* Logo Mark */}
           <Link href="/" style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '8px' }}>
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1313BA" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#3B82F6" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
               <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
             </svg>
             <span style={{ 
-              fontWeight: 800, 
-              fontSize: '18px', 
-              color: '#1313BA', 
-              letterSpacing: '-0.03em' 
+              fontWeight: 600, 
+              fontSize: '16px', 
+              color: '#111827', 
+              letterSpacing: '-0.02em' 
             }}>
-              Future Chief of Staff (CoS)
+              Future CoS
             </span>
           </Link>
 
@@ -112,21 +112,21 @@ export default function LandingPage() {
           <nav style={{ display: 'flex', alignItems: 'center', gap: '24px' }}>
             <Link href="/dashboard" className="nav-link" style={{
               textDecoration: 'none',
-              fontSize: '14px',
+              fontSize: '13px',
               fontWeight: 500,
-              color: '#6363C6',
+              color: '#4B5563',
               transition: 'color 0.15s ease'
             }}>
               Dashboard
             </Link>
             <Link href="/chat" className="nav-link" style={{
               textDecoration: 'none',
-              fontSize: '14px',
+              fontSize: '13px',
               fontWeight: 500,
-              color: '#6363C6',
+              color: '#4B5563',
               transition: 'color 0.15s ease'
             }}>
-              Workspace Chat
+              Workspace
             </Link>
 
             {/* CTA Button */}
@@ -136,19 +136,26 @@ export default function LandingPage() {
               alignItems: 'center',
               justifyContent: 'center',
               padding: '8px 16px',
-              fontSize: '13px',
-              fontWeight: 600,
+              fontSize: '12px',
+              fontWeight: 500,
               color: '#FFFFFF',
-              backgroundColor: '#1313BA',
+              backgroundColor: '#3B82F6',
               border: 'none',
-              borderRadius: '0px', // Square corners per radius.md
+              borderRadius: '6px',
               cursor: 'pointer',
-              transition: 'background-color 0.15s ease'
+              transition: 'all 0.15s ease',
+              boxShadow: '0 1px 2px rgba(59, 130, 246, 0.1)'
             }}
-            onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#0E0E8C'}
-            onMouseLeave={(e) => e.currentTarget.style.backgroundColor = '#1313BA'}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.backgroundColor = '#2563EB';
+              e.currentTarget.style.boxShadow = '0 4px 12px rgba(37, 99, 235, 0.15)';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.backgroundColor = '#3B82F6';
+              e.currentTarget.style.boxShadow = '0 1px 2px rgba(59, 130, 246, 0.1)';
+            }}
             >
-              {username ? 'Buka Dashboard' : 'Mulai Sekarang'}
+              {username ? 'Go to Dashboard' : 'Get Started'}
             </Link>
           </nav>
         </div>
@@ -156,74 +163,115 @@ export default function LandingPage() {
 
       {/* --- HERO SECTION --- */}
       <section style={{ 
-        backgroundColor: '#1313BA', 
-        padding: '100px 24px 80px 24px', 
+        backgroundColor: '#FFFFFF', 
+        padding: '80px 24px 64px 24px', 
         textAlign: 'center',
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
         position: 'relative',
-        overflow: 'hidden'
+        borderBottom: '1px solid #E5E7EB'
       }}>
-        <div style={{ maxWidth: '1024px', margin: '0 auto', zIndex: 10 }}>
-          <h1 style={{ 
-            fontSize: '72px', 
-            fontWeight: 800, 
-            color: '#FFFFFF', 
-            letterSpacing: '-0.04em',
-            lineHeight: 1.05,
-            marginBottom: '36px'
+        <div style={{ maxWidth: '800px', margin: '0 auto', zIndex: 10 }}>
+          <span style={{ 
+            fontSize: '11px', 
+            fontWeight: 600, 
+            color: '#3B82F6', 
+            backgroundColor: 'rgba(59, 130, 246, 0.08)',
+            padding: '4px 12px',
+            borderRadius: '20px',
+            textTransform: 'uppercase', 
+            letterSpacing: '0.05em',
+            display: 'inline-block',
+            marginBottom: '24px'
           }}>
-            Sistem Manajemen Proyek Berbasis AI untuk Masa Depan.
+            AI-Powered Executive Copilot
+          </span>
+          <h1 style={{ 
+            fontSize: '48px', 
+            fontWeight: 600, 
+            color: '#111827', 
+            letterSpacing: '-0.03em',
+            lineHeight: 1.15,
+            marginBottom: '24px'
+          }}>
+            Accelerate Strategic Decisions with Future Chief of Staff
           </h1>
           <p style={{ 
-            fontSize: '20px', 
+            fontSize: '16px', 
             fontWeight: 400, 
-            color: '#CACAF0', 
-            lineHeight: 1.5, 
-            maxWidth: '768px',
-            margin: '36px auto',
+            color: '#4B5563', 
+            lineHeight: 1.6, 
+            maxWidth: '600px',
+            margin: '0 auto 32px auto',
             letterSpacing: '-0.01em'
           }}>
-            Hubungkan kecerdasan buatan Gemini langsung ke dalam ruang kerja Anda. Pecah tugas kompleks secara otomatis, visualisasikan beban kemajuan, dan sinkronisasikan memo/catatan proyek secara real-time.
+            Integrate Gemini directly into your workspace. Automate executive briefings, simulate scenario impacts on runway, compile board reports, and monitor competitors from a single, unified command canvas.
           </p>
-          <div style={{ display: 'flex', gap: '16px', justifyContent: 'center', marginBottom: '64px' }}>
+          <div style={{ display: 'flex', gap: '16px', justifyContent: 'center', marginBottom: '48px' }}>
             <Link href={username ? "/dashboard" : "/chat"} style={{
               textDecoration: 'none',
               display: 'inline-flex',
               alignItems: 'center',
               justifyContent: 'center',
-              padding: '14px 28px',
-              fontSize: '15px',
-              fontWeight: 600,
-              color: '#1313BA',
-              backgroundColor: '#FFFFFF',
+              padding: '12px 24px',
+              fontSize: '13px',
+              fontWeight: 500,
+              color: '#FFFFFF',
+              backgroundColor: '#3B82F6',
               border: 'none',
-              borderRadius: '0px',
+              borderRadius: '6px',
               cursor: 'pointer',
-              transition: 'background-color 0.15s ease'
+              transition: 'all 0.15s ease',
+              boxShadow: '0 2px 4px rgba(59, 130, 246, 0.1)'
             }}
-            onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#E8E8F8'}
-            onMouseLeave={(e) => e.currentTarget.style.backgroundColor = '#FFFFFF'}
+            onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#2563EB'}
+            onMouseLeave={(e) => e.currentTarget.style.backgroundColor = '#3B82F6'}
             >
-              {username ? 'Masuk ke Dashboard ➡️' : 'Coba Gratis Sekarang ➡️'}
+              {username ? 'Go to Dashboard' : 'Launch Workspace'}
             </Link>
+            <a href="#demo" style={{
+              textDecoration: 'none',
+              display: 'inline-flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              padding: '12px 24px',
+              fontSize: '13px',
+              fontWeight: 500,
+              color: '#111827',
+              backgroundColor: '#FFFFFF',
+              border: '1px solid #E5E7EB',
+              borderRadius: '6px',
+              cursor: 'pointer',
+              transition: 'all 0.15s ease'
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.backgroundColor = '#F9FAFB';
+              e.currentTarget.style.borderColor = '#D1D5DB';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.backgroundColor = '#FFFFFF';
+              e.currentTarget.style.borderColor = '#E5E7EB';
+            }}
+            >
+              Interactive Demo
+            </a>
           </div>
         </div>
 
-        {/* --- LIVE INTERACTIVE WORKSPACE MOCKUP (Spaced 52px per rule) --- */}
-        <div style={{ 
-          marginTop: '52px', 
+        {/* --- LIVE INTERACTIVE WORKSPACE MOCKUP (Precision spacing) --- */}
+        <div id="demo" style={{ 
+          marginTop: '48px', 
           width: '100%', 
-          maxWidth: '1080px', 
+          maxWidth: '1000px', 
           backgroundColor: '#FFFFFF', 
-          border: '1px solid #E8E8F8', 
-          borderRadius: '0px', 
-          boxShadow: '0 20px 40px rgba(0,0,0,0.15)',
+          border: '1px solid #E5E7EB', 
+          borderRadius: '8px', 
+          boxShadow: '0 12px 32px rgba(0,0,0,0.04)',
           textAlign: 'left',
           display: 'flex',
           flexDirection: 'column',
-          height: '520px',
+          height: '480px',
           overflow: 'hidden'
         }}>
           {/* Mock Window Header */}
@@ -232,16 +280,16 @@ export default function LandingPage() {
             justifyContent: 'space-between', 
             alignItems: 'center', 
             padding: '12px 20px', 
-            borderBottom: '1px solid #E8E8F8', 
-            backgroundColor: '#F4F4FC' 
+            borderBottom: '1px solid #E5E7EB', 
+            backgroundColor: '#F9FAFB' 
           }}>
             <div style={{ display: 'flex', gap: '6px' }}>
-              <span style={{ width: '10px', height: '10px', backgroundColor: '#FF5F56', borderRadius: '50%' }}></span>
-              <span style={{ width: '10px', height: '10px', backgroundColor: '#FFBD2E', borderRadius: '50%' }}></span>
-              <span style={{ width: '10px', height: '10px', backgroundColor: '#27C93F', borderRadius: '50%' }}></span>
+              <span style={{ width: '10px', height: '10px', backgroundColor: '#EF4444', borderRadius: '50%' }}></span>
+              <span style={{ width: '10px', height: '10px', backgroundColor: '#F59E0B', borderRadius: '50%' }}></span>
+              <span style={{ width: '10px', height: '10px', backgroundColor: '#10B981', borderRadius: '50%' }}></span>
             </div>
-            <div style={{ fontSize: '11px', fontWeight: 700, color: '#1313BA', letterSpacing: '0.05em' }}>
-              📊 WORKSPACE DEMO INTERAKTIF
+            <div style={{ fontSize: '11px', fontWeight: 500, color: '#4B5563', letterSpacing: '0.05em' }}>
+              INTERACTIVE DEMO CANVAS
             </div>
             <div style={{ width: '40px' }}></div>
           </div>
@@ -250,10 +298,10 @@ export default function LandingPage() {
           <div style={{ display: 'flex', flex: 1, overflow: 'hidden' }}>
             
             {/* Left Pane: Chat Workspace (60%) */}
-            <div style={{ flex: 3, display: 'flex', flexDirection: 'column', borderRight: '1px solid #E8E8F8', backgroundColor: '#FFFFFF', position: 'relative' }}>
+            <div style={{ flex: 3, display: 'flex', flexDirection: 'column', borderRight: '1px solid #E5E7EB', backgroundColor: '#FFFFFF', position: 'relative' }}>
               
               {/* Chat Messages */}
-              <div style={{ flex: 1, padding: '20px', overflowY: 'auto', display: 'flex', flexDirection: 'column', gap: '16px' }}>
+              <div style={{ flex: 1, padding: '16px', overflowY: 'auto', display: 'flex', flexDirection: 'column', gap: '12px' }}>
                 
                 {demoChat.map((msg, idx) => (
                   <div key={idx} style={{
@@ -262,17 +310,18 @@ export default function LandingPage() {
                     alignSelf: msg.role === 'user' ? 'flex-end' : 'flex-start',
                     maxWidth: '80%'
                   }}>
-                    <span style={{ fontSize: '9px', fontWeight: 700, color: '#9090CE', marginBottom: '4px', textAlign: msg.role === 'user' ? 'right' : 'left' }}>
-                      {msg.role === 'user' ? 'Anda (Demo)' : 'CoS Asisten'}
+                    <span style={{ fontSize: '10px', fontWeight: 500, color: '#9CA3AF', marginBottom: '4px', textAlign: msg.role === 'user' ? 'right' : 'left' }}>
+                      {msg.role === 'user' ? 'You' : 'CoS Copilot'}
                     </span>
                     <div style={{
-                      padding: '12px 16px',
-                      backgroundColor: msg.role === 'user' ? '#1313BA' : '#F4F4FC',
-                      color: msg.role === 'user' ? '#FFFFFF' : '#6363C6',
-                      borderRadius: '0px', // Strict Atlas square corners
-                      border: msg.role === 'ai' ? '1px solid #E8E8F8' : 'none',
-                      fontSize: '13px',
-                      lineHeight: 1.5
+                      padding: '10px 14px',
+                      backgroundColor: msg.role === 'user' ? 'rgba(59, 130, 246, 0.08)' : '#F9FAFB',
+                      color: msg.role === 'user' ? '#1E40AF' : '#111827',
+                      borderRadius: '6px',
+                      border: '1px solid',
+                      borderColor: msg.role === 'user' ? 'rgba(59, 130, 246, 0.15)' : '#E5E7EB',
+                      fontSize: '12px',
+                      lineHeight: 1.45
                     }}>
                       {msg.content}
                     </div>
@@ -280,66 +329,70 @@ export default function LandingPage() {
                 ))}
 
                 {isTyping && (
-                  <div style={{ alignSelf: 'flex-start', padding: '12px 16px', backgroundColor: '#F4F4FC', color: '#9090CE', fontSize: '12px', fontStyle: 'italic' }}>
-                    AI sedang mengetik...
+                  <div style={{ alignSelf: 'flex-start', padding: '10px 14px', backgroundColor: '#F9FAFB', color: '#9CA3AF', fontSize: '11px', fontStyle: 'italic', borderRadius: '6px' }}>
+                    AI is writing...
                   </div>
                 )}
               </div>
 
               {/* Chat Input form */}
-              <form onSubmit={handleDemoSend} style={{ padding: '16px', borderTop: '1px solid #E8E8F8', display: 'flex', gap: '8px' }}>
+              <form onSubmit={handleDemoSend} style={{ padding: '12px', borderTop: '1px solid #E5E7EB', display: 'flex', gap: '8px' }}>
                 <input
                   type="text"
-                  placeholder="Ketik 'Tambahkan tugas: Rilis versi beta' atau ketik catatan..."
+                  placeholder="Try: 'Add task: Finalize pricing model' or type a project note..."
                   value={demoInput}
                   onChange={(e) => setDemoInput(e.target.value)}
                   style={{
                     flex: 1,
-                    padding: '10px 14px',
-                    fontSize: '13px',
-                    border: '1px solid #E8E8F8',
-                    borderRadius: '0px',
+                    padding: '8px 12px',
+                    fontSize: '12px',
+                    border: '1px solid #E5E7EB',
+                    borderRadius: '6px',
                     outline: 'none',
-                    color: '#6363C6'
+                    color: '#111827'
                   }}
-                  onFocus={(e) => e.target.style.borderColor = '#1313BA'}
-                  onBlur={(e) => e.target.style.borderColor = '#E8E8F8'}
+                  onFocus={(e) => e.target.style.borderColor = '#3B82F6'}
+                  onBlur={(e) => e.target.style.borderColor = '#E5E7EB'}
                 />
                 <button type="submit" style={{
-                  backgroundColor: '#1313BA',
+                  backgroundColor: '#3B82F6',
                   color: '#FFFFFF',
                   border: 'none',
-                  borderRadius: '0px',
+                  borderRadius: '6px',
                   padding: '8px 16px',
-                  fontSize: '13px',
-                  fontWeight: 600,
-                  cursor: 'pointer'
-                }}>
-                  Kirim
+                  fontSize: '12px',
+                  fontWeight: 500,
+                  cursor: 'pointer',
+                  transition: 'background-color 0.15s'
+                }}
+                onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#2563EB'}
+                onMouseLeave={(e) => e.currentTarget.style.backgroundColor = '#3B82F6'}
+                >
+                  Send
                 </button>
               </form>
             </div>
 
             {/* Middle Pane: Task Checklist (25%) */}
-            <div style={{ flex: 2, display: 'flex', flexDirection: 'column', borderRight: '1px solid #E8E8F8', backgroundColor: '#FFFFFF', padding: '20px' }}>
-              <h4 style={{ fontSize: '14px', fontWeight: 700, color: '#1313BA', marginBottom: '12px', display: 'flex', alignItems: 'center', gap: '6px' }}>
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+            <div style={{ flex: 2, display: 'flex', flexDirection: 'column', borderRight: '1px solid #E5E7EB', backgroundColor: '#FFFFFF', padding: '16px' }}>
+              <h4 style={{ fontSize: '12px', fontWeight: 600, color: '#111827', marginBottom: '12px', display: 'flex', alignItems: 'center', gap: '6px' }}>
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
                   <polyline points="9 11 12 14 22 4" />
                   <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11" />
                 </svg>
-                Daftar Tugas
+                Task List
               </h4>
               
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', overflowY: 'auto', flex: 1 }}>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', overflowY: 'auto', flex: 1 }}>
                 {demoTasks.map(task => (
                   <div key={task.id} style={{
                     display: 'flex',
                     alignItems: 'flex-start',
-                    gap: '10px',
-                    padding: '10px',
-                    border: '1px solid #E8E8F8',
-                    borderRadius: '0px',
-                    backgroundColor: task.status === 'completed' ? '#F4F4FC' : '#FFFFFF',
+                    gap: '8px',
+                    padding: '8px',
+                    border: '1px solid #E5E7EB',
+                    borderRadius: '6px',
+                    backgroundColor: task.status === 'completed' ? '#F9FAFB' : '#FFFFFF',
                     transition: 'all 0.2s'
                   }}>
                     <input
@@ -350,18 +403,18 @@ export default function LandingPage() {
                     />
                     <div style={{ flex: 1 }}>
                       <span style={{
-                        fontSize: '12px',
-                        fontWeight: 600,
-                        color: task.status === 'completed' ? '#9090CE' : '#6363C6',
+                        fontSize: '11px',
+                        fontWeight: 500,
+                        color: task.status === 'completed' ? '#9CA3AF' : '#111827',
                         textDecoration: task.status === 'completed' ? 'line-through' : 'none'
                       }}>
                         {task.title}
                       </span>
-                      <div style={{ display: 'flex', gap: '6px', marginTop: '6px' }}>
-                        <span style={{ fontSize: '9px', fontWeight: 700, padding: '1px 5px', backgroundColor: task.priority === 'High' ? '#ffebeb' : '#fff9e6', color: task.priority === 'High' ? '#ff3b30' : '#ff9500' }}>
+                      <div style={{ display: 'flex', gap: '6px', marginTop: '4px' }}>
+                        <span style={{ fontSize: '8px', fontWeight: 600, padding: '1px 4px', borderRadius: '4px', backgroundColor: task.priority === 'High' ? 'rgba(220, 38, 38, 0.08)' : 'rgba(217, 119, 6, 0.08)', color: task.priority === 'High' ? '#DC2626' : '#D97706' }}>
                           {task.priority}
                         </span>
-                        <span style={{ fontSize: '9px', color: '#9090CE' }}>
+                        <span style={{ fontSize: '8px', color: '#9CA3AF' }}>
                           📅 {task.dueDate}
                         </span>
                       </div>
@@ -372,13 +425,13 @@ export default function LandingPage() {
             </div>
 
             {/* Right Pane: Project Notes (20%) */}
-            <div style={{ flex: 2, display: 'flex', flexDirection: 'column', backgroundColor: '#FFFFFF', padding: '20px' }}>
-              <h4 style={{ fontSize: '14px', fontWeight: 700, color: '#1313BA', marginBottom: '12px', display: 'flex', alignItems: 'center', gap: '6px' }}>
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+            <div style={{ flex: 2, display: 'flex', flexDirection: 'column', backgroundColor: '#FFFFFF', padding: '16px' }}>
+              <h4 style={{ fontSize: '12px', fontWeight: 600, color: '#111827', marginBottom: '12px', display: 'flex', alignItems: 'center', gap: '6px' }}>
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
                   <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
                   <polyline points="14 2 14 8 20 8" />
                 </svg>
-                Catatan Wiki
+                Project Wiki
               </h4>
               <textarea
                 value={demoNotes}
@@ -386,20 +439,20 @@ export default function LandingPage() {
                 style={{
                   flex: 1,
                   width: '100%',
-                  padding: '12px',
-                  fontSize: '12px',
-                  color: '#6363C6',
-                  lineHeight: '1.5',
-                  border: '1px solid #E8E8F8',
-                  borderRadius: '0px',
+                  padding: '8px',
+                  fontSize: '11px',
+                  color: '#4B5563',
+                  lineHeight: '1.4',
+                  border: '1px solid #E5E7EB',
+                  borderRadius: '6px',
                   resize: 'none',
                   outline: 'none',
                   backgroundColor: '#FFFFFF',
                   fontFamily: 'inherit'
                 }}
               />
-              <span style={{ fontSize: '9px', color: '#9090CE', marginTop: '8px', display: 'block' }}>
-                💾 Auto-save aktif
+              <span style={{ fontSize: '8px', color: '#9CA3AF', marginTop: '6px', display: 'block' }}>
+                💾 Auto-save active
               </span>
             </div>
 
@@ -408,154 +461,335 @@ export default function LandingPage() {
 
       </section>
 
-      {/* --- FEATURE SECTION --- */}
+      {/* --- THE FIVE PILLARS OF COS SECTION --- */}
       <section style={{ 
-        padding: '100px 24px', 
-        backgroundColor: '#FFFFFF'
+        padding: '80px 24px', 
+        backgroundColor: '#FFFFFF',
+        borderBottom: '1px solid #E5E7EB'
       }}>
-        <div style={{ maxWidth: '1280px', margin: '0 auto' }}>
+        <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
           
           {/* Section Header */}
-          <div style={{ maxWidth: '768px', marginBottom: '64px' }}>
+          <div style={{ maxWidth: '600px', marginBottom: '48px' }}>
             <span style={{ 
-              fontSize: '12px', 
-              fontWeight: 700, 
-              color: '#1313BA', 
+              fontSize: '11px', 
+              fontWeight: 600, 
+              color: '#3B82F6', 
               textTransform: 'uppercase', 
-              letterSpacing: '0.1em',
+              letterSpacing: '0.05em',
               display: 'block',
-              marginBottom: '12px'
+              marginBottom: '8px'
             }}>
-              Fitur Utama
+              Core Architecture
             </span>
             <h2 style={{ 
-              fontSize: '36px', 
-              fontWeight: 800, 
-              color: '#1313BA', 
+              fontSize: '32px', 
+              fontWeight: 600, 
+              color: '#111827', 
               letterSpacing: '-0.02em',
               lineHeight: 1.2
             }}>
-              Alur Kerja Manajemen Modern yang Efisien & Cerdas.
+              Five Pillars of Professional C-Suite Assistance
             </h2>
+            <p style={{ fontSize: '14px', color: '#4B5563', marginTop: '8px', lineHeight: 1.5 }}>
+              Designed as a premium system dashboard running on the Google Cloud Free Tier. Every feature undergoes a strict agentic loop (Plan &rarr; Select Tools &rarr; Synthesize &rarr; Self-Reflect).
+            </p>
           </div>
 
-          {/* Cards Grid */}
-          <div style={{ 
-            display: 'grid', 
-            gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', 
-            gap: '32px' 
-          }}>
-            {/* Card 1 */}
-            <div className="features-card" style={{
+          {/* Pillars Grid */}
+          {/* Bento Grid */}
+          <div className="bento-grid">
+            
+            {/* Pillar 1: Executive Daily Briefings - Large (span 2) */}
+            <div className="pillar-card bento-item-large" style={{
               backgroundColor: '#FFFFFF',
-              border: '1px solid #E8E8F8',
-              borderRadius: '0px',
-              padding: '32px',
-              transition: 'all 0.2s ease'
+              border: '1px solid #E5E7EB',
+              borderRadius: '8px',
+              padding: '24px',
+              transition: 'all 0.15s ease',
+              display: 'flex',
+              flexDirection: 'row',
+              flexWrap: 'wrap',
+              gap: '24px',
+              justifyContent: 'space-between'
             }}>
-              <div style={{ 
-                width: '40px', 
-                height: '40px', 
-                backgroundColor: 'rgba(19, 19, 186, 0.04)', 
-                display: 'flex', 
-                alignItems: 'center', 
-                justifyContent: 'center', 
-                marginBottom: '20px' 
-              }}>
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1313BA" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z" />
-                  <path d="M12 6v6l4 2" />
-                </svg>
+              <div style={{ flex: 1, minWidth: '220px' }}>
+                <div style={{ 
+                  width: '32px', 
+                  height: '32px', 
+                  backgroundColor: 'rgba(59, 130, 246, 0.08)', 
+                  display: 'flex', 
+                  alignItems: 'center', 
+                  justifyContent: 'center', 
+                  marginBottom: '16px',
+                  borderRadius: '6px'
+                }}>
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#3B82F6" strokeWidth="2.5">
+                    <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
+                    <line x1="16" y1="2" x2="16" y2="6" />
+                    <line x1="8" y1="2" x2="8" y2="6" />
+                    <line x1="3" y1="10" x2="21" y2="10" />
+                  </svg>
+                </div>
+                <h3 style={{ fontSize: '16px', fontWeight: 600, color: '#111827', marginBottom: '8px' }}>Executive Daily Briefings</h3>
+                <p style={{ fontSize: '13px', color: '#4B5563', lineHeight: 1.5, margin: 0 }}>
+                  Consolidates financial metrics, CRM pipelines, and calendar alerts into a clean executive summary at the start of your day. Automatically highlights anomalies.
+                </p>
               </div>
-              <h3 style={{ fontSize: '20px', fontWeight: 700, color: '#1313BA', marginBottom: '12px' }}>Pencegahan Keterlambatan</h3>
-              <p style={{ fontSize: '14px', color: '#6363C6', lineHeight: 1.6 }}>
-                Kalkulasi otomatis status deadline dengan indikator visual dinamis (Merah/Oranye/Biru) untuk mengamankan ketepatan waktu pengerjaan.
-              </p>
+
+              {/* Visual Mockup inside Card */}
+              <div style={{ 
+                flex: 1, 
+                minWidth: '220px', 
+                border: '1px solid #E5E7EB', 
+                borderRadius: '6px', 
+                padding: '16px', 
+                backgroundColor: '#F9FAFB',
+                fontSize: '11px' 
+              }}>
+                <div style={{ fontWeight: 600, color: '#111827', marginBottom: '8px', borderBottom: '1px solid #E5E7EB', paddingBottom: '4px' }}>
+                  ☀️ Morning Executive Summary
+                </div>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
+                  <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                    <span style={{ color: '#4B5563' }}>Cash Runway:</span>
+                    <span style={{ color: '#16A34A', fontWeight: 600 }}>8.2 Months (Safe)</span>
+                  </div>
+                  <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                    <span style={{ color: '#4B5563' }}>Active Deals:</span>
+                    <span style={{ color: '#111827', fontWeight: 600 }}>12 (Value: IDR 450M)</span>
+                  </div>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', borderTop: '1px solid #E5E7EB', paddingTop: '4px', marginTop: '2px' }}>
+                    <span style={{ color: '#4B5563' }}>Next Meeting:</span>
+                    <span style={{ color: '#3B82F6', fontWeight: 500 }}>Board Review @ 10:00 AM</span>
+                  </div>
+                </div>
+              </div>
             </div>
 
-            {/* Card 2 */}
-            <div className="features-card" style={{
+            {/* Pillar 2: Scenario Simulator - Small (span 1) */}
+            <div className="pillar-card bento-item-small" style={{
               backgroundColor: '#FFFFFF',
-              border: '1px solid #E8E8F8',
-              borderRadius: '0px',
-              padding: '32px',
-              transition: 'all 0.2s ease'
+              border: '1px solid #E5E7EB',
+              borderRadius: '8px',
+              padding: '24px',
+              transition: 'all 0.15s ease',
+              display: 'flex',
+              flexDirection: 'column',
+              justifyContent: 'space-between',
+              gap: '16px'
             }}>
-              <div style={{ 
-                width: '40px', 
-                height: '40px', 
-                backgroundColor: 'rgba(19, 19, 186, 0.04)', 
-                display: 'flex', 
-                alignItems: 'center', 
-                justifyContent: 'center', 
-                marginBottom: '20px' 
+              <div>
+                <div style={{ 
+                  width: '32px', 
+                  height: '32px', 
+                  backgroundColor: 'rgba(59, 130, 246, 0.08)', 
+                  display: 'flex', 
+                  alignItems: 'center', 
+                  justifyContent: 'center', 
+                  marginBottom: '16px',
+                  borderRadius: '6px'
+                }}>
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#3B82F6" strokeWidth="2.5">
+                    <line x1="18" y1="20" x2="18" y2="10" />
+                    <line x1="12" y1="20" x2="12" y2="4" />
+                    <line x1="6" y1="20" x2="6" y2="14" />
+                  </svg>
+                </div>
+                <h3 style={{ fontSize: '16px', fontWeight: 600, color: '#111827', marginBottom: '8px' }}>Scenario Simulator ("What-If")</h3>
+                <p style={{ fontSize: '13px', color: '#4B5563', lineHeight: 1.5, margin: 0 }}>
+                  Model the future impact of hiring or pricing decisions. Uses sandbox logic to project cash runway without touching live databases.
+                </p>
+              </div>
+
+              {/* Sparkline Visual Mockup */}
+              <div style={{
+                border: '1px solid #E5E7EB',
+                borderRadius: '6px',
+                padding: '10px 14px',
+                backgroundColor: '#F9FAFB',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'space-between',
+                fontSize: '11px'
               }}>
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1313BA" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+                <div>
+                  <span style={{ color: '#9CA3AF', fontSize: '9px', textTransform: 'uppercase' }}>Runway Extension</span>
+                  <div style={{ color: '#16A34A', fontWeight: 600, fontSize: '14px', marginTop: '2px' }}>+4.2 Months</div>
+                </div>
+                {/* Micro Chart SVG */}
+                <svg width="60" height="24" viewBox="0 0 60 24" fill="none">
+                  <path d="M0 20 L15 16 L30 18 L45 8 L60 2" stroke="#16A34A" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                 </svg>
               </div>
-              <h3 style={{ fontSize: '20px', fontWeight: 700, color: '#1313BA', marginBottom: '12px' }}>Asisten Pendamping AI</h3>
-              <p style={{ fontSize: '14px', color: '#6363C6', lineHeight: 1.6 }}>
-                Pecah tugas kompleks menjadi checklist subtugas, ganti proyek, atau perbarui catatan proyek secara langsung dari input percakapan asisten.
-              </p>
             </div>
 
-            {/* Card 3 */}
-            <div className="features-card" style={{
+            {/* Pillar 3: Board & Investor Reporting - Small (span 1) */}
+            <div className="pillar-card bento-item-small" style={{
               backgroundColor: '#FFFFFF',
-              border: '1px solid #E8E8F8',
-              borderRadius: '0px',
-              padding: '32px',
-              transition: 'all 0.2s ease'
+              border: '1px solid #E5E7EB',
+              borderRadius: '8px',
+              padding: '24px',
+              transition: 'all 0.15s ease',
+              display: 'flex',
+              flexDirection: 'column',
+              justifyContent: 'space-between',
+              gap: '16px'
             }}>
-              <div style={{ 
-                width: '40px', 
-                height: '40px', 
-                backgroundColor: 'rgba(19, 19, 186, 0.04)', 
-                display: 'flex', 
-                alignItems: 'center', 
-                justifyContent: 'center', 
-                marginBottom: '20px' 
-              }}>
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1313BA" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
-                  <line x1="9" y1="3" x2="9" y2="21" />
-                </svg>
+              <div>
+                <div style={{ 
+                  width: '32px', 
+                  height: '32px', 
+                  backgroundColor: 'rgba(59, 130, 246, 0.08)', 
+                  display: 'flex', 
+                  alignItems: 'center', 
+                  justifyContent: 'center', 
+                  marginBottom: '16px',
+                  borderRadius: '6px'
+                }}>
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#3B82F6" strokeWidth="2.5">
+                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                    <polyline points="14 2 14 8 20 8" />
+                  </svg>
+                </div>
+                <h3 style={{ fontSize: '16px', fontWeight: 600, color: '#111827', marginBottom: '8px' }}>Board & Investor Reports</h3>
+                <p style={{ fontSize: '13px', color: '#4B5563', lineHeight: 1.5, margin: 0 }}>
+                  Generate professional Markdown reports compile MRR, Cash runways, and decisions automatically. Download with a single click.
+                </p>
               </div>
-              <h3 style={{ fontSize: '20px', fontWeight: 700, color: '#1313BA', marginBottom: '12px' }}>Workspace Terintegrasi</h3>
-              <p style={{ fontSize: '14px', color: '#6363C6', lineHeight: 1.6 }}>
-                Split-pane workspace yang menyandingkan daftar tugas dengan catatan dokumentasi wiki secara berdampingan tanpa beralih tab.
-              </p>
+
+              {/* File Download Preview Mockup */}
+              <div style={{
+                border: '1px solid #E5E7EB',
+                borderRadius: '6px',
+                padding: '10px 12px',
+                backgroundColor: '#F9FAFB',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'space-between',
+                fontSize: '11px'
+              }}>
+                <span style={{ fontWeight: 500, color: '#4B5563' }}>📄 Board_Report_Q2.md</span>
+                <span style={{ color: '#3B82F6', fontWeight: 600, cursor: 'pointer' }}>Download</span>
+              </div>
             </div>
 
-            {/* Card 4 */}
-            <div className="features-card" style={{
+            {/* Pillar 4: Market Intel Digest - Small (span 1) */}
+            <div className="pillar-card bento-item-small" style={{
               backgroundColor: '#FFFFFF',
-              border: '1px solid #E8E8F8',
-              borderRadius: '0px',
-              padding: '32px',
-              transition: 'all 0.2s ease'
+              border: '1px solid #E5E7EB',
+              borderRadius: '8px',
+              padding: '24px',
+              transition: 'all 0.15s ease',
+              display: 'flex',
+              flexDirection: 'column',
+              justifyContent: 'space-between',
+              gap: '16px'
             }}>
-              <div style={{ 
-                width: '40px', 
-                height: '40px', 
-                backgroundColor: 'rgba(19, 19, 186, 0.04)', 
-                display: 'flex', 
-                alignItems: 'center', 
-                justifyContent: 'center', 
-                marginBottom: '20px' 
-              }}>
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1313BA" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M12 2a10 10 0 0 1 10 10c0 5.523-4.477 10-10 10S2 17.523 2 12A10 10 0 0 1 12 2z" />
-                  <path d="M12 8v8" />
-                  <path d="M8 12h8" />
-                  <path d="M7.5 7.5l9 9" />
-                </svg>
+              <div>
+                <div style={{ 
+                  width: '32px', 
+                  height: '32px', 
+                  backgroundColor: 'rgba(59, 130, 246, 0.08)', 
+                  display: 'flex', 
+                  alignItems: 'center', 
+                  justifyContent: 'center', 
+                  marginBottom: '16px',
+                  borderRadius: '6px'
+                }}>
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#3B82F6" strokeWidth="2.5">
+                    <circle cx="12" cy="12" r="10" />
+                    <line x1="2" y1="12" x2="22" y2="12" />
+                    <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
+                  </svg>
+                </div>
+                <h3 style={{ fontSize: '16px', fontWeight: 600, color: '#111827', marginBottom: '8px' }}>Market Intel Digest</h3>
+                <p style={{ fontSize: '13px', color: '#4B5563', lineHeight: 1.5, margin: 0 }}>
+                  Keep track of competitor pricing models and industry changes. Saves API quota through custom caching layers.
+                </p>
               </div>
-              <h3 style={{ fontSize: '20px', fontWeight: 700, color: '#1313BA', marginBottom: '12px' }}>Generative UI (GenUI)</h3>
-              <p style={{ fontSize: '14px', color: '#6363C6', lineHeight: 1.6 }}>
-                AI asisten secara dinamis merender kartu interaktif (seperti daftar tugas, pengalih proyek, dan wiki) langsung di dalam gelembung obrolan Anda.
-              </p>
+
+              {/* Price Checklist Mockup */}
+              <div style={{
+                border: '1px solid #E5E7EB',
+                borderRadius: '6px',
+                padding: '8px 12px',
+                backgroundColor: '#F9FAFB',
+                fontSize: '10px',
+                display: 'flex',
+                flexDirection: 'column',
+                gap: '4px'
+              }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                  <span style={{ color: '#4B5563' }}>Competitor X Premium:</span>
+                  <span style={{ color: '#111827', fontWeight: 600 }}>$49/mo</span>
+                </div>
+                <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                  <span style={{ color: '#4B5563' }}>Competitor Y Starter:</span>
+                  <span style={{ color: '#111827', fontWeight: 600 }}>$19/mo</span>
+                </div>
+              </div>
+            </div>
+
+            {/* Pillar 5: Decision Logs & Audit Trail - Large (span 2) */}
+            <div className="pillar-card bento-item-large" style={{
+              backgroundColor: '#FFFFFF',
+              border: '1px solid #E5E7EB',
+              borderRadius: '8px',
+              padding: '24px',
+              transition: 'all 0.15s ease',
+              display: 'flex',
+              flexDirection: 'row',
+              flexWrap: 'wrap',
+              gap: '24px',
+              justifyContent: 'space-between'
+            }}>
+              <div style={{ flex: 1, minWidth: '220px' }}>
+                <div style={{ 
+                  width: '32px', 
+                  height: '32px', 
+                  backgroundColor: 'rgba(59, 130, 246, 0.08)', 
+                  display: 'flex', 
+                  alignItems: 'center', 
+                  justifyContent: 'center', 
+                  marginBottom: '16px',
+                  borderRadius: '6px'
+                }}>
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#3B82F6" strokeWidth="2.5">
+                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                    <polyline points="14 2 14 8 20 8" />
+                    <line x1="16" y1="13" x2="8" y2="13" />
+                    <line x1="16" y1="17" x2="8" y2="17" />
+                  </svg>
+                </div>
+                <h3 style={{ fontSize: '16px', fontWeight: 600, color: '#111827', marginBottom: '8px' }}>Decision Logs & Audit Trail</h3>
+                <p style={{ fontSize: '13px', color: '#4B5563', lineHeight: 1.5, margin: 0 }}>
+                  Record board-level strategic decisions with documented logic. Features audit trails tracking key assumptions, confidence scores, and alternative paths.
+                </p>
+              </div>
+
+              {/* Audit log visual mockup */}
+              <div style={{
+                flex: 1,
+                minWidth: '220px',
+                border: '1px solid #E5E7EB',
+                borderRadius: '6px',
+                padding: '16px',
+                backgroundColor: '#F9FAFB',
+                fontSize: '11px',
+                display: 'flex',
+                flexDirection: 'column',
+                gap: '8px'
+              }}>
+                <div style={{ fontWeight: 600, color: '#111827', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                  <span>📋 Recent Governance Log</span>
+                  <span style={{ fontSize: '9px', padding: '1px 5px', borderRadius: '4px', backgroundColor: 'rgba(22, 163, 74, 0.08)', color: '#16A34A', fontWeight: 600 }}>SAVED</span>
+                </div>
+                <div style={{ color: '#4B5563', lineHeight: 1.4 }}>
+                  <strong>Decision:</strong> Increase pricing plan by 10%.<br/>
+                  <strong>Rationale:</strong> Lift MRR while maintaining healthy LTV/CAC ratios.
+                </div>
+              </div>
             </div>
 
           </div>
@@ -564,67 +798,67 @@ export default function LandingPage() {
 
       {/* --- GENERATIVE UI SHOWCASE SECTION --- */}
       <section style={{ 
-        padding: '100px 24px', 
-        backgroundColor: '#F4F4FC', // Light brand tint background
-        borderTop: '1px solid #E8E8F8',
-        borderBottom: '1px solid #E8E8F8'
+        padding: '80px 24px', 
+        backgroundColor: '#F9FAFB',
+        borderBottom: '1px solid #E5E7EB'
       }}>
-        <div style={{ maxWidth: '1280px', margin: '0 auto', display: 'flex', flexWrap: 'wrap', gap: '64px', alignItems: 'center' }}>
+        <div style={{ maxWidth: '1200px', margin: '0 auto', display: 'flex', flexWrap: 'wrap', gap: '48px', alignItems: 'center' }}>
           
-          {/* Visual Showcase (Interactive Mockup card showing text transforming to UI component) */}
-          <div style={{ flex: 1, minWidth: '300px', display: 'flex', flexDirection: 'column', gap: '20px' }}>
+          {/* Visual Showcase */}
+          <div style={{ flex: 1, minWidth: '300px', display: 'flex', flexDirection: 'column', gap: '16px' }}>
             <div style={{
               backgroundColor: '#FFFFFF',
-              border: '1px solid #E8E8F8',
-              padding: '24px',
-              borderRadius: '0px',
-              boxShadow: '0 8px 24px rgba(19, 19, 186, 0.05)'
+              border: '1px solid #E5E7EB',
+              padding: '20px',
+              borderRadius: '8px',
+              boxShadow: '0 2px 8px rgba(0,0,0,0.02)'
             }}>
-              <span style={{ fontSize: '11px', fontWeight: 700, color: '#9090CE' }}>Input Percakapan</span>
-              <p style={{ fontSize: '14px', fontWeight: 600, color: '#6363C6', margin: '8px 0 0 0', fontStyle: 'italic' }}>
-                "Tolong buatkan ringkasan status tugas proyek kita sekarang."
+              <span style={{ fontSize: '10px', fontWeight: 600, color: '#9CA3AF', textTransform: 'uppercase', letterSpacing: '0.05em' }}>User Prompt Input</span>
+              <p style={{ fontSize: '13px', fontWeight: 500, color: '#4B5563', margin: '6px 0 0 0', fontStyle: 'italic' }}>
+                "Draft a report for investors regarding our Q2 progress."
               </p>
             </div>
 
             {/* Simulated GenUI Card Output */}
             <div style={{
               backgroundColor: '#FFFFFF',
-              border: '2px solid #1313BA',
+              border: '1px solid #3B82F6',
               padding: '24px',
-              borderRadius: '0px',
+              borderRadius: '8px',
               position: 'relative',
-              overflow: 'hidden'
+              overflow: 'hidden',
+              boxShadow: '0 8px 24px rgba(59, 130, 246, 0.05)'
             }}>
-              {/* Pulsing Badge */}
+              {/* Badge */}
               <span style={{
                 position: 'absolute',
                 top: '12px',
                 right: '12px',
-                fontSize: '9px',
-                fontWeight: 700,
-                color: '#FFFFFF',
-                backgroundColor: '#1313BA',
+                fontSize: '8px',
+                fontWeight: 600,
+                color: '#3B82F6',
+                backgroundColor: 'rgba(59, 130, 246, 0.08)',
                 padding: '2px 8px',
-                borderRadius: '0px',
+                borderRadius: '4px',
                 textTransform: 'uppercase',
                 letterSpacing: '0.05em'
               }}>
                 ✨ RENDERED BY GENUI
               </span>
 
-              <h4 style={{ fontSize: '15px', fontWeight: 700, color: '#1313BA', margin: '0 0 12px 0' }}>
-                📋 Ringkasan Status Proyek
+              <h4 style={{ fontSize: '14px', fontWeight: 600, color: '#111827', margin: '0 0 12px 0' }}>
+                📋 Investor Performance Report
               </h4>
 
               {/* Task list simulation */}
               <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-                <div style={{ display: 'flex', justifySelf: 'stretch', alignItems: 'center', gap: '8px', fontSize: '12px', color: '#6363C6' }}>
-                  <span style={{ color: '#15A34A', fontWeight: 'bold' }}>✓</span>
-                  <span style={{ textDecoration: 'line-through' }}>Setup repositori & routing Next.js</span>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '11px', color: '#4B5563' }}>
+                  <span style={{ color: '#16A34A', fontWeight: 'bold' }}>✓</span>
+                  <span>Financial Health: MRR at IDR 180M (Cash Runway: 8.2 Months)</span>
                 </div>
-                <div style={{ display: 'flex', justifySelf: 'stretch', alignItems: 'center', gap: '8px', fontSize: '12px', color: '#6363C6' }}>
-                  <span style={{ color: '#F97316', fontWeight: 'bold' }}>⏳</span>
-                  <span>Integrasi visualisasi Gantt Chart</span>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '11px', color: '#4B5563' }}>
+                  <span style={{ color: '#16A34A', fontWeight: 'bold' }}>✓</span>
+                  <span>CRM Growth: 12 Active Pipeline Deals (Value: IDR 450M)</span>
                 </div>
               </div>
             </div>
@@ -632,86 +866,85 @@ export default function LandingPage() {
 
           {/* Text block explanation */}
           <div style={{ flex: 1, minWidth: '300px' }}>
-            <span style={{ fontSize: '12px', fontWeight: 700, color: '#1313BA', textTransform: 'uppercase', letterSpacing: '0.1em' }}>Kelebihan Eksklusif</span>
-            <h2 style={{ fontSize: '36px', fontWeight: 800, color: '#1313BA', marginTop: '12px', marginBottom: '24px', letterSpacing: '-0.02em' }}>
-              Generative UI: Antarmuka yang Terlahir dari Obrolan.
+            <span style={{ fontSize: '11px', fontWeight: 600, color: '#3B82F6', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Generative UI Engine</span>
+            <h2 style={{ fontSize: '28px', fontWeight: 600, color: '#111827', marginTop: '8px', marginBottom: '16px', letterSpacing: '-0.02em' }}>
+              Dynamic Interfaces Born from Natural Conversation
             </h2>
-            <p style={{ fontSize: '16px', color: '#6363C6', lineHeight: 1.6, marginBottom: '24px' }}>
-              Tidak seperti asisten AI tradisional yang hanya membalas dengan teks markdown kaku, asisten AI Future CoS dapat menghasilkan komponen antarmuka yang hidup, interaktif, dan fungsional secara instan di dalam chat bubble Anda.
+            <p style={{ fontSize: '14px', color: '#4B5563', lineHeight: 1.5, marginBottom: '20px' }}>
+              Unlike traditional chatbots that output rigid markdown summaries, Future CoS dynamically renders interactive, live, and editable UI components right inside your chat stream.
             </p>
-            <ul style={{ paddingLeft: '20px', color: '#6363C6', fontSize: '14px', lineHeight: 1.8, display: 'flex', flexDirection: 'column', gap: '8px' }}>
-              <li><strong>Interaksi Langsung</strong>: Klik, centang, atau jalankan perintah langsung di dalam kartu obrolan tanpa beralih halaman.</li>
-              <li><strong>Representasi Data Visual</strong>: Rendering grafik persentase kemajuan pengerjaan yang dibuat khusus secara real-time.</li>
-              <li><strong>Integrasi Penuh</strong>: Data dari komponen GenUI tersinkronisasi otomatis dengan database global proyek Anda.</li>
+            <ul style={{ paddingLeft: '20px', color: '#4B5563', fontSize: '13px', lineHeight: 1.7, display: 'flex', flexDirection: 'column', gap: '8px' }}>
+              <li><strong>Direct Interaction</strong>: Approve decisions, copy drafts, or force refresh competitor data directly on visual cards.</li>
+              <li><strong>Visual Precision</strong>: Generates micro-charts, logs, and timelines calculated by backend services.</li>
+              <li><strong>State Synchronization</strong>: Interactive states are automatically synchronized back to the Firestore database.</li>
             </ul>
           </div>
 
         </div>
       </section>
 
-      {/* --- INTERACTIVE SVG METRICS SECTION --- */}
+      {/* --- STATISTICS SECTION --- */}
       <section style={{ 
-        padding: '100px 24px', 
+        padding: '80px 24px', 
         backgroundColor: '#FFFFFF',
-        borderTop: '1px solid #E8E8F8'
+        borderBottom: '1px solid #E5E7EB'
       }}>
-        <div style={{ maxWidth: '1280px', margin: '0 auto', display: 'flex', flexWrap: 'wrap', gap: '64px', alignItems: 'center' }}>
+        <div style={{ maxWidth: '1200px', margin: '0 auto', display: 'flex', flexWrap: 'wrap', gap: '48px', alignItems: 'center' }}>
           
           {/* Text block */}
           <div style={{ flex: 1, minWidth: '300px' }}>
-            <span style={{ fontSize: '12px', fontWeight: 700, color: '#1313BA', textTransform: 'uppercase', letterSpacing: '0.1em' }}>Statistik Riil</span>
-            <h2 style={{ fontSize: '36px', fontWeight: 800, color: '#1313BA', marginTop: '12px', marginBottom: '24px', letterSpacing: '-0.02em' }}>
-              Analisis Kemajuan Real-Time & Skalabilitas Kerja
+            <span style={{ fontSize: '11px', fontWeight: 600, color: '#3B82F6', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Engine Performance</span>
+            <h2 style={{ fontSize: '28px', fontWeight: 600, color: '#111827', marginTop: '8px', marginBottom: '16px', letterSpacing: '-0.02em' }}>
+              Real-time Analysis & High-Speed Synthesis
             </h2>
-            <p style={{ fontSize: '16px', color: '#6363C6', lineHeight: 1.6, marginBottom: '32px' }}>
-              Sistem visualisasi kami memetakan prioritas pengerjaan tugas secara dinamis. Anda selalu tahu tugas mana yang menghambat kemajuan proyek.
+            <p style={{ fontSize: '14px', color: '#4B5563', lineHeight: 1.5, marginBottom: '24px' }}>
+              Succeeding in executive workflows requires speed and accuracy. Our implementation maps calculations to a Python sandbox, skipping LLM hallucination for numbers.
             </p>
 
             <div style={{ display: 'flex', gap: '40px' }}>
               <div>
-                <div style={{ fontSize: '32px', fontWeight: 800, color: '#1313BA' }}>98%</div>
-                <div style={{ fontSize: '12px', color: '#9090CE', fontWeight: 600, marginTop: '4px' }}>Tingkat Penyelesaian</div>
+                <div style={{ fontSize: '28px', fontWeight: 600, color: '#3B82F6' }}>98%</div>
+                <div style={{ fontSize: '11px', color: '#9CA3AF', fontWeight: 500, marginTop: '4px' }}>Task Completion Rate</div>
               </div>
               <div>
-                <div style={{ fontSize: '32px', fontWeight: 800, color: '#1313BA' }}>&lt; 2 Detik</div>
-                <div style={{ fontSize: '12px', color: '#9090CE', fontWeight: 600, marginTop: '4px' }}>Respon AI Asisten</div>
+                <div style={{ fontSize: '28px', fontWeight: 600, color: '#3B82F6' }}>&lt; 1.5s</div>
+                <div style={{ fontSize: '11px', color: '#9CA3AF', fontWeight: 500, marginTop: '4px' }}>AI Agent Response Latency</div>
               </div>
             </div>
           </div>
 
-          {/* SVG Animated chart mockup (Spaced 52px per rule) */}
-          <div style={{ flex: 1, minWidth: '300px', border: '1px solid #E8E8F8', padding: '32px', borderRadius: '0px', backgroundColor: '#FFFFFF' }}>
-            <h3 style={{ fontSize: '16px', fontWeight: 700, color: '#1313BA', marginBottom: '20px' }}>📊 Distribusi Tugas Aktif</h3>
+          {/* Static Chart Mockup */}
+          <div style={{ flex: 1, minWidth: '300px', border: '1px solid #E5E7EB', padding: '24px', borderRadius: '8px', backgroundColor: '#FFFFFF' }}>
+            <h3 style={{ fontSize: '14px', fontWeight: 600, color: '#111827', marginBottom: '16px' }}>📊 Active Project Task Distribution</h3>
             
-            {/* Live Chart bars simulating task distribution */}
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
               <div>
-                <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '12px', marginBottom: '6px' }}>
-                  <span style={{ color: '#ff3b30', fontWeight: 700 }}>🔥 Prioritas Tinggi</span>
-                  <span style={{ color: '#6363C6', fontWeight: 600 }}>12 Tugas</span>
+                <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '11px', marginBottom: '4px' }}>
+                  <span style={{ color: '#DC2626', fontWeight: 500 }}>🔥 High Priority</span>
+                  <span style={{ color: '#4B5563' }}>12 Tasks</span>
                 </div>
-                <div style={{ width: '100%', height: '8px', backgroundColor: '#E8E8F8', borderRadius: '0px' }}>
-                  <div style={{ width: '80%', height: '100%', backgroundColor: '#ff3b30', transition: 'width 0.5s ease' }}></div>
+                <div style={{ width: '100%', height: '6px', backgroundColor: '#F3F4F6', borderRadius: '4px' }}>
+                  <div style={{ width: '80%', height: '100%', backgroundColor: '#DC2626', borderRadius: '4px' }}></div>
                 </div>
               </div>
 
               <div>
-                <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '12px', marginBottom: '6px' }}>
-                  <span style={{ color: '#ff9500', fontWeight: 700 }}>⚡ Prioritas Sedang</span>
-                  <span style={{ color: '#6363C6', fontWeight: 600 }}>18 Tugas</span>
+                <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '11px', marginBottom: '4px' }}>
+                  <span style={{ color: '#D97706', fontWeight: 500 }}>⚡ Medium Priority</span>
+                  <span style={{ color: '#4B5563' }}>18 Tasks</span>
                 </div>
-                <div style={{ width: '100%', height: '8px', backgroundColor: '#E8E8F8', borderRadius: '0px' }}>
-                  <div style={{ width: '60%', height: '100%', backgroundColor: '#ff9500', transition: 'width 0.5s ease' }}></div>
+                <div style={{ width: '100%', height: '6px', backgroundColor: '#F3F4F6', borderRadius: '4px' }}>
+                  <div style={{ width: '60%', height: '100%', backgroundColor: '#D97706', borderRadius: '4px' }}></div>
                 </div>
               </div>
 
               <div>
-                <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '12px', marginBottom: '6px' }}>
-                  <span style={{ color: '#1313BA', fontWeight: 700 }}>🟢 Prioritas Rendah</span>
-                  <span style={{ color: '#6363C6', fontWeight: 600 }}>8 Tugas</span>
+                <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '11px', marginBottom: '4px' }}>
+                  <span style={{ color: '#3B82F6', fontWeight: 500 }}>🟢 Low Priority</span>
+                  <span style={{ color: '#4B5563' }}>8 Tasks</span>
                 </div>
-                <div style={{ width: '100%', height: '8px', backgroundColor: '#E8E8F8', borderRadius: '0px' }}>
-                  <div style={{ width: '40%', height: '100%', backgroundColor: '#1313BA', transition: 'width 0.5s ease' }}></div>
+                <div style={{ width: '100%', height: '6px', backgroundColor: '#F3F4F6', borderRadius: '4px' }}>
+                  <div style={{ width: '40%', height: '100%', backgroundColor: '#3B82F6', borderRadius: '4px' }}></div>
                 </div>
               </div>
             </div>
@@ -720,47 +953,46 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* --- FAQ ACCORDION SECTION (Grouped Variant per accordion.md specs) --- */}
+      {/* --- FAQ ACCORDION SECTION (Sleek Clean Style) --- */}
       <section style={{ 
-        padding: '100px 24px', 
+        padding: '80px 24px', 
         backgroundColor: '#FFFFFF',
-        borderTop: '1px solid #E8E8F8'
+        borderBottom: '1px solid #E5E7EB'
       }}>
-        <div style={{ maxWidth: '1280px', margin: '0 auto' }}>
+        <div style={{ maxWidth: '800px', margin: '0 auto' }}>
           
           {/* Section Header */}
-          <div style={{ maxWidth: '768px', marginBottom: '64px' }}>
-            <span style={{ fontSize: '12px', fontWeight: 700, color: '#1313BA', textTransform: 'uppercase', letterSpacing: '0.1em' }}>FAQ</span>
-            <h2 style={{ fontSize: '36px', fontWeight: 800, color: '#1313BA', marginTop: '12px', letterSpacing: '-0.02em' }}>Pertanyaan Sering Diajukan</h2>
+          <div style={{ marginBottom: '48px' }}>
+            <span style={{ fontSize: '11px', fontWeight: 600, color: '#3B82F6', textTransform: 'uppercase', letterSpacing: '0.05em' }}>FAQ</span>
+            <h2 style={{ fontSize: '28px', fontWeight: 600, color: '#111827', marginTop: '8px', letterSpacing: '-0.02em' }}>Frequently Asked Questions</h2>
           </div>
 
-          {/* Accordion Grouped Container (Radius 0px, No Perimeter border, Dividers between) */}
+          {/* Accordion Grouped Container */}
           <div style={{ 
-            maxWidth: '768px', 
-            border: 'none', 
-            borderRadius: '0px', 
+            border: '1px solid #E5E7EB', 
+            borderRadius: '8px', 
             overflow: 'hidden',
             backgroundColor: '#FFFFFF'
           }}>
             {[
               {
-                q: "Bagaimana cara asisten AI membantu memecah tugas?",
-                a: "Saat Anda mengetik instruksi natural (misal: 'Beri saya tugas riset kompetitor'), AI akan menganalisis kompleksitas tugas tersebut. Jika tugas dinilai besar, AI secara otomatis akan membuat daftar subtugas checklist bertingkat untuk pengerjaan yang terstruktur."
+                q: "How does the AI assistant break down complex tasks?",
+                a: "When you send a high-level task instruction (e.g. 'Audit competitor SEO'), Gemini analyzes the context and splits the task into structural, pending subtask checklists automatically, specifying their category and priority."
               },
               {
-                q: "Di mana database data proyek saya disimpan?",
-                a: "Data proyek dan catatan Anda disimpan secara lokal per-pengguna langsung di backend server atau memori local storage peramban Anda. Hal ini memastikan data Anda tetap private dan terisolasi dengan aman."
+                q: "Where is my project data stored?",
+                a: "For local execution, your active tasks and notes are kept in local JSON databases and browser storage. If deployed, they are saved securely in Firestore databases scoped to your authenticated Firebase user ID."
               },
               {
-                q: "Apakah saya bisa mengubah tanggal tenggat waktu secara langsung?",
-                a: "Ya! Badge tenggat waktu di daftar tugas kami didesain sebagai pemilih tanggal interaktif. Cukup klik badge status deadline pada tugas mana pun untuk mengubah tenggat waktunya secara langsung."
+                q: "Can I directly modify task deadlines?",
+                a: "Yes! The deadline badges in the task list function as interactive date pickers. You can click on the badge to choose a new due date directly."
               }
             ].map((faq, idx) => {
               const isOpen = activeFaqIndex === idx;
               return (
                 <div key={idx} style={{ 
-                  borderBottom: idx !== 2 ? '1px solid #E8E8F8' : 'none',
-                  backgroundColor: isOpen ? '#F4F4FC' : 'transparent',
+                  borderBottom: idx !== 2 ? '1px solid #E5E7EB' : 'none',
+                  backgroundColor: isOpen ? '#F9FAFB' : 'transparent',
                   transition: 'background-color 0.15s ease'
                 }}>
                   {/* Accordion Trigger Row */}
@@ -771,7 +1003,7 @@ export default function LandingPage() {
                       display: 'flex',
                       justifyContent: 'space-between',
                       alignItems: 'center',
-                      padding: '20px',
+                      padding: '16px 20px',
                       background: 'none',
                       border: 'none',
                       cursor: 'pointer',
@@ -780,20 +1012,20 @@ export default function LandingPage() {
                     }}
                   >
                     <span style={{ 
-                      fontSize: '14px', 
-                      fontWeight: 600, 
-                      color: isOpen ? '#1313BA' : '#6363C6',
+                      fontSize: '13px', 
+                      fontWeight: 500, 
+                      color: isOpen ? '#3B82F6' : '#111827',
                       transition: 'color 0.15s ease'
                     }}>
                       {faq.q}
                     </span>
-                    {/* Chevron Indicator (rotating 180deg) */}
+                    {/* Chevron Indicator */}
                     <svg 
-                      width="20"
-                      height="20"
+                      width="16"
+                      height="16"
                       viewBox="0 0 24 24"
                       fill="none"
-                      stroke={isOpen ? '#1313BA' : '#9090CE'}
+                      stroke={isOpen ? '#3B82F6' : '#9CA3AF'}
                       strokeWidth="2.5"
                       strokeLinecap="round"
                       strokeLinejoin="round"
@@ -809,12 +1041,12 @@ export default function LandingPage() {
 
                   {/* Accordion Panel Content */}
                   <div style={{
-                    maxHeight: isOpen ? '200px' : '0px',
+                    maxHeight: isOpen ? '120px' : '0px',
                     opacity: isOpen ? 1 : 0,
                     overflow: 'hidden',
                     transition: 'all 0.2s ease-in-out'
                   }}>
-                    <div style={{ padding: '0 20px 20px 20px', fontSize: '14px', color: '#6363C6', lineHeight: 1.5 }}>
+                    <div style={{ padding: '0 20px 16px 20px', fontSize: '12px', color: '#4B5563', lineHeight: 1.5 }}>
                       {faq.a}
                     </div>
                   </div>
@@ -828,40 +1060,60 @@ export default function LandingPage() {
 
       {/* --- FOOTER --- */}
       <footer style={{ 
-        backgroundColor: '#1313BA', 
-        color: '#FFFFFF', 
-        padding: '64px 24px'
+        backgroundColor: '#FFFFFF', 
+        borderTop: '1px solid #E5E7EB',
+        color: '#4B5563', 
+        padding: '48px 24px'
       }}>
         <div style={{ 
-          maxWidth: '1280px', 
+          maxWidth: '1200px', 
           margin: '0 auto', 
           display: 'flex', 
           flexDirection: 'column', 
           alignItems: 'center', 
-          gap: '24px' 
+          gap: '16px' 
         }}>
-          <span style={{ fontWeight: 800, fontSize: '16px', letterSpacing: '-0.02em' }}>Future Chief of Staff (CoS)</span>
+          <span style={{ fontWeight: 600, fontSize: '14px', color: '#111827', letterSpacing: '-0.02em' }}>Future Chief of Staff</span>
           <div style={{ display: 'flex', gap: '24px' }}>
-            <Link href="/dashboard" className="footer-link" style={{ textDecoration: 'none', color: '#CACAF0', fontSize: '13px' }}>Dashboard</Link>
-            <Link href="/chat" className="footer-link" style={{ textDecoration: 'none', color: '#CACAF0', fontSize: '13px' }}>Workspace</Link>
+            <Link href="/dashboard" className="footer-link" style={{ textDecoration: 'none', color: '#9CA3AF', fontSize: '12px', transition: 'color 0.15s' }}>Dashboard</Link>
+            <Link href="/chat" className="footer-link" style={{ textDecoration: 'none', color: '#9CA3AF', fontSize: '12px', transition: 'color 0.15s' }}>Workspace</Link>
           </div>
-          <p style={{ fontSize: '12px', color: '#CACAF0', marginTop: '12px' }}>
-            &copy; 2026 Future Chief of Staff (CoS). Built with TypeUI Atlas Design System.
+          <p style={{ fontSize: '11px', color: '#9CA3AF', marginTop: '8px' }}>
+            &copy; 2026 Future Chief of Staff (CoS). Designed with Sleek Design System.
           </p>
         </div>
       </footer>
 
       <style jsx global>{`
         .nav-link:hover {
-          color: #1313BA !important;
+          color: #3B82F6 !important;
         }
-        footer .footer-link:hover {
-          color: #FFFFFF !important;
-          opacity: 0.8;
+        .footer-link:hover {
+          color: #111827 !important;
         }
-        .features-card:hover {
-          border-color: #1313BA !important;
-          transform: translateY(-2px);
+        .pillar-card:hover {
+          border-color: #3B82F6 !important;
+          transform: translateY(-1px);
+        }
+        .bento-grid {
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          gap: 24px;
+          width: 100%;
+        }
+        .bento-item-large {
+          grid-column: span 2;
+        }
+        .bento-item-small {
+          grid-column: span 1;
+        }
+        @media (max-width: 768px) {
+          .bento-grid {
+            grid-template-columns: 1fr;
+          }
+          .bento-item-large {
+            grid-column: span 1;
+          }
         }
       `}</style>
     </div>

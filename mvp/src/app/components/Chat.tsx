@@ -893,11 +893,11 @@ export default function Chat() {
   const handleLoginSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!loginUsername.trim()) {
-      setLoginError("Nama pengguna tidak boleh kosong.");
+      setLoginError("Username cannot be empty.");
       return;
     }
     if (loginPin && loginPin.length < 4) {
-      setLoginError("PIN keamanan minimal harus 4 digit.");
+      setLoginError("Security PIN must be at least 4 digits.");
       return;
     }
 
@@ -1131,64 +1131,63 @@ export default function Chat() {
          },
          body: JSON.stringify({ tasks: updatedTasks }),
        });
-       if (username) loadProjects(username); // Sync counts
-     } catch (error) {
-       console.error("Gagal menghapus tugas:", error);
-     }
-  };
+        if (username) loadProjects(username); // Sync counts
+      } catch (error) {
+        console.error("Failed to delete task:", error);
+      }
+   };
 
-  // --- RENDER LOGIN VIEW ---
-  if (!username) {
+   // --- RENDER LOGIN VIEW ---
+   if (!username) {
     return (
       <div style={{
         minHeight: '100vh',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        background: 'linear-gradient(135deg, #f5f5f7 0%, #fcfcfd 100%)',
-        padding: '20px'
+        backgroundColor: '#F9FAFB',
+        padding: '24px'
       }}>
         <div className="animate-enter" style={{
           width: '100%',
-          maxWidth: '380px',
-          background: 'white',
-          borderRadius: '24px',
-          padding: '36px',
-          boxShadow: 'var(--shadow-lg)',
-          border: '1px solid var(--border-color)',
+          maxWidth: '360px',
+          backgroundColor: '#FFFFFF',
+          borderRadius: '8px',
+          padding: '32px',
+          boxShadow: '0 4px 16px rgba(0,0,0,0.02)',
+          border: '1px solid #E5E7EB',
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center'
         }}>
           {/* Logo Icon */}
           <div style={{
-            width: '56px',
-            height: '56px',
-            borderRadius: '16px',
-            background: 'linear-gradient(135deg, #111113 0%, #3a3a3c 100%)',
+            width: '48px',
+            height: '48px',
+            borderRadius: '8px',
+            backgroundColor: 'rgba(59, 130, 246, 0.08)',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            marginBottom: '20px',
-            boxShadow: '0 4px 12px rgba(0,0,0,0.1)'
+            marginBottom: '16px'
           }}>
-            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#3B82F6" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
               <path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" />
               <path d="M2 12H22" />
               <path d="M12 2C14.5013 4.73831 15.9228 8.29203 16 12C15.9228 15.708 14.5013 19.2617 12 22C9.49872 19.2617 8.07725 15.708 8 12C8.07725 8.29203 9.49872 4.73831 12 2Z" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
           </div>
 
-          <h2 style={{ fontSize: '22px', fontWeight: 800, color: '#111113', letterSpacing: '-0.02em', marginBottom: '6px' }}>
-            Future Chief of Staff (CoS)
+          <h2 style={{ fontSize: '18px', fontWeight: 600, color: '#111827', letterSpacing: '-0.02em', marginBottom: '6px' }}>
+            Future Chief of Staff
           </h2>
-          <p style={{ fontSize: '13px', color: 'var(--text-secondary)', textAlign: 'center', marginBottom: '28px', lineHeight: 1.4 }}>
-            AI Executive Copilot for Founder & C-Suite.<br />Sign in with your username.
+          <p style={{ fontSize: '12px', color: '#4B5563', textAlign: 'center', marginBottom: '24px', lineHeight: 1.45 }}>
+            AI Executive Copilot for Founder & C-Suite.<br />Sign in with your username below.
           </p>
 
           <form onSubmit={handleLoginSubmit} style={{ width: '100%', display: 'flex', flexDirection: 'column', gap: '16px' }}>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
-              <label style={{ fontSize: '12px', fontWeight: 700, color: '#1d1d1f' }}>Username</label>
+              <label style={{ fontSize: '11px', fontWeight: 500, color: '#111827' }}>Username</label>
               <input
                 type="text"
                 placeholder="Example: frits, guest, marketing"
@@ -1196,24 +1195,25 @@ export default function Chat() {
                 onChange={(e) => setLoginUsername(e.target.value)}
                 style={{
                   width: '100%',
-                  padding: '12px 16px',
-                  borderRadius: '12px',
-                  border: '1px solid rgba(0,0,0,0.12)',
-                  fontSize: '14px',
+                  padding: '10px 14px',
+                  borderRadius: '6px',
+                  border: '1px solid #E5E7EB',
+                  fontSize: '13px',
                   outline: 'none',
-                  transition: 'border-color 0.2s',
-                  background: '#fcfcfd'
+                  transition: 'all 0.15s ease',
+                  backgroundColor: '#FFFFFF',
+                  color: '#111827'
                 }}
-                onFocus={(e) => e.target.style.borderColor = '#111113'}
-                onBlur={(e) => e.target.style.borderColor = 'rgba(0,0,0,0.12)'}
+                onFocus={(e) => e.target.style.borderColor = '#3B82F6'}
+                onBlur={(e) => e.target.style.borderColor = '#E5E7EB'}
                 required
               />
             </div>
 
             <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
-              <label style={{ fontSize: '12px', fontWeight: 700, color: '#1d1d1f', display: 'flex', justifyContent: 'space-between' }}>
+              <label style={{ fontSize: '11px', fontWeight: 500, color: '#111827', display: 'flex', justifyContent: 'space-between' }}>
                 <span>Security PIN</span>
-                <span style={{ color: 'var(--text-secondary)', fontWeight: 500, fontSize: '11px' }}>Optional</span>
+                <span style={{ color: '#9CA3AF', fontWeight: 400, fontSize: '10px' }}>Optional</span>
               </label>
               <input
                 type="password"
@@ -1225,21 +1225,22 @@ export default function Chat() {
                 onChange={(e) => setLoginPin(e.target.value.replace(/[^0-9]/g, ''))}
                 style={{
                   width: '100%',
-                  padding: '12px 16px',
-                  borderRadius: '12px',
-                  border: '1px solid rgba(0,0,0,0.12)',
-                  fontSize: '14px',
+                  padding: '10px 14px',
+                  borderRadius: '6px',
+                  border: '1px solid #E5E7EB',
+                  fontSize: '13px',
                   outline: 'none',
-                  transition: 'border-color 0.2s',
-                  background: '#fcfcfd'
+                  transition: 'all 0.15s ease',
+                  backgroundColor: '#FFFFFF',
+                  color: '#111827'
                 }}
-                onFocus={(e) => e.target.style.borderColor = '#111113'}
-                onBlur={(e) => e.target.style.borderColor = 'rgba(0,0,0,0.12)'}
+                onFocus={(e) => e.target.style.borderColor = '#3B82F6'}
+                onBlur={(e) => e.target.style.borderColor = '#E5E7EB'}
               />
             </div>
 
             {loginError && (
-              <p style={{ color: '#ff3b30', fontSize: '12px', fontWeight: 600, marginTop: '4px' }}>
+              <p style={{ color: '#DC2626', fontSize: '11px', fontWeight: 500, marginTop: '4px' }}>
                 ⚠️ {loginError}
               </p>
             )}
@@ -1248,28 +1249,28 @@ export default function Chat() {
               type="submit"
               style={{
                 width: '100%',
-                padding: '14px',
-                borderRadius: '14px',
+                padding: '10px 14px',
+                borderRadius: '6px',
                 border: 'none',
-                background: '#111113',
-                color: 'white',
-                fontSize: '14px',
-                fontWeight: 700,
+                backgroundColor: '#3B82F6',
+                color: '#FFFFFF',
+                fontSize: '13px',
+                fontWeight: 500,
                 cursor: 'pointer',
-                marginTop: '12px',
-                boxShadow: '0 4px 12px rgba(0,0,0,0.05)',
-                transition: 'all 0.2s'
+                marginTop: '8px',
+                boxShadow: '0 1px 2px rgba(59, 130, 246, 0.05)',
+                transition: 'all 0.15s ease'
               }}
-              onMouseEnter={(e) => e.currentTarget.style.opacity = '0.9'}
-              onMouseLeave={(e) => e.currentTarget.style.opacity = '1'}
+              onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#2563EB'}
+              onMouseLeave={(e) => e.currentTarget.style.backgroundColor = '#3B82F6'}
             >
-              Sign In & Manage Tasks
+              Sign In
             </button>
           </form>
 
-          <div style={{ marginTop: '24px', paddingTop: '16px', borderTop: '1px solid rgba(0,0,0,0.06)', width: '100%', textAlign: 'center' }}>
-            <p style={{ fontSize: '11px', color: 'var(--text-secondary)', lineHeight: 1.4 }}>
-              🔒 Database is stored locally based on your username. An optional PIN can be used for basic browser security.
+          <div style={{ marginTop: '24px', paddingTop: '16px', borderTop: '1px solid #E5E7EB', width: '100%', textAlign: 'center' }}>
+            <p style={{ fontSize: '10px', color: '#9CA3AF', lineHeight: 1.45, margin: 0 }}>
+              🔒 Databases are stored locally per-user. An optional PIN can be used for basic local privacy.
             </p>
           </div>
         </div>
@@ -1666,7 +1667,106 @@ export default function Chat() {
       </div>
 
       {/* Input Box */}
-      <div className="input-wrapper" style={{ left: 0, right: 0, zIndex: 40 }}>
+      <div className="input-wrapper" style={{ left: 0, right: 0, zIndex: 40, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '6px' }}>
+        {/* Quick Actions / Suggested Prompts */}
+        <div style={{
+          display: 'flex',
+          gap: '8px',
+          overflowX: 'auto',
+          padding: '4px 8px 8px 8px',
+          scrollbarWidth: 'none', // Hide scrollbar for clean look
+          msOverflowStyle: 'none',
+          width: '100%',
+          maxWidth: 'var(--max-width)',
+          pointerEvents: 'auto',
+          alignSelf: 'center',
+          boxSizing: 'border-box'
+        }} className="quick-actions-container">
+          <style>{`
+            .quick-actions-container::-webkit-scrollbar {
+              display: none;
+            }
+            .quick-action-btn {
+              background: rgba(255, 255, 255, 0.9);
+              backdrop-filter: blur(10px);
+              border: 1px solid rgba(0, 0, 0, 0.08);
+              border-radius: 20px;
+              padding: 6px 12px;
+              font-size: 11px;
+              font-weight: 700;
+              color: #48484a;
+              cursor: pointer;
+              white-space: nowrap;
+              transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+              box-shadow: 0 2px 6px rgba(0,0,0,0.03);
+            }
+            .quick-action-btn:hover {
+              background: #0071e3;
+              color: white;
+              border-color: #0071e3;
+              transform: translateY(-1px);
+              box-shadow: 0 4px 10px rgba(0,113,227,0.15);
+            }
+            .quick-action-btn:active {
+              transform: translateY(0);
+            }
+          `}</style>
+          
+          <button 
+            type="button"
+            className="quick-action-btn"
+            onClick={() => setInput("Generate daily briefing")}
+            title="Sintesis data bisnis harian Anda"
+          >
+            📊 Daily Briefing
+          </button>
+          
+          <button 
+            type="button"
+            className="quick-action-btn"
+            onClick={() => setInput("What if we hire 2 developers with annual salary of IDR 120 million?")}
+            title="Simulasikan dampak rekrutmen staf baru"
+          >
+            📈 Hire 2 Devs (What-If)
+          </button>
+
+          <button 
+            type="button"
+            className="quick-action-btn"
+            onClick={() => setInput("What if we increase selling price by 10%?")}
+            title="Simulasikan kenaikan harga produk"
+          >
+            💰 Price +10% (What-If)
+          </button>
+
+          <button 
+            type="button"
+            className="quick-action-btn"
+            onClick={() => setInput("Generate board report draft for Q2 2026")}
+            title="Buat draf laporan kinerja formal"
+          >
+            📄 Board Report
+          </button>
+
+          <button 
+            type="button"
+            className="quick-action-btn"
+            onClick={() => setInput("Search competitor SaaS pricing")}
+            title="Riset tren pasar dan kompetitor"
+          >
+            🔍 Competitor Research
+          </button>
+
+          <button 
+            type="button"
+            className="quick-action-btn"
+            onClick={() => setInput("Please record my task: Review marketing plan Q3 with deadline 2026-07-15 and priority High")}
+            title="Tambah tugas baru ke proyek aktif"
+          >
+            📝 Add Task
+          </button>
+        </div>
+
         <form onSubmit={handleSubmit} className="input-box">
           <input
             type="text"

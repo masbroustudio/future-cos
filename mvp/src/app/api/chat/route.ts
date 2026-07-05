@@ -520,7 +520,8 @@ RULES:
 12. If the user asks for market research, competitor analysis, business trends, or market intelligence (e.g. "search competitor news", "how do competitor prices compare?"), you MUST:
     a. Call 'fetch_market_intelligence' function to search for info (with Firestore caching).
     b. Call 'render_market_digest_card' function to display the structured market and competitor intelligence summary.
-13. For general questions outside the project management system and business analysis, reply with natural text. Always reply in professional, clear, and structured English.`;
+13. For general questions outside the project management system and business analysis, reply with natural text. Always reply in professional, clear, and structured English.
+14. CRITICAL RULE FOR GENERATIVE UI: Every time you invoke a Generative UI tool (such as 'renderBriefingCard', 'render_decision_log_card', 'render_scenario_chart', 'render_report_card', or 'render_market_digest_card'), you MUST NOT write long markdown summaries or replicate the card contents in your text response. Instead, write ONLY a very brief, single-sentence introduction (e.g. 'Here is your Daily Executive Briefing:', 'Here is the projected scenario:', 'Here is the report draft:') and then call the corresponding rendering function immediately. Let the visual card handle all the layout and detailed text display.`;
 
     let response = null;
     let successfulKeyIndex = 0;
@@ -867,7 +868,7 @@ RULES:
                 decisionsList.push("- *No new strategic decisions recorded*");
               }
               const decisionsText = decisionsList.join("\n");
-              const title = `${reportType.charAt(0).toUpperCase() + reportType.slice(1)} Performance Report - {period}`;
+              const title = `${reportType.charAt(0).toUpperCase() + reportType.slice(1)} Performance Report - ${period}`;
               const formattedDate = new Date().toLocaleDateString("en-US", { day: "numeric", month: "long", year: "numeric" });
 
               let contentMarkdown = "";

@@ -506,62 +506,79 @@ export default function LandingPage() {
               border: '1px solid #E5E7EB',
               borderRadius: '8px',
               padding: '24px',
-              transition: 'all 0.15s ease',
+              transition: 'all 0.2s ease',
               display: 'flex',
               flexDirection: 'row',
               flexWrap: 'wrap',
               gap: '24px',
-              justifyContent: 'space-between'
+              justifyContent: 'space-between',
+              boxShadow: '0 1px 3px rgba(0,0,0,0.02)'
             }}>
-              <div style={{ flex: 1, minWidth: '220px' }}>
-                <div style={{ 
-                  width: '32px', 
-                  height: '32px', 
-                  backgroundColor: 'rgba(59, 130, 246, 0.08)', 
-                  display: 'flex', 
-                  alignItems: 'center', 
-                  justifyContent: 'center', 
-                  marginBottom: '16px',
-                  borderRadius: '6px'
-                }}>
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#3B82F6" strokeWidth="2.5">
-                    <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
-                    <line x1="16" y1="2" x2="16" y2="6" />
-                    <line x1="8" y1="2" x2="8" y2="6" />
-                    <line x1="3" y1="10" x2="21" y2="10" />
-                  </svg>
+              <div style={{ flex: 1, minWidth: '240px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+                <div>
+                  <div style={{ 
+                    width: '32px', 
+                    height: '32px', 
+                    backgroundColor: 'rgba(59, 130, 246, 0.08)', 
+                    display: 'flex', 
+                    alignItems: 'center', 
+                    justifyContent: 'center', 
+                    marginBottom: '16px',
+                    borderRadius: '6px'
+                  }}>
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#3B82F6" strokeWidth="2.5">
+                      <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
+                      <line x1="16" y1="2" x2="16" y2="6" />
+                      <line x1="8" y1="2" x2="8" y2="6" />
+                      <line x1="3" y1="10" x2="21" y2="10" />
+                    </svg>
+                  </div>
+                  <h3 style={{ fontSize: '16px', fontWeight: 600, color: '#111827', marginBottom: '8px' }}>Executive Daily Briefings</h3>
+                  <p style={{ fontSize: '13px', color: '#4B5563', lineHeight: 1.5, margin: 0 }}>
+                    Consolidates financial metrics, CRM pipelines, and calendar alerts into a clean executive summary at the start of your day. Automatically highlights anomalies.
+                  </p>
                 </div>
-                <h3 style={{ fontSize: '16px', fontWeight: 600, color: '#111827', marginBottom: '8px' }}>Executive Daily Briefings</h3>
-                <p style={{ fontSize: '13px', color: '#4B5563', lineHeight: 1.5, margin: 0 }}>
-                  Consolidates financial metrics, CRM pipelines, and calendar alerts into a clean executive summary at the start of your day. Automatically highlights anomalies.
-                </p>
+                <div style={{ display: 'flex', gap: '8px', marginTop: '16px' }}>
+                  <span style={{ fontSize: '10px', color: '#3B82F6', fontWeight: 600, background: 'rgba(59, 130, 246, 0.08)', padding: '2px 8px', borderRadius: '4px' }}>CRM Sync</span>
+                  <span style={{ fontSize: '10px', color: '#16A34A', fontWeight: 600, background: 'rgba(22, 163, 74, 0.08)', padding: '2px 8px', borderRadius: '4px' }}>Bank Feeds</span>
+                </div>
               </div>
 
               {/* Visual Mockup inside Card */}
               <div style={{ 
                 flex: 1, 
-                minWidth: '220px', 
+                minWidth: '240px', 
                 border: '1px solid #E5E7EB', 
-                borderRadius: '6px', 
+                borderRadius: '8px', 
                 padding: '16px', 
-                backgroundColor: '#F9FAFB',
+                backgroundColor: '#FFFFFF',
+                boxShadow: '0 4px 12px rgba(0,0,0,0.01)',
                 fontSize: '11px' 
               }}>
-                <div style={{ fontWeight: 600, color: '#111827', marginBottom: '8px', borderBottom: '1px solid #E5E7EB', paddingBottom: '4px' }}>
-                  ☀️ Morning Executive Summary
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px', borderBottom: '1px solid #F3F4F6', paddingBottom: '8px' }}>
+                  <span style={{ fontWeight: 600, color: '#111827' }}>☀️ Morning Briefing</span>
+                  <span style={{ display: 'flex', alignItems: 'center', gap: '4px', color: '#16A34A', fontWeight: 600, fontSize: '9px' }}>
+                    <span style={{ width: '5px', height: '5px', backgroundColor: '#16A34A', borderRadius: '50%' }}></span>
+                    UPDATED
+                  </span>
                 </div>
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
-                  <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                    <span style={{ color: '#4B5563' }}>Cash Runway:</span>
-                    <span style={{ color: '#16A34A', fontWeight: 600 }}>8.2 Months (Safe)</span>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                  <div>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', color: '#4B5563', marginBottom: '4px' }}>
+                      <span>Runway Health</span>
+                      <span style={{ color: '#111827', fontWeight: 600 }}>8.2 Months (Safe)</span>
+                    </div>
+                    <div style={{ width: '100%', height: '4px', backgroundColor: '#F3F4F6', borderRadius: '2px' }}>
+                      <div style={{ width: '68%', height: '100%', backgroundColor: '#16A34A', borderRadius: '2px' }}></div>
+                    </div>
                   </div>
-                  <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                    <span style={{ color: '#4B5563' }}>Active Deals:</span>
-                    <span style={{ color: '#111827', fontWeight: 600 }}>12 (Value: IDR 450M)</span>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', borderTop: '1px solid #F3F4F6', paddingTop: '8px', color: '#4B5563' }}>
+                    <span>Active Pipeline</span>
+                    <span style={{ color: '#111827', fontWeight: 600 }}>IDR 450M (12 Deals)</span>
                   </div>
-                  <div style={{ display: 'flex', justifyContent: 'space-between', borderTop: '1px solid #E5E7EB', paddingTop: '4px', marginTop: '2px' }}>
-                    <span style={{ color: '#4B5563' }}>Next Meeting:</span>
-                    <span style={{ color: '#3B82F6', fontWeight: 500 }}>Board Review @ 10:00 AM</span>
+                  <div style={{ display: 'flex', gap: '6px', alignItems: 'flex-start', borderTop: '1px solid #F3F4F6', paddingTop: '8px', color: '#DC2626', background: 'rgba(220, 38, 38, 0.02)', padding: '6px', borderRadius: '4px' }}>
+                    <span>🚨</span>
+                    <span><strong>Anomaly:</strong> Competitor X raised basic plan pricing by 20% today.</span>
                   </div>
                 </div>
               </div>
@@ -573,11 +590,12 @@ export default function LandingPage() {
               border: '1px solid #E5E7EB',
               borderRadius: '8px',
               padding: '24px',
-              transition: 'all 0.15s ease',
+              transition: 'all 0.2s ease',
               display: 'flex',
               flexDirection: 'column',
               justifyContent: 'space-between',
-              gap: '16px'
+              gap: '20px',
+              boxShadow: '0 1px 3px rgba(0,0,0,0.02)'
             }}>
               <div>
                 <div style={{ 
@@ -602,24 +620,31 @@ export default function LandingPage() {
                 </p>
               </div>
 
-              {/* Sparkline Visual Mockup */}
+              {/* Sparkline Area Chart Mockup */}
               <div style={{
                 border: '1px solid #E5E7EB',
-                borderRadius: '6px',
-                padding: '10px 14px',
-                backgroundColor: '#F9FAFB',
+                borderRadius: '8px',
+                padding: '12px',
+                backgroundColor: '#FFFFFF',
+                boxShadow: '0 4px 12px rgba(0,0,0,0.01)',
                 display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'space-between',
-                fontSize: '11px'
+                flexDirection: 'column',
+                gap: '8px'
               }}>
-                <div>
-                  <span style={{ color: '#9CA3AF', fontSize: '9px', textTransform: 'uppercase' }}>Runway Extension</span>
-                  <div style={{ color: '#16A34A', fontWeight: 600, fontSize: '14px', marginTop: '2px' }}>+4.2 Months</div>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                  <span style={{ color: '#9CA3AF', fontSize: '9px', fontWeight: 600, textTransform: 'uppercase' }}>Runway Impact</span>
+                  <span style={{ color: '#16A34A', fontWeight: 600, fontSize: '12px' }}>+4.2 Months</span>
                 </div>
-                {/* Micro Chart SVG */}
-                <svg width="60" height="24" viewBox="0 0 60 24" fill="none">
-                  <path d="M0 20 L15 16 L30 18 L45 8 L60 2" stroke="#16A34A" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                {/* SVG Area Chart with Gradient */}
+                <svg width="100%" height="32" viewBox="0 0 100 32" fill="none" style={{ display: 'block' }}>
+                  <defs>
+                    <linearGradient id="chartGrad" x1="0" y1="0" x2="0" y2="1">
+                      <stop offset="0%" stopColor="#16A34A" stopOpacity="0.2"/>
+                      <stop offset="100%" stopColor="#16A34A" stopOpacity="0"/>
+                    </linearGradient>
+                  </defs>
+                  <path d="M0 32 C20 32, 35 24, 55 12 T 100 2" fill="url(#chartGrad)"/>
+                  <path d="M0 32 C20 32, 35 24, 55 12 T 100 2" stroke="#16A34A" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                 </svg>
               </div>
             </div>
@@ -630,11 +655,12 @@ export default function LandingPage() {
               border: '1px solid #E5E7EB',
               borderRadius: '8px',
               padding: '24px',
-              transition: 'all 0.15s ease',
+              transition: 'all 0.2s ease',
               display: 'flex',
               flexDirection: 'column',
               justifyContent: 'space-between',
-              gap: '16px'
+              gap: '20px',
+              boxShadow: '0 1px 3px rgba(0,0,0,0.02)'
             }}>
               <div>
                 <div style={{ 
@@ -658,19 +684,25 @@ export default function LandingPage() {
                 </p>
               </div>
 
-              {/* File Download Preview Mockup */}
+              {/* Action Item Compilation Mockup */}
               <div style={{
                 border: '1px solid #E5E7EB',
-                borderRadius: '6px',
-                padding: '10px 12px',
-                backgroundColor: '#F9FAFB',
+                borderRadius: '8px',
+                padding: '12px',
+                backgroundColor: '#FFFFFF',
+                boxShadow: '0 4px 12px rgba(0,0,0,0.01)',
                 display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'space-between',
-                fontSize: '11px'
+                flexDirection: 'column',
+                gap: '8px',
+                fontSize: '10px'
               }}>
-                <span style={{ fontWeight: 500, color: '#4B5563' }}>📄 Board_Report_Q2.md</span>
-                <span style={{ color: '#3B82F6', fontWeight: 600, cursor: 'pointer' }}>Download</span>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '6px', color: '#16A34A', fontWeight: 600 }}>
+                  <span>✓</span> <span>Runway calculated</span>
+                </div>
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', borderTop: '1px solid #F3F4F6', paddingTop: '8px' }}>
+                  <span style={{ fontWeight: 500, color: '#4B5563' }}>📄 Board_Q2.md</span>
+                  <span style={{ color: '#3B82F6', fontWeight: 600, cursor: 'pointer' }}>Download</span>
+                </div>
               </div>
             </div>
 
@@ -680,11 +712,12 @@ export default function LandingPage() {
               border: '1px solid #E5E7EB',
               borderRadius: '8px',
               padding: '24px',
-              transition: 'all 0.15s ease',
+              transition: 'all 0.2s ease',
               display: 'flex',
               flexDirection: 'column',
               justifyContent: 'space-between',
-              gap: '16px'
+              gap: '20px',
+              boxShadow: '0 1px 3px rgba(0,0,0,0.02)'
             }}>
               <div>
                 <div style={{ 
@@ -709,42 +742,49 @@ export default function LandingPage() {
                 </p>
               </div>
 
-              {/* Price Checklist Mockup */}
+              {/* Competitor Feed Mockup */}
               <div style={{
                 border: '1px solid #E5E7EB',
-                borderRadius: '6px',
-                padding: '8px 12px',
-                backgroundColor: '#F9FAFB',
+                borderRadius: '8px',
+                padding: '12px',
+                backgroundColor: '#FFFFFF',
+                boxShadow: '0 4px 12px rgba(0,0,0,0.01)',
                 fontSize: '10px',
                 display: 'flex',
                 flexDirection: 'column',
-                gap: '4px'
+                gap: '6px'
               }}>
-                <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                  <span style={{ color: '#4B5563' }}>Competitor X Premium:</span>
-                  <span style={{ color: '#111827', fontWeight: 600 }}>$49/mo</span>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                  <span style={{ color: '#4B5563', display: 'flex', alignItems: 'center', gap: '4px' }}>
+                    <span style={{ width: '12px', height: '12px', borderRadius: '50%', backgroundColor: '#0071e3', color: '#FFFFFF', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', fontSize: '7px', fontWeight: 'bold' }}>X</span>
+                    Competitor X
+                  </span>
+                  <span style={{ color: '#DC2626', fontWeight: 600 }}>$59 (+$10)</span>
                 </div>
-                <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                  <span style={{ color: '#4B5563' }}>Competitor Y Starter:</span>
-                  <span style={{ color: '#111827', fontWeight: 600 }}>$19/mo</span>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderTop: '1px solid #F3F4F6', paddingTop: '6px' }}>
+                  <span style={{ color: '#4B5563', display: 'flex', alignItems: 'center', gap: '4px' }}>
+                    <span style={{ width: '12px', height: '12px', borderRadius: '50%', backgroundColor: '#16a34a', color: '#FFFFFF', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', fontSize: '7px', fontWeight: 'bold' }}>Y</span>
+                    Competitor Y
+                  </span>
+                  <span style={{ color: '#4B5563', fontWeight: 500 }}>$19 (Static)</span>
                 </div>
               </div>
             </div>
 
-            {/* Pillar 5: Decision Logs & Audit Trail - Large (span 2) */}
-            <div className="pillar-card bento-item-large" style={{
+            {/* Pillar 5: Secure Document Vault & RAG - Small (span 1) */}
+            <div className="pillar-card bento-item-small" style={{
               backgroundColor: '#FFFFFF',
               border: '1px solid #E5E7EB',
               borderRadius: '8px',
               padding: '24px',
-              transition: 'all 0.15s ease',
+              transition: 'all 0.2s ease',
               display: 'flex',
-              flexDirection: 'row',
-              flexWrap: 'wrap',
-              gap: '24px',
-              justifyContent: 'space-between'
+              flexDirection: 'column',
+              justifyContent: 'space-between',
+              gap: '20px',
+              boxShadow: '0 1px 3px rgba(0,0,0,0.02)'
             }}>
-              <div style={{ flex: 1, minWidth: '220px' }}>
+              <div>
                 <div style={{ 
                   width: '32px', 
                   height: '32px', 
@@ -756,38 +796,120 @@ export default function LandingPage() {
                   borderRadius: '6px'
                 }}>
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#3B82F6" strokeWidth="2.5">
-                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
-                    <polyline points="14 2 14 8 20 8" />
-                    <line x1="16" y1="13" x2="8" y2="13" />
-                    <line x1="16" y1="17" x2="8" y2="17" />
+                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
                   </svg>
                 </div>
-                <h3 style={{ fontSize: '16px', fontWeight: 600, color: '#111827', marginBottom: '8px' }}>Decision Logs & Audit Trail</h3>
+                <h3 style={{ fontSize: '16px', fontWeight: 600, color: '#111827', marginBottom: '8px' }}>Secure Document Vault</h3>
                 <p style={{ fontSize: '13px', color: '#4B5563', lineHeight: 1.5, margin: 0 }}>
-                  Record board-level strategic decisions with documented logic. Features audit trails tracking key assumptions, confidence scores, and alternative paths.
+                  Upload pitch decks, spreadsheets, or private memos. The AI uses semantic RAG search to answer strategic queries instantly.
                 </p>
               </div>
 
-              {/* Audit log visual mockup */}
+              {/* Secure upload mockup */}
               <div style={{
-                flex: 1,
-                minWidth: '220px',
                 border: '1px solid #E5E7EB',
-                borderRadius: '6px',
+                borderRadius: '8px',
+                padding: '12px',
+                backgroundColor: '#FFFFFF',
+                boxShadow: '0 4px 12px rgba(0,0,0,0.01)',
+                display: 'flex',
+                flexDirection: 'column',
+                gap: '8px',
+                fontSize: '10px'
+              }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                  <span style={{ fontWeight: 500, color: '#4B5563' }}>📊 Q1_Revenue.xlsx</span>
+                  <span style={{ color: '#16A34A', fontWeight: 600 }}>SECURE</span>
+                </div>
+                <div style={{ width: '100%', height: '4px', backgroundColor: '#F3F4F6', borderRadius: '2px' }}>
+                  <div style={{ width: '100%', height: '100%', backgroundColor: '#16A34A', borderRadius: '2px' }}></div>
+                </div>
+              </div>
+            </div>
+
+            {/* Pillar 6: Decision Logs & Audit Trail - Full (span 3) */}
+            <div className="pillar-card bento-item-full" style={{
+              backgroundColor: '#FFFFFF',
+              border: '1px solid #E5E7EB',
+              borderRadius: '8px',
+              padding: '24px',
+              transition: 'all 0.2s ease',
+              display: 'flex',
+              flexDirection: 'row',
+              flexWrap: 'wrap',
+              gap: '24px',
+              justifyContent: 'space-between',
+              boxShadow: '0 1px 3px rgba(0,0,0,0.02)'
+            }}>
+              <div style={{ flex: 1, minWidth: '280px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+                <div>
+                  <div style={{ 
+                    width: '32px', 
+                    height: '32px', 
+                    backgroundColor: 'rgba(59, 130, 246, 0.08)', 
+                    display: 'flex', 
+                    alignItems: 'center', 
+                    justifyContent: 'center', 
+                    marginBottom: '16px',
+                    borderRadius: '6px'
+                  }}>
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#3B82F6" strokeWidth="2.5">
+                      <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                      <path d="M9 11l3 3 6-6" />
+                    </svg>
+                  </div>
+                  <h3 style={{ fontSize: '16px', fontWeight: 600, color: '#111827', marginBottom: '8px' }}>Decision Logs & Audit Trail</h3>
+                  <p style={{ fontSize: '13px', color: '#4B5563', lineHeight: 1.5, margin: 0 }}>
+                    Maintains an immutable, timestamped ledger of board-level strategic choices. Documents the reasoning, key assumptions, forecasted runway impact, and confidence rates behind every pivot.
+                  </p>
+                </div>
+                <div style={{ display: 'flex', gap: '8px', marginTop: '16px' }}>
+                  <span style={{ fontSize: '10px', color: '#111827', fontWeight: 600, border: '1px solid #E5E7EB', padding: '2px 8px', borderRadius: '4px' }}>Immutable Ledger</span>
+                  <span style={{ fontSize: '10px', color: '#3B82F6', fontWeight: 600, border: '1px solid #E5E7EB', padding: '2px 8px', borderRadius: '4px' }}>SHA-256 Verified</span>
+                </div>
+              </div>
+
+              {/* Audit log visual mockup table (expanded for 3-columns) */}
+              <div style={{
+                flex: 1.5,
+                minWidth: '320px',
+                border: '1px solid #E5E7EB',
+                borderRadius: '8px',
                 padding: '16px',
-                backgroundColor: '#F9FAFB',
+                backgroundColor: '#FFFFFF',
+                boxShadow: '0 4px 12px rgba(0,0,0,0.01)',
                 fontSize: '11px',
                 display: 'flex',
                 flexDirection: 'column',
                 gap: '8px'
               }}>
-                <div style={{ fontWeight: 600, color: '#111827', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                  <span>📋 Recent Governance Log</span>
-                  <span style={{ fontSize: '9px', padding: '1px 5px', borderRadius: '4px', backgroundColor: 'rgba(22, 163, 74, 0.08)', color: '#16A34A', fontWeight: 600 }}>SAVED</span>
+                <div style={{ fontWeight: 600, color: '#111827', display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '1px solid #F3F4F6', paddingBottom: '8px' }}>
+                  <span>📋 Recent Strategic Decisions</span>
+                  <span style={{ fontSize: '9px', padding: '1px 5px', borderRadius: '4px', backgroundColor: 'rgba(22, 163, 74, 0.08)', color: '#16A34A', fontWeight: 600 }}>SYNCED</span>
                 </div>
-                <div style={{ color: '#4B5563', lineHeight: 1.4 }}>
-                  <strong>Decision:</strong> Increase pricing plan by 10%.<br/>
-                  <strong>Rationale:</strong> Lift MRR while maintaining healthy LTV/CAC ratios.
+                
+                {/* Entry 1 */}
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: '12px' }}>
+                  <span style={{ color: '#9CA3AF', width: '70px' }}>10 mins ago</span>
+                  <span style={{ color: '#111827', fontWeight: 500, flex: 1 }}>Raised pricing tier by 20%</span>
+                  <span style={{ color: '#16A34A', fontWeight: 600 }}>+4.2m Runway</span>
+                  <span style={{ fontSize: '9px', padding: '1px 5px', borderRadius: '4px', backgroundColor: 'rgba(59, 130, 246, 0.08)', color: '#3B82F6', fontWeight: 600 }}>94% Conf</span>
+                </div>
+
+                {/* Entry 2 */}
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: '12px', borderTop: '1px solid #F3F4F6', paddingTop: '8px' }}>
+                  <span style={{ color: '#9CA3AF', width: '70px' }}>2 hrs ago</span>
+                  <span style={{ color: '#111827', fontWeight: 500, flex: 1 }}>Hired Senior Backend Developer</span>
+                  <span style={{ color: '#DC2626', fontWeight: 600 }}>-1.8m Runway</span>
+                  <span style={{ fontSize: '9px', padding: '1px 5px', borderRadius: '4px', backgroundColor: 'rgba(59, 130, 246, 0.08)', color: '#3B82F6', fontWeight: 600 }}>88% Conf</span>
+                </div>
+
+                {/* Entry 3 */}
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: '12px', borderTop: '1px solid #F3F4F6', paddingTop: '8px' }}>
+                  <span style={{ color: '#9CA3AF', width: '70px' }}>Yesterday</span>
+                  <span style={{ color: '#111827', fontWeight: 500, flex: 1 }}>Shifted strategy to B2B enterprise</span>
+                  <span style={{ color: '#4B5563' }}>Neutral Impact</span>
+                  <span style={{ fontSize: '9px', padding: '1px 5px', borderRadius: '4px', backgroundColor: 'rgba(59, 130, 246, 0.08)', color: '#3B82F6', fontWeight: 600 }}>92% Conf</span>
                 </div>
               </div>
             </div>
@@ -1107,11 +1229,14 @@ export default function LandingPage() {
         .bento-item-small {
           grid-column: span 1;
         }
+        .bento-item-full {
+          grid-column: span 3;
+        }
         @media (max-width: 768px) {
           .bento-grid {
             grid-template-columns: 1fr;
           }
-          .bento-item-large {
+          .bento-item-large, .bento-item-full {
             grid-column: span 1;
           }
         }

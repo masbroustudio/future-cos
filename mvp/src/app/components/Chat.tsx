@@ -52,8 +52,8 @@ const getDueDateStatus = (dueDateStr?: string, isCompleted?: boolean) => {
   dueDate.setHours(0, 0, 0, 0);
 
   if (isCompleted) {
-    const dateFormatted = new Intl.DateTimeFormat('id-ID', { day: 'numeric', month: 'short' }).format(dueDate);
-    return { label: `📅 Selesai (${dateFormatted})`, color: '#86868b', background: '#f5f5f7', isOverdue: false, isToday: false };
+    const dateFormatted = new Intl.DateTimeFormat('en-US', { day: 'numeric', month: 'short' }).format(dueDate);
+    return { label: `📅 Completed (${dateFormatted})`, color: '#86868b', background: '#f5f5f7', isOverdue: false, isToday: false };
   }
   
   const today = new Date();
@@ -115,7 +115,7 @@ function TaskListCard({
     <div className="genui-card animate-enter" style={{ animationDelay: '0.2s', marginTop: '16px' }}>
       {/* Header & Filter Tabs */}
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '14px', flexWrap: 'wrap', gap: '8px' }}>
-        <h4 style={{ fontWeight: 700, fontSize: '16px', color: '#1d1d1f', letterSpacing: '-0.01em' }}>📋 Daftar Tugas</h4>
+        <h4 style={{ fontWeight: 700, fontSize: '16px', color: '#1d1d1f', letterSpacing: '-0.01em' }}>📋 Task List</h4>
         <div style={{ display: 'flex', gap: '4px', background: '#f5f5f7', padding: '3px', borderRadius: '12px' }}>
           {(['all', 'pending', 'completed'] as const).map(f => (
             <button
@@ -134,7 +134,7 @@ function TaskListCard({
                 transition: 'all 0.2s'
               }}
             >
-              {f === 'all' ? 'Semua' : f === 'pending' ? 'Aktif' : 'Selesai'}
+              {f === 'all' ? 'All' : f === 'pending' ? 'Active' : 'Completed'}
             </button>
           ))}
         </div>
@@ -226,7 +226,7 @@ function TaskListCard({
                 boxShadow: selectedCategory === cat ? '0 2px 6px rgba(0, 113, 227, 0.2)' : 'none'
               }}
             >
-              {cat === 'all' ? '🏷️ Semua Kategori' : cat}
+              {cat === 'all' ? '🏷️ All Categories' : cat}
             </button>
           ))}
         </div>
@@ -484,7 +484,7 @@ function ProjectSummaryCard({
       
       {/* Judul Grafik Prioritas */}
       <h4 style={{ fontSize: '13px', fontWeight: 700, color: '#1d1d1f', marginBottom: '12px', letterSpacing: '-0.01em' }}>
-        📊 Urgensi Prioritas Tugas Aktif
+        📊 Active Tasks Priority Urgency
       </h4>
       
       {/* Grafik Batang SVG Dinamis */}
@@ -492,7 +492,7 @@ function ProjectSummaryCard({
         <svg width="100%" height="96" viewBox="0 0 400 96" style={{ overflow: 'visible' }}>
           {/* Row 1: High Priority */}
           <g>
-            <text x="0" y="20" fill="#ff3b30" style={{ fontSize: '12px', fontWeight: 700 }}>🔴 Tinggi</text>
+            <text x="0" y="20" fill="#ff3b30" style={{ fontSize: '12px', fontWeight: 700 }}>🔴 High</text>
             <rect x="80" y="10" width="260" height="10" rx="5" fill="#f5f5f7" />
             <rect 
               x="80" 
@@ -508,7 +508,7 @@ function ProjectSummaryCard({
 
           {/* Row 2: Medium Priority */}
           <g>
-            <text x="0" y="50" fill="#ff9500" style={{ fontSize: '12px', fontWeight: 700 }}>🟡 Sedang</text>
+            <text x="0" y="50" fill="#ff9500" style={{ fontSize: '12px', fontWeight: 700 }}>🟡 Medium</text>
             <rect x="80" y="40" width="260" height="10" rx="5" fill="#f5f5f7" />
             <rect 
               x="80" 
@@ -524,7 +524,7 @@ function ProjectSummaryCard({
 
           {/* Row 3: Low Priority */}
           <g>
-            <text x="0" y="80" fill="#86868b" style={{ fontSize: '12px', fontWeight: 700 }}>🟢 Rendah</text>
+            <text x="0" y="80" fill="#86868b" style={{ fontSize: '12px', fontWeight: 700 }}>🟢 Low</text>
             <rect x="80" y="70" width="260" height="10" rx="5" fill="#f5f5f7" />
             <rect 
               x="80" 
@@ -556,7 +556,7 @@ function ProjectSwitchCard({
       <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '8px' }}>
         <span style={{ fontSize: '20px' }}>{action === 'create' ? '✨' : '🔄'}</span>
         <h4 style={{ fontWeight: 700, fontSize: '15px', color: '#0071e3' }}>
-          {action === 'create' ? 'Proyek Baru Aktif' : 'Beralih Proyek'}
+          {action === 'create' ? 'New Project Active' : 'Project Switched'}
         </h4>
       </div>
       <p style={{ fontSize: '14.5px', color: '#1d1d1f', fontWeight: 600 }}>
@@ -645,11 +645,11 @@ function ProjectNotesCard({
   return (
     <div className="genui-card animate-enter" style={{ animationDelay: '0.2s', marginTop: '16px', borderRadius: '0px', borderColor: '#E8E8F8' }}>
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px' }}>
-        <h4 style={{ fontWeight: 700, fontSize: '15px', color: '#1313BA' }}>📝 Catatan Proyek Diperbarui</h4>
-        <span style={{ fontSize: '10px', fontWeight: 700, color: '#15803D', background: '#ECFDF3', padding: '2px 8px' }}>Tersimpan</span>
+        <h4 style={{ fontWeight: 700, fontSize: '15px', color: '#1313BA' }}>📝 Project Notes Updated</h4>
+        <span style={{ fontSize: '10px', fontWeight: 700, color: '#15803D', background: '#ECFDF3', padding: '2px 8px' }}>Saved</span>
       </div>
       <p style={{ fontSize: '13px', color: '#6363C6', fontStyle: 'italic', background: '#F4F4FC', padding: '12px', marginBottom: '12px', border: '1px solid #E8E8F8', borderRadius: '0px', whiteSpace: 'pre-wrap' }}>
-        "{truncated || 'Catatan kosong'}"
+        "{truncated || 'Notes are empty'}"
       </p>
       <button 
         onClick={onOpen}
@@ -668,7 +668,7 @@ function ProjectNotesCard({
         onMouseEnter={(e) => e.currentTarget.style.background = '#0E0E8C'}
         onMouseLeave={(e) => e.currentTarget.style.background = '#1313BA'}
       >
-        Buka Panel Catatan Lengkap
+        Open Full Notes Panel
       </button>
     </div>
   );
@@ -689,7 +689,7 @@ export default function Chat() {
 
   // Multi-Project States
   const [activeProjectId, setActiveProjectId] = useState('default');
-  const [activeProjectName, setActiveProjectName] = useState('Proyek Utama');
+  const [activeProjectName, setActiveProjectName] = useState('Main Project');
   const [projects, setProjects] = useState<ProjectInfo[]>([]);
   const [showProjectDropdown, setShowProjectDropdown] = useState(false);
   
@@ -830,7 +830,7 @@ export default function Chat() {
         setMessages(prev => [...prev, {
           id: Date.now().toString(),
           role: 'ai',
-          content: `Saya telah beralih ke proyek "${data.activeProjectName}".`
+          content: `I have switched to the project "${data.activeProjectName}".`
         }]);
       }
     } catch (error) {
@@ -841,7 +841,7 @@ export default function Chat() {
   // FUNGSI MANUAL: Membuat Proyek Baru
   const handleCreateProject = async () => {
     if (!username) return;
-    const name = window.prompt("Masukkan nama proyek baru Anda:");
+    const name = window.prompt("Enter your new project name:");
     if (!name || !name.trim()) return;
 
     try {
@@ -916,7 +916,7 @@ export default function Chat() {
     setUsername(null);
     setTasks([]);
     setActiveProjectId('default');
-    setActiveProjectName('Proyek Utama');
+    setActiveProjectName('Main Project');
     setProjects([]);
     setLoginUsername('');
     setLoginPin('');
@@ -1354,7 +1354,7 @@ export default function Chat() {
                 zIndex: 100
               }}>
                 <div style={{ fontSize: '10px', fontWeight: 800, color: 'var(--text-secondary)', padding: '6px 10px', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
-                  Daftar Proyek
+                  Projects List
                 </div>
                 
                 <div style={{ maxHeight: '180px', overflowY: 'auto', display: 'flex', flexDirection: 'column', gap: '2px' }}>
@@ -1420,7 +1420,7 @@ export default function Chat() {
                       <line x1="12" y1="5" x2="12" y2="19" />
                       <line x1="5" y1="12" x2="19" y2="12" />
                     </svg>
-                    Proyek Baru...
+                    New Project...
                   </button>
                 </div>
               </div>
@@ -1475,7 +1475,7 @@ export default function Chat() {
               <line x1="16" y1="17" x2="8" y2="17" />
               <polyline points="10 9 9 9 8 9" />
             </svg>
-            Catatan
+            Notes
           </button>
 
           {/* Dashboard Link button */}
@@ -1542,7 +1542,7 @@ export default function Chat() {
               <polyline points="16 17 21 12 16 7" />
               <line x1="21" y1="12" x2="9" y2="12" />
             </svg>
-            Keluar
+            Sign Out
           </button>
         </div>
       </header>
@@ -1894,7 +1894,7 @@ export default function Chat() {
               <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
                 <span style={{ display: 'inline-block', width: '6px', height: '6px', backgroundColor: '#15A34A', borderRadius: '50%' }}></span>
                 <span style={{ fontSize: '11px', color: '#9090CE', fontWeight: 500 }}>
-                  Catatan disimpan secara otomatis.
+                  Notes are saved automatically.
                 </span>
               </div>
 
@@ -1914,7 +1914,7 @@ export default function Chat() {
                 onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#0E0E8C'}
                 onMouseLeave={(e) => e.currentTarget.style.backgroundColor = '#1313BA'}
               >
-                Selesai
+                Done
               </button>
             </div>
 
